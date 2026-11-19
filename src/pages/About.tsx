@@ -51,15 +51,17 @@ const values = ["Clarity over complexity", "Speed without shortcuts", "Design fo
 const team = [
   {
     name: "Steven Shiyo",
+    initials: "SS",
     role: "Founder & Lead Developer",
     bio: "Focused on turning complex briefs into clear, fast, maintainable digital products.",
-    photo: "/STEVEN.webp",
+    focus: ["Engineering", "Web apps", "Systems"],
   },
   {
     name: "Denis Mteshi",
+    initials: "DM",
     role: "Co-Founder & Creative Director",
     bio: "Shapes every project's visual language so it feels credible, current, and conversion-ready.",
-    photo: "/DENIS.webp",
+    focus: ["Brand", "UI design", "Creative direction"],
   },
 ];
 
@@ -166,25 +168,31 @@ const About = () => (
           accent="Kitaa."
           text="A focused team building digital products with clarity and purpose."
         />
-        <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
           {team.map((m, i) => (
             <Reveal key={m.name} delay={i * 0.1} y={30}>
-              <div className="group overflow-hidden rounded-2xl border border-white/[0.07] bg-card">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img
-                    src={m.photo}
-                    alt={m.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover object-top grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+              <SpotlightCard className="h-full p-7 md:p-8">
+                <div className="flex items-center gap-5">
+                  <div className="relative shrink-0">
+                    <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-accent to-accent/0 opacity-60 blur-md transition-opacity duration-500 group-hover/spot:opacity-100" />
+                    <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-accent to-[#0b3d91] font-heading text-xl font-extrabold text-white">
+                      {m.initials}
+                    </div>
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-heading text-2xl font-extrabold text-white">{m.name}</h3>
+                    <p className="mt-0.5 text-sm font-medium text-accent">{m.role}</p>
+                  </div>
                 </div>
-                <div className="relative -mt-12 p-6">
-                  <h3 className="font-heading text-2xl font-extrabold text-white">{m.name}</h3>
-                  <p className="mt-1 text-sm font-medium text-accent">{m.role}</p>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{m.bio}</p>
+                <p className="mt-6 text-[15px] leading-7 text-muted-foreground">{m.bio}</p>
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-white/[0.06] pt-6">
+                  {m.focus.map((f) => (
+                    <span key={f} className="rounded-full bg-white/[0.05] px-3 py-1 text-xs font-medium text-white/70">
+                      {f}
+                    </span>
+                  ))}
                 </div>
-              </div>
+              </SpotlightCard>
             </Reveal>
           ))}
         </div>

@@ -11,7 +11,9 @@ import SmoothScroll from "./components/SmoothScroll";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import BackToTop from "./components/BackToTop";
 
-const Index = lazy(() => import("./pages/Index"));
+// The homepage loads with the main bundle so first-time visitors never wait on it.
+import Index from "./pages/Index";
+
 const Services = lazy(() => import("./pages/Services"));
 const ServiceWebsites = lazy(() => import("./pages/services/Websites"));
 const ServiceApplications = lazy(() => import("./pages/services/Applications"));
@@ -30,14 +32,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-const RouteFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="flex flex-col items-center gap-4">
-      <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-      <p className="text-sm text-muted-foreground">Loading...</p>
-    </div>
-  </div>
-);
+// While another page's code loads (usually a split second), keep a quiet blank
+// space instead of a spinner so the footer doesn't jump up.
+const RouteFallback = () => <div className="min-h-screen" aria-hidden="true" />;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

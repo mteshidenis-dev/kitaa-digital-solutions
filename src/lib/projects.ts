@@ -218,7 +218,7 @@ export const recentProjects: ProjectEntry[] = [
     url: "https://elbethelstationery.com",
     logoSrc: "/project-logos/elbethel-stationary.webp",
     imageSrc: "/project-previews/elbethel-stationary.webp",
-    imageAlt: "Nataraj Dust Clear eraser from the Elbethel Stationery product range",
+    imageAlt: "School and office supplies: pencils, notebooks, staplers and clips",
     imagePosition: "center",
     imageFit: "cover",
     category: "Retail and Supplies",

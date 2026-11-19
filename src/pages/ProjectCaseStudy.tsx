@@ -119,7 +119,7 @@ const ProjectCaseStudy = () => {
                       href={f.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-1 block truncate font-medium text-white hover:text-accent"
+                      className="block truncate py-1.5 font-medium text-white hover:text-accent"
                     >
                       {f.value}
                     </a>

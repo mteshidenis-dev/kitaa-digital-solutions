@@ -160,7 +160,7 @@ const Index = () => {
                 <Link
                   key={`${p.slug}-${i}`}
                   to={`/portfolio/${p.slug}`}
-                  className="whitespace-nowrap font-heading text-lg font-extrabold text-white/35 transition-colors hover:text-white"
+                  className="whitespace-nowrap py-2 font-heading text-lg font-extrabold text-white/35 transition-colors hover:text-white"
                   tabIndex={i >= recentProjects.length ? -1 : undefined}
                 >
                   {p.name}
@@ -259,7 +259,7 @@ const Index = () => {
               href={siteContact.phones[0].whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-accent"
+              className="mt-4 inline-flex items-center gap-2 py-2.5 text-sm font-semibold text-white transition-colors hover:text-accent"
             >
               <MessageCircle className="h-4 w-4 text-accent" />
               Chat on WhatsApp

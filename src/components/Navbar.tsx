@@ -49,7 +49,7 @@ const Navbar = () => {
         }`}
       >
         <div className="container mx-auto flex h-16 items-center justify-between px-4 md:h-20">
-          <Link to="/" aria-label="Kitaa Digital Solutions home">
+          <Link to="/" aria-label="Kitaa Digital Solutions home" className="inline-flex py-2.5">
             <Logo />
           </Link>
 
@@ -58,13 +58,13 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`group relative text-sm transition-colors ${
+                className={`group relative py-3 text-sm transition-colors ${
                   isActive(link.href) ? "text-white" : "text-white/55 hover:text-white"
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1.5 left-0 h-px bg-accent transition-all duration-300 ${
+                  className={`absolute bottom-1.5 left-0 h-px bg-accent transition-all duration-300 ${
                     isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />

@@ -43,12 +43,12 @@ const Footer = () => {
             {/* Navigation */}
             <div>
               <h4 className="mb-5 font-hero text-xs font-bold uppercase tracking-[0.22em] text-white/40">Navigation</h4>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col">
                 {["Home", "About", "Services", "Portfolio", "Blog", "Contact"].map((label) => (
                   <Link
                     key={label}
                     to={label === "Home" ? "/" : `/${label.toLowerCase()}`}
-                    className="text-sm text-white/60 transition-colors hover:text-white"
+                    className="py-2 text-sm text-white/60 transition-colors hover:text-white"
                   >
                     {label}
                   </Link>
@@ -59,7 +59,7 @@ const Footer = () => {
             {/* What We Build */}
             <div>
               <h4 className="mb-5 font-hero text-xs font-bold uppercase tracking-[0.22em] text-white/40">What We Build</h4>
-              <div className="flex flex-col gap-3 text-sm text-white/60">
+              <div className="flex flex-col gap-4 py-2 text-sm text-white/60">
                 <span>Websites &amp; landing pages</span>
                 <span>Business systems &amp; portals</span>
                 <span>Visual identity &amp; graphics</span>
@@ -70,10 +70,10 @@ const Footer = () => {
             {/* Contact */}
             <div>
               <h4 className="mb-5 font-hero text-xs font-bold uppercase tracking-[0.22em] text-white/40">Contact</h4>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col">
                 <a
                   href={`mailto:${siteContact.email}`}
-                  className="flex items-start gap-3 text-sm text-white/60 transition-colors hover:text-white"
+                  className="flex items-start gap-3 py-2 text-sm text-white/60 transition-colors hover:text-white"
                 >
                   <Mail size={15} className="mt-0.5 shrink-0 text-accent" />
                   <span>{siteContact.email}</span>
@@ -82,13 +82,13 @@ const Footer = () => {
                   <a
                     key={phone.href}
                     href={phone.href}
-                    className="flex items-start gap-3 text-sm text-white/60 transition-colors hover:text-white"
+                    className="flex items-start gap-3 py-2 text-sm text-white/60 transition-colors hover:text-white"
                   >
                     <Phone size={15} className="mt-0.5 shrink-0 text-accent" />
                     <span>{phone.display}</span>
                   </a>
                 ))}
-                <div className="flex items-start gap-3 text-sm text-white/60">
+                <div className="flex items-start gap-3 py-2 text-sm text-white/60">
                   <MapPin size={15} className="mt-0.5 shrink-0 text-accent" />
                   <span>{siteContact.location}</span>
                 </div>
@@ -100,10 +100,10 @@ const Footer = () => {
           <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/35 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} Kitaa Digital Solutions. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link to="/privacy" className="transition-colors hover:text-white">
+              <Link to="/privacy" className="py-2 transition-colors hover:text-white">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="transition-colors hover:text-white">
+              <Link to="/terms" className="py-2 transition-colors hover:text-white">
                 Terms &amp; Conditions
               </Link>
             </div>

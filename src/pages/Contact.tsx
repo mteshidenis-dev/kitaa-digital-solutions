@@ -85,7 +85,7 @@ const Contact = () => {
       </PageHero>
 
       <section id="contact-form" className="scroll-mt-24 px-4 pb-14 md:pb-20">
-        <div className="container mx-auto grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="container mx-auto grid gap-6 lg:grid-cols-[0.85fr_1.15fr] [&>*]:min-w-0">
           {/* Channels */}
           <Reveal className="flex flex-col gap-3">
             <div className="mb-3">
@@ -199,7 +199,7 @@ const Contact = () => {
                           key={t}
                           type="button"
                           onClick={() => setForm({ ...form, subject: t })}
-                          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                          className={`rounded-full border px-4 py-2.5 text-xs font-medium transition-colors ${
                             form.subject === t
                               ? "border-accent bg-accent text-white"
                               : "border-white/10 text-white/65 hover:border-white/25 hover:text-white"

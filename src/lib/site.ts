@@ -1,6 +1,6 @@
 export const siteContact = {
   email: "info@kitaadigitalsolutions.tech",
-  location: "Dar es Salaam, Tanzania",
+  location: "Arusha, Tanzania",
   phones: [
     {
       label: "Phone",

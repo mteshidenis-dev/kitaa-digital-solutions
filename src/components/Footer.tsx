@@ -83,7 +83,7 @@ const Footer = () => {
             </div>
 
             {/* Link columns: side by side on phones, separate grid columns on desktop */}
-            <div className="grid grid-cols-2 gap-6 border-t border-white/[0.06] pt-8 lg:contents">
+            <div className="grid grid-cols-2 gap-6 border-t border-white/[0.06] pt-8 text-center lg:contents lg:text-left">
               <nav aria-label="Footer">
                 <h4 className={heading}>Explore</h4>
                 {explore.map((l) => (
@@ -139,7 +139,7 @@ const Footer = () => {
           </div>
 
           {/* Bottom bar */}
-          <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/40 lg:mt-14 lg:flex-row lg:items-center lg:justify-between">
+          <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-center text-xs text-white/40 lg:mt-14 lg:flex-row lg:items-center lg:justify-between lg:text-left">
             <p className="flex items-center gap-1.5 lg:hidden">
               <MapPin className="h-3.5 w-3.5 text-accent" /> {siteContact.location}
             </p>

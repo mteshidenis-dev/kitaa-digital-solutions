@@ -43,7 +43,7 @@ const faqs = [
     a: "Every business needs something different, so we quote per project. You get a clear written quote up front, so you know exactly what is included before we begin.",
   },
   {
-    q: "Do you work with businesses outside Dar es Salaam?",
+    q: "Do you work with businesses outside Arusha?",
     a: "Yes. We work with clients across Tanzania and East Africa, remotely or in person.",
   },
   {

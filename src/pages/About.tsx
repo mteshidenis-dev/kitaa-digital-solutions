@@ -159,7 +159,7 @@ const About = () => (
     </section>
 
     {/* Team */}
-    <section className="px-4 py-16 md:py-24">
+    <section className="px-4 py-16 md:py-24 overflow-x-clip">
       <div className="container mx-auto">
         <SectionHeader
           center
@@ -170,7 +170,7 @@ const About = () => (
         />
         <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
           {team.map((m, i) => (
-            <Reveal key={m.name} delay={i * 0.1} y={30}>
+            <Reveal key={m.name} x={i === 0 ? -160 : 160} y={0} className="h-full">
               <SpotlightCard className="h-full p-7 md:p-8">
                 <div className="flex items-center gap-5">
                   <div className="relative shrink-0">

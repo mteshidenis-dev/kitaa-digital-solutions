@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 33% 98%;
+    --foreground: 209 61% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 209 61% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 209 61% 14%;
+
+    --primary: 209 75% 16%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 34 42% 94%;
+    --secondary-foreground: 209 75% 16%;
+
+    --muted: 35 24% 95%;
+    --muted-foreground: 210 16% 42%;
+
+    --accent: 24 93% 49%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 32 23% 88%;
+    --input: 32 23% 88%;
+    --ring: 24 93% 49%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 209 75% 12%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 24 93% 49%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 209 75% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 209 50% 25%;
+    --sidebar-ring: 24 93% 49%;
+
+    /* Custom tokens */
+    --navy: 209 75% 17%;
+    --navy-light: 209 60% 25%;
+    --navy-dark: 209 80% 10%;
+    --orange: 24 93% 49%;
+    --orange-light: 24 90% 60%;
+    --orange-dark: 24 95% 40%;
+  }
+
+  .dark {
+    --background: 209 80% 6%;
+    --foreground: 0 0% 95%;
+    --card: 209 75% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 209 75% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 24 93% 49%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 209 50% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 209 50% 15%;
+    --muted-foreground: 210 15% 60%;
+    --accent: 24 93% 49%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 209 50% 20%;
+    --input: 209 50% 20%;
+    --ring: 24 93% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(233, 120, 17, 0.12), transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.92));
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+  ::selection {
+    background: rgba(233, 120, 17, 0.18);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+  .bg-navy-gradient {
+    background: linear-gradient(135deg, hsl(var(--navy-dark)) 0%, hsl(var(--navy)) 50%, hsl(var(--navy-light)) 100%);
+  }
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+  .section-padding {
+    @apply py-20 md:py-28 px-4;
+  }
+  .section-kicker {
+    @apply inline-flex items-center rounded-full border border-accent/15 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent;
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .hero-orb-left {
+    left: -10rem;
+    top: 2rem;
+    height: 28rem;
+    width: 28rem;
+    background: rgba(233, 120, 17, 0.28);
+  }
+  .hero-orb-right {
+    right: -9rem;
+    top: 3rem;
+    height: 30rem;
+    width: 30rem;
+    background: rgba(9, 34, 53, 0.18);
+  }
+  .premium-panel {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8)),
+      radial-gradient(circle at top left, rgba(233, 120, 17, 0.1), transparent 40%);
+    box-shadow: 0 28px 80px rgba(9, 34, 53, 0.08);
+  }
+  .premium-grid {
+    background-image:
+      linear-gradient(rgba(9, 34, 53, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(9, 34, 53, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}

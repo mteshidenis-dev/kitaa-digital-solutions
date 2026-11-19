@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollManager from "./components/ScrollManager";
+import SmoothScroll from "./components/SmoothScroll";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import BackToTop from "./components/BackToTop";
 
@@ -44,6 +45,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollManager />
+        <SmoothScroll />
         <Navbar />
         <main className="min-h-screen">
           <Suspense fallback={<RouteFallback />}>

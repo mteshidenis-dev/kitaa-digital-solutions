@@ -8,25 +8,25 @@
  */
 @layer base {
   :root {
-    --background: 228 33% 3%;      /* #05060a */
-    --foreground: 0 0% 98%;
+    --background: 240 4% 7%;       /* charcoal #111113 */
+    --foreground: 40 23% 94%;      /* off-white #f3f1ec */
 
-    --surface: 226 30% 5%;         /* slightly lifted section background */
+    --surface: 240 4% 9%;         /* slightly lifted section background */
 
-    --card: 225 25% 7%;            /* #0d0f15 */
-    --card-foreground: 0 0% 98%;
+    --card: 240 4% 10%;
+    --card-foreground: 40 23% 94%;
 
-    --popover: 225 25% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 4% 11%;
+    --popover-foreground: 40 23% 94%;
 
     --primary: 215 92% 54%;        /* electric blue #1f74f2 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 20% 11%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 240 4% 14%;
+    --secondary-foreground: 40 23% 94%;
 
-    --muted: 225 20% 11%;
-    --muted-foreground: 222 12% 66%;
+    --muted: 240 4% 14%;
+    --muted-foreground: 40 5% 62%;
 
     --accent: 215 92% 58%;
     --accent-foreground: 0 0% 100%;
@@ -34,8 +34,8 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 225 16% 15%;
-    --input: 225 16% 17%;
+    --border: 240 4% 17%;
+    --input: 240 4% 19%;
     --ring: 215 92% 58%;
 
     --radius: 0.75rem;
@@ -50,9 +50,9 @@
     --sidebar-ring: 215 92% 58%;
 
     /* Legacy names kept so older classes still resolve to the new palette */
-    --navy: 225 25% 7%;
-    --navy-light: 225 20% 12%;
-    --navy-dark: 228 33% 3%;
+    --navy: 240 4% 10%;
+    --navy-light: 240 4% 14%;
+    --navy-dark: 240 4% 7%;
     --orange: 215 92% 58%;
     --orange-light: 213 94% 68%;
     --orange-dark: 217 91% 45%;
@@ -100,7 +100,7 @@
   /* Big soft blue light, used behind hero content */
   .hero-glow {
     background:
-      radial-gradient(ellipse 60% 55% at 50% 62%, rgba(31, 116, 242, 0.85) 0%, rgba(31, 116, 242, 0.22) 42%, transparent 70%),
+      radial-gradient(ellipse 60% 55% at 50% 62%, rgba(31, 116, 242, 0.45) 0%, rgba(31, 116, 242, 0.12) 42%, transparent 70%),
       radial-gradient(ellipse 40% 30% at 30% 70%, rgba(56, 132, 255, 0.25) 0%, transparent 70%);
     filter: blur(20px);
   }
@@ -155,9 +155,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
-  background: hsl(228 33% 3%);
+  background: hsl(240 4% 7%);
 }
 
 body {

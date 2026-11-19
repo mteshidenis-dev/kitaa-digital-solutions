@@ -211,7 +211,7 @@ const Contact = () => {
                 href={siteContact.phones[0].whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-2xl bg-green-600 p-4 text-white transition-colors hover:bg-green-700"
+                className="flex items-center gap-3 rounded-2xl bg-accent p-4 text-white transition-colors hover:bg-accent/90"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15">
                   <MessageCircle size={18} />

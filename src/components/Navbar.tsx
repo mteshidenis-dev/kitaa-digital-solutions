@@ -220,7 +220,7 @@ const Navbar = () => {
                     Start a project <ArrowRight className="h-4 w-4" />
                   </Link>
                   <a
-                    href={siteContact.phones[0].whatsappHref}
+                    href={siteContact.whatsapp.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-glass inline-flex h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold"

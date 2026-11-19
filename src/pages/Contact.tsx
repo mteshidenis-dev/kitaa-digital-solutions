@@ -15,12 +15,12 @@ const channels = [
     href: `mailto:${siteContact.email}`,
     note: "Replies within 24 hours",
   },
-  ...siteContact.phones.map((phone, i) => ({
+  ...siteContact.phones.map((phone) => ({
     icon: Phone,
     label: phone.label,
     value: phone.display,
     href: phone.href,
-    note: i === 0 ? "WhatsApp available" : "Business hours",
+    note: phone.note,
   })),
   {
     icon: MapPin,
@@ -76,7 +76,7 @@ const Contact = () => {
         accent="We move fast."
         text="Tell us what you need built, fixed, or sharpened. We'll respond within 24 hours with a clear next step, no vague proposals and no endless back-and-forth."
         primary={{ to: "#contact-form", label: "Send a message", external: false }}
-        secondary={{ to: siteContact.phones[0].whatsappHref ?? "/contact", label: "WhatsApp us", external: true }}
+        secondary={{ to: siteContact.whatsapp.href, label: "WhatsApp us", external: true }}
       >
         <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/70">
           <Clock className="h-4 w-4 text-accent" />
@@ -124,7 +124,7 @@ const Contact = () => {
               );
             })}
             <a
-              href={siteContact.phones[0].whatsappHref}
+              href={siteContact.whatsapp.href}
               target="_blank"
               rel="noopener noreferrer"
               className="group mt-1 flex items-center gap-4 rounded-2xl bg-accent p-4 text-white transition-colors hover:bg-accent/90"

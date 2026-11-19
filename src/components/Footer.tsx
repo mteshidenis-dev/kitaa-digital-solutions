@@ -16,7 +16,7 @@ const explore = [
   { label: "Contact", href: "/contact" },
 ];
 
-const whatsapp = siteContact.phones[0].whatsappHref;
+const whatsapp = siteContact.whatsapp.href;
 
 const quickContacts = [
   { icon: Mail, label: "Email", href: `mailto:${siteContact.email}` },

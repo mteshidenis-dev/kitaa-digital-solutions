@@ -256,7 +256,7 @@ const Index = () => {
               Can't find what you're looking for? Message us on WhatsApp and we'll reply quickly.
             </p>
             <a
-              href={siteContact.phones[0].whatsappHref}
+              href={siteContact.whatsapp.href}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-2 py-2.5 text-sm font-semibold text-white transition-colors hover:text-accent"

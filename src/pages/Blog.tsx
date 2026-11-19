@@ -166,7 +166,7 @@ const Blog = () => {
           <Reveal className="mt-12 flex flex-col items-center gap-3 text-center">
             <p className="text-sm text-muted-foreground">Want a heads-up when new articles go live?</p>
             <a
-              href={siteContact.phones[0].whatsappHref}
+              href={siteContact.whatsapp.href}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-glass inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-semibold"

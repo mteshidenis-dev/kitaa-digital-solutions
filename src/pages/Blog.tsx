@@ -70,7 +70,7 @@ const Blog = () => {
       />
 
       {/* Featured */}
-      <section className="px-4 pb-12">
+      <section className="px-4 pb-10">
         <Reveal className="container mx-auto">
           <div className="relative grid overflow-hidden rounded-3xl border border-white/[0.07] bg-card md:grid-cols-[1.1fr_0.9fr]">
             <div className="relative z-10 p-7 md:p-12">
@@ -113,7 +113,7 @@ const Blog = () => {
       </section>
 
       {/* Filters + grid */}
-      <section className="px-4 pb-20 md:pb-28">
+      <section className="px-4 pb-14 md:pb-20">
         <div className="container mx-auto">
           <div className="mb-10 flex flex-wrap justify-center gap-2">
             {CATEGORIES.map((c) => (

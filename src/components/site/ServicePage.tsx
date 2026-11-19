@@ -45,7 +45,7 @@ const ServicePage = ({ data }: { data: ServicePageData }) => {
       />
 
       {/* Features */}
-      <section className="px-4 py-16 md:py-24">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto">
           <SectionHeader label={data.features.label} title={data.features.title} />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -65,7 +65,7 @@ const ServicePage = ({ data }: { data: ServicePageData }) => {
       </section>
 
       {/* What's included */}
-      <section className="px-4 py-16 md:py-24">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto">
           <Reveal>
             <div className="grid gap-10 rounded-3xl border border-white/[0.07] bg-card p-7 md:p-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
@@ -104,7 +104,7 @@ const ServicePage = ({ data }: { data: ServicePageData }) => {
       </section>
 
       {/* Recent work */}
-      <section className="px-4 py-16 md:py-24">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto">
           <SectionHeader
             label="Recent work"

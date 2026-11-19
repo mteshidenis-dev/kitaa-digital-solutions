@@ -29,7 +29,7 @@ const LegalPage = ({ name, title, intro, highlights, sections, contactNote, disc
       </p>
     </PageHero>
 
-    <section className="px-4 pb-12">
+    <section className="px-4 pb-10">
       <div className="container mx-auto grid gap-4 md:grid-cols-3">
         {highlights.map((h, i) => (
           <Reveal key={h.title} delay={i * 0.08} y={20}>
@@ -45,7 +45,7 @@ const LegalPage = ({ name, title, intro, highlights, sections, contactNote, disc
       </div>
     </section>
 
-    <section className="px-4 pb-24 md:pb-32">
+    <section className="px-4 pb-16 md:pb-20">
       <div className="container mx-auto grid gap-10 lg:grid-cols-[260px_1fr]">
         <aside className="hidden lg:block">
           <nav className="sticky top-28 rounded-2xl border border-white/[0.07] bg-card p-5" aria-label="On this page">

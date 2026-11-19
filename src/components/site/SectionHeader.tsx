@@ -33,7 +33,7 @@ type SectionHeaderProps = {
 const SectionHeader = ({ label, title, accent, text, action, center, className }: SectionHeaderProps) => (
   <Reveal
     className={cn(
-      "mb-12 flex flex-col gap-6 md:mb-16",
+      "mb-10 flex flex-col gap-6 md:mb-12",
       center ? "items-center text-center" : "md:flex-row md:items-end md:justify-between",
       className,
     )}

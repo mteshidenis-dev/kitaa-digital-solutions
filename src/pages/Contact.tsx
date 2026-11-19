@@ -84,7 +84,7 @@ const Contact = () => {
         </div>
       </PageHero>
 
-      <section id="contact-form" className="scroll-mt-24 px-4 pb-20 md:pb-28">
+      <section id="contact-form" className="scroll-mt-24 px-4 pb-14 md:pb-20">
         <div className="container mx-auto grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           {/* Channels */}
           <Reveal className="flex flex-col gap-3">
@@ -274,7 +274,7 @@ const Contact = () => {
       </section>
 
       {/* Nudge to services */}
-      <section className="px-4 pb-24 md:pb-32">
+      <section className="px-4 pb-16 md:pb-20">
         <Reveal className="container mx-auto">
           <Link
             to="/services"

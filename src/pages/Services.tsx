@@ -41,7 +41,7 @@ const Services = () => (
       </div>
     </PageHero>
 
-    <section className="px-4 py-16 md:py-24">
+    <section className="px-4 py-12 md:py-16">
       <div className="container mx-auto">
         <SectionHeader
           label="What we do"
@@ -54,7 +54,7 @@ const Services = () => (
     </section>
 
     {/* How we engage */}
-    <section className="px-4 py-16 md:py-24">
+    <section className="px-4 py-12 md:py-16">
       <div className="container mx-auto">
         <Reveal>
           <div className="relative grid gap-10 overflow-hidden rounded-3xl border border-white/[0.07] bg-card p-7 md:p-12 lg:grid-cols-2 lg:gap-16">
@@ -97,7 +97,7 @@ const Services = () => (
       </div>
     </section>
 
-    <section className="px-4 py-16 md:py-24">
+    <section className="px-4 py-12 md:py-16">
       <div className="container mx-auto">
         <SectionHeader
           label="How we work"

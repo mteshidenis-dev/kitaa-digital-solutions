@@ -153,7 +153,7 @@ const ProjectCaseStudy = () => {
       </section>
 
       {/* ── Challenge / Solution ── */}
-      <section className="px-4 py-16 md:py-24">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto grid gap-4 md:grid-cols-2">
           {[
             { icon: Target, label: "The challenge", title: "What needed to change", text: project.challenge },
@@ -171,7 +171,7 @@ const ProjectCaseStudy = () => {
       </section>
 
       {/* ── Deliverables + Outcomes ── */}
-      <section className="px-4 pb-16 md:pb-24">
+      <section className="px-4 pb-12 md:pb-16">
         <div className="container mx-auto">
           <Reveal>
             <div className="grid gap-10 rounded-3xl border border-white/[0.07] bg-card p-7 md:p-12 lg:grid-cols-2 lg:gap-16">
@@ -212,7 +212,7 @@ const ProjectCaseStudy = () => {
 
       {/* ── Next project ── */}
       {next && next.slug !== project.slug && (
-        <section className="px-4 pb-16 md:pb-24">
+        <section className="px-4 pb-12 md:pb-16">
           <Reveal className="container mx-auto">
             <Link
               to={`/portfolio/${next.slug}`}
@@ -233,7 +233,7 @@ const ProjectCaseStudy = () => {
       )}
 
       {/* ── More projects ── */}
-      <section className="px-4 pb-16 md:pb-24">
+      <section className="px-4 pb-12 md:pb-16">
         <div className="container mx-auto">
           <SectionHeader
             label="More projects"

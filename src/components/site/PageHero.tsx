@@ -48,7 +48,7 @@ const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, seconda
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <section className="relative isolate overflow-hidden px-4 pb-16 pt-32 md:pb-24 md:pt-44">
+    <section className="relative isolate overflow-hidden px-4 pb-12 pt-32 md:pb-16 md:pt-40">
       <div
         className="pointer-events-none absolute left-1/2 top-[45%] -z-10 h-[30rem] w-[60rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
         style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.28), transparent)" }}

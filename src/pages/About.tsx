@@ -87,7 +87,7 @@ const About = () => (
     </PageHero>
 
     {/* Mission / Vision / Method */}
-    <section className="px-4 py-16 md:py-24">
+    <section className="px-4 py-12 md:py-16">
       <div className="container mx-auto grid gap-4 md:grid-cols-3">
         {pillars.map((p, i) => (
           <Reveal key={p.title} delay={i * 0.08} y={30}>
@@ -104,7 +104,7 @@ const About = () => (
     </section>
 
     {/* How we work + facts */}
-    <section className="px-4 py-16 md:py-24">
+    <section className="px-4 py-12 md:py-16">
       <div className="container mx-auto grid gap-10 lg:grid-cols-[1.4fr_0.6fr] lg:gap-12">
         <Reveal>
           <Chip>How we work</Chip>
@@ -159,7 +159,7 @@ const About = () => (
     </section>
 
     {/* Team */}
-    <section className="px-4 py-16 md:py-24 overflow-x-clip">
+    <section className="px-4 py-12 md:py-16 overflow-x-clip">
       <div className="container mx-auto">
         <SectionHeader
           center

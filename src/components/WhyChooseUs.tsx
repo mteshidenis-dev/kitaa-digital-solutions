@@ -12,7 +12,7 @@ const reasons = [
 ];
 
 const WhyChooseUs = () => (
-  <section className="px-4 py-16 md:py-24">
+  <section className="px-4 py-12 md:py-16">
     <div className="container mx-auto">
       <SectionHeader
         label="Why Kitaa"

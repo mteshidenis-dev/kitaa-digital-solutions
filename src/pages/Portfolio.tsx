@@ -48,7 +48,7 @@ const Portfolio = () => {
         </div>
       </PageHero>
 
-      <section className="px-4 pb-20 md:pb-28">
+      <section className="px-4 pb-14 md:pb-20">
         <div className="container mx-auto">
           {/* Filters */}
           <div className="mb-10 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filter projects">

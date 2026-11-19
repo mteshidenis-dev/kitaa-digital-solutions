@@ -172,7 +172,7 @@ const Index = () => {
       </section>
 
       {/* ── SELECTED WORK (bento) ────────────────────────────────────── */}
-      <section className="px-4 py-20 md:py-28">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto">
           <SectionHeader
             label="Selected work"
@@ -193,7 +193,7 @@ const Index = () => {
       </section>
 
       {/* ── SERVICES (spotlight cards) ───────────────────────────────── */}
-      <section className="px-4 py-20 md:py-28">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto">
           <SectionHeader
             label="What we do"
@@ -231,7 +231,7 @@ const Index = () => {
       </section>
 
       {/* ── PROCESS (timeline) ───────────────────────────────────────── */}
-      <section className="px-4 py-20 md:py-28">
+      <section className="px-4 py-12 md:py-16">
         <div className="container mx-auto">
           <SectionHeader
             label="How we work"
@@ -245,7 +245,7 @@ const Index = () => {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────── */}
-      <section className="px-4 pb-20 md:pb-28">
+      <section className="px-4 pb-12 md:pb-16">
         <div className="container mx-auto grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
             <Chip>FAQ</Chip>

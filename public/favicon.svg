@@ -1,16 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Dark navy rounded square background -->
-  <rect width="64" height="64" rx="14" fill="#050d1a"/>
-  <!-- Orange accent bar (bottom-right corner detail) -->
-  <rect x="42" y="42" width="16" height="16" rx="5" fill="#F97316" opacity="0.25"/>
-  <!-- "K" letter -->
-  <text
-    x="7"
-    y="47"
-    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
-    font-weight="900"
-    font-size="38"
-    fill="#F97316"
-    letter-spacing="-2"
-  >KD</text>
+  <!-- Charcoal rounded square, matching the site background -->
+  <rect width="64" height="64" rx="15" fill="#111113"/>
+  <!-- Rounded "K", echoing the Nunito logotype -->
+  <g fill="none" stroke="#f3f1ec" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 15.5V48.5"/>
+    <path d="M38 15.5L20.5 32L38.5 48.5"/>
+  </g>
+  <!-- The blue full stop from "Kitaa Digital Solutions." -->
+  <circle cx="48.5" cy="45" r="5" fill="#2a7cf6"/>
 </svg>

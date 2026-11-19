@@ -7,10 +7,12 @@ type RevealProps = {
   delay?: number;
   y?: number;
   x?: number;
+  duration?: number;
+  ease?: [number, number, number, number];
 };
 
 /** Fades and lifts its content into place the first time it scrolls into view. */
-const Reveal = ({ children, className, delay = 0, y = 40, x = 0 }: RevealProps) => {
+const Reveal = ({ children, className, delay = 0, y = 40, x = 0, duration, ease = [0.22, 1, 0.36, 1] }: RevealProps) => {
   const reduce = useReducedMotion();
   return (
     <motion.div
@@ -18,7 +20,7 @@ const Reveal = ({ children, className, delay = 0, y = 40, x = 0 }: RevealProps) 
       initial={reduce ? false : { opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: x ? 1.1 : 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: duration ?? (x ? 1.1 : 0.9), delay, ease }}
     >
       {children}
     </motion.div>

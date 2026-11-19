@@ -170,7 +170,7 @@ const About = () => (
         />
         <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
           {team.map((m, i) => (
-            <Reveal key={m.name} x={i === 0 ? -160 : 160} y={0} className="h-full">
+            <Reveal key={m.name} x={i === 0 ? -160 : 160} y={0} duration={2.4} ease={[0.4, 0, 0.2, 1]} className="h-full">
               <SpotlightCard className="h-full p-7 md:p-8">
                 <div className="flex items-center gap-5">
                   <div className="relative shrink-0">

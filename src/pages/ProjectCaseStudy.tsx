@@ -110,6 +110,7 @@ const ProjectCaseStudy = () => {
               <img
                 src={project.imageSrc}
                 alt={project.imageAlt}
+                style={{ objectPosition: project.imagePosition }}
                 className={`aspect-[16/9] w-full ${
                   project.imageFit === "contain" ? "object-contain bg-white/[0.02] p-12" : "object-cover object-top"
                 }`}

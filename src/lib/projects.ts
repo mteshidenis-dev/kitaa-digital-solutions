@@ -6,6 +6,8 @@ export type ProjectEntry = {
   imageSrc?: string;
   imageAlt: string;
   imageFit?: "cover" | "contain";
+  /** Which part of the image to keep when cropping, e.g. "center 70%". Defaults to the top. */
+  imagePosition?: string;
   category: string;
   headline: string;
   summary: string;
@@ -40,6 +42,27 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Stronger brand credibility", "Clearer package presentation", "More premium visitor experience"],
     outcomes: ["Helps prospects trust the brand faster", "Supports better package comparison", "Creates a more premium first impression"],
     accent: "from-[#eed3bc] via-[#f8ece2] to-[#fffaf6]",
+  },
+  {
+    slug: "bcb-safaris",
+    name: "BCB Safaris",
+    domain: "bcbsafaris.com",
+    url: "https://www.bcbsafaris.com",
+    imageSrc: "/project-previews/bcb-safaris.webp",
+    imageAlt: "Cheetah stalking through the grass, from the BCB Safaris website hero",
+    imageFit: "cover",
+    imagePosition: "center 72%",
+    category: "Luxury Safaris",
+    headline: "A luxury safari brand built to make tailor-made Tanzania journeys feel world-class from the first scroll.",
+    summary: "A luxury safari website presenting tailor-made journeys across Serengeti, Ngorongoro, Zanzibar, and Kilimanjaro.",
+    short: "Tailor-made luxury safaris, from Serengeti to Zanzibar.",
+    challenge: "High-end safari travellers compare many operators before they enquire, so the brand had to feel premium, trustworthy, and clearly tailor-made at a glance.",
+    solution: "We led with immersive wildlife imagery, clear destination pages, and a calm, premium layout that guides visitors from inspiration to enquiry.",
+    audience: "Ideal for travel brands selling premium, tailor-made trips to international visitors.",
+    deliverables: ["Luxury website design", "Destination and tour pages", "Immersive photo-led layout", "Enquiry-focused journey"],
+    value: ["Premium first impression", "Clear destination storytelling", "Easier path to enquiry"],
+    outcomes: ["Helps travellers trust the brand quickly", "Showcases Tanzania's highlights in one place", "Turns inspiration into enquiries"],
+    accent: "from-[#e8dcc5] via-[#f4ede0] to-[#fbf8f2]",
   },
   {
     slug: "bcb-suites",

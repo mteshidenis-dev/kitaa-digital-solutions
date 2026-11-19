@@ -19,7 +19,7 @@ const workGrid = [
   { slug: "masatu-tours", span: "lg:col-span-2 lg:row-span-2" },
   { slug: "elem-adventures", span: "" },
   { slug: "tulia-essence-tours", span: "" },
-  { slug: "become-beyond", span: "lg:col-span-2" },
+  { slug: "bcb-safaris", span: "lg:col-span-2" },
   { slug: "divine-wonders-adventures", span: "" },
 ]
   .map((item) => ({ ...item, project: bySlug(item.slug) }))

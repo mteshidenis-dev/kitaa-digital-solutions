@@ -110,10 +110,9 @@
     @apply border border-white/15 bg-white/[0.06] text-white backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.12];
   }
 
-  /* Solid blue button with a soft glow */
+  /* Solid blue button */
   .btn-glow {
-    @apply bg-primary text-primary-foreground transition-all hover:bg-primary/90;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 10px 30px -8px rgba(31, 116, 242, 0.7);
+    @apply bg-primary text-primary-foreground transition-colors hover:bg-primary/90;
   }
 
   .hero-orb {

@@ -38,7 +38,7 @@ const FloatingWhatsApp = () => {
                 href={c.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-card px-4 py-3 text-white shadow-[0_8px_32px_rgba(0,0,0,0.45)] transition-colors hover:border-accent/50"
+                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-card px-4 py-3 text-white transition-colors hover:border-accent/50"
                 onClick={() => setOpen(false)}
               >
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
@@ -59,7 +59,7 @@ const FloatingWhatsApp = () => {
         onClick={() => setOpen((v) => !v)}
         whileTap={{ scale: 0.92 }}
         aria-label="WhatsApp chat"
-        className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-card text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-colors hover:border-accent hover:bg-accent"
+        className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-card text-white transition-colors hover:border-accent hover:bg-accent"
       >
         <AnimatePresence mode="wait" initial={false}>
           {open ? (

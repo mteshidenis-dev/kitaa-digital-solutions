@@ -46,8 +46,8 @@ const includes = [
 const data: ServicePageData = {
   name: "Applications",
   hero: {
-    title: "Web applications built around",
-    accent: "how your business actually operates",
+    title: "Web apps built around",
+    accent: "your business.",
     text: "Custom web apps, booking systems, portals, and dashboards — built to your exact workflow, not adapted from a generic template or constrained by a subscription tool.",
     cta: "Discuss your application",
   },

@@ -46,8 +46,8 @@ const includes = [
 const data: ServicePageData = {
   name: "Social Media",
   hero: {
-    title: "Social media that builds presence",
-    accent: "without burning your time",
+    title: "Social media that builds",
+    accent: "presence.",
     text: "Strategy, content creation, scheduling, and reporting — handled consistently every month so your brand shows up where your audience is already paying attention.",
     cta: "Get started",
   },

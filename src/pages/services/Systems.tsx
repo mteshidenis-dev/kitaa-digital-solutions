@@ -46,8 +46,8 @@ const includes = [
 const data: ServicePageData = {
   name: "Systems",
   hero: {
-    title: "Internal systems that replace",
-    accent: "spreadsheets with real infrastructure",
+    title: "Swap spreadsheets for",
+    accent: "real systems.",
     text: "Custom portals, automation tools, and reporting layers that make your team faster and give you a clearer picture of how your business is actually running.",
     cta: "Book a free call",
   },

@@ -22,7 +22,7 @@ const Services = () => (
       pageTitle="Services"
       breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}
       title="Digital work built around"
-      accent="outcomes, not deliverables."
+      accent="outcomes."
       text="Strategy, design, engineering, and support under one roof, so businesses launch faster and operate with more confidence."
       primary={{ to: "/contact", label: "Discuss your project" }}
       secondary={{ to: "/portfolio", label: "View our portfolio" }}

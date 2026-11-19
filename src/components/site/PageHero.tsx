@@ -71,7 +71,7 @@ const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, seconda
         >
           <h1
             className="font-hero font-extrabold leading-[1.02] tracking-[-0.03em] text-white text-balance"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4.75rem)" }}
+            style={{ fontSize: "clamp(2.25rem, 4.6vw, 3.75rem)" }}
           >
             {title} {accent && <span className="text-accent">{accent}</span>}
           </h1>

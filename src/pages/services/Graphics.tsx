@@ -46,8 +46,8 @@ const includes = [
 const data: ServicePageData = {
   name: "Graphics",
   hero: {
-    title: "Visual identity that makes you",
-    accent: "look like you charge more",
+    title: "A brand that looks",
+    accent: "established.",
     text: "Brand systems, logo design, and marketing graphics built from strategy — so your business looks consistent, established, and easier to trust everywhere it shows up.",
     cta: "Build your brand",
   },

@@ -8,6 +8,8 @@ export type ProjectEntry = {
   imageFit?: "cover" | "contain";
   /** Which part of the image to keep when cropping, e.g. "center 70%". Defaults to the top. */
   imagePosition?: string;
+  /** Small square company logo, shown in a circle on the case study page. Falls back to initials. */
+  logoSrc?: string;
   category: string;
   headline: string;
   summary: string;
@@ -29,6 +31,7 @@ export const recentProjects: ProjectEntry[] = [
     domain: "masatutours.com",
     url: "https://masatutours.com",
     imageSrc: "/project-previews/masatu-tours.webp",
+    logoSrc: "/project-logos/masatu-tours.webp",
     imageAlt: "Masatu Tours safari website preview",
     imageFit: "cover",
     category: "Travel and Tours",
@@ -49,6 +52,7 @@ export const recentProjects: ProjectEntry[] = [
     domain: "bcbsafaris.com",
     url: "https://www.bcbsafaris.com",
     imageSrc: "/project-previews/bcb-safaris.webp",
+    logoSrc: "/project-logos/bcb-safaris.webp",
     imageAlt: "Cheetah stalking through the grass, from the BCB Safaris website hero",
     imageFit: "cover",
     imagePosition: "center 72%",
@@ -110,6 +114,7 @@ export const recentProjects: ProjectEntry[] = [
     domain: "elemadventures.com",
     url: "https://elemadventures.com",
     imageSrc: "/project-previews/elem-adventures.webp",
+    logoSrc: "/project-logos/elem-adventures.webp",
     imageAlt: "Elem Adventures travel website preview",
     imageFit: "cover",
     category: "Adventure Travel",
@@ -150,6 +155,7 @@ export const recentProjects: ProjectEntry[] = [
     domain: "easyamazingtanzania.org",
     url: "https://easyamazingtanzania.org",
     imageSrc: "/project-previews/easy-amazing-tanzania.webp",
+    logoSrc: "/project-logos/easy-amazing-tanzania.webp",
     imageAlt: "Easy Amazing Tanzania organisation website preview",
     imageFit: "contain",
     category: "Organisation and Destination Promotion",
@@ -170,6 +176,7 @@ export const recentProjects: ProjectEntry[] = [
     domain: "becomebeyond.org",
     url: "https://becomebeyond.org",
     imageSrc: "/project-previews/become-beyond.webp",
+    logoSrc: "/project-logos/become-beyond.webp",
     imageAlt: "Become Beyond impact organisation website preview",
     imageFit: "cover",
     category: "Organisation and Impact",

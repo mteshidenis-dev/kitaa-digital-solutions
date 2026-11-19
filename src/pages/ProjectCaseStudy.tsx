@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import SpotlightCard from "@/components/SpotlightCard";
 import CTABlock from "@/components/site/CTABlock";
 import SectionHeader, { Chip, sectionTitleClass, sectionTitleStyle } from "@/components/site/SectionHeader";
+import ProjectLogo from "@/components/site/ProjectLogo";
 import WorkTile from "@/components/site/WorkTile";
 import { getProjectBySlug, recentProjects } from "@/lib/projects";
 
@@ -67,13 +68,19 @@ const ProjectCaseStudy = () => {
             className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end"
           >
             <div>
-              <h1
-                className="font-hero font-extrabold leading-[1] tracking-[-0.03em] text-white"
-                style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
-              >
-                {project.name}
-                <span className="text-accent">.</span>
-              </h1>
+              <div className="flex items-center gap-4 md:gap-6">
+                <ProjectLogo
+                  project={project}
+                  className="h-14 w-14 text-[2.25rem] md:h-20 md:w-20 md:text-[3rem]"
+                />
+                <h1
+                  className="font-hero font-extrabold leading-[1] tracking-[-0.03em] text-white"
+                  style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
+                >
+                  {project.name}
+                  <span className="text-accent">.</span>
+                </h1>
+              </div>
               <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{project.headline}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
@@ -96,34 +103,8 @@ const ProjectCaseStudy = () => {
         </div>
       </section>
 
-      {/* ── Big screenshot in a browser frame ── */}
-      <section className="px-4">
-        <Reveal className="container mx-auto" y={50}>
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-card shadow-[0_40px_120px_-30px_rgba(31,116,242, 0.225)]">
-            <div className="flex items-center gap-2 border-b border-white/[0.06] bg-white/[0.03] px-4 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="mx-auto rounded-md bg-white/[0.05] px-4 py-1 text-[11px] text-white/50">{project.domain}</span>
-            </div>
-            {project.imageSrc ? (
-              <img
-                src={project.imageSrc}
-                alt={project.imageAlt}
-                style={{ objectPosition: project.imagePosition }}
-                className={`aspect-[16/9] w-full ${
-                  project.imageFit === "contain" ? "object-contain bg-white/[0.02] p-12" : "object-cover object-top"
-                }`}
-              />
-            ) : (
-              <div className="aspect-[16/9] w-full bg-gradient-to-br from-accent/10 to-card" />
-            )}
-          </div>
-        </Reveal>
-      </section>
-
       {/* ── Quick facts ── */}
-      <section className="px-4 pt-6">
+      <section className="px-4 pt-4">
         <div className="container mx-auto grid gap-4 md:grid-cols-3">
           {facts.map((f, i) => (
             <Reveal key={f.label} delay={i * 0.08} y={20}>

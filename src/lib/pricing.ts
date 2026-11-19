@@ -37,12 +37,12 @@ export const pricingCategories: PricingCategory[] = [
     id: "websites",
     label: "Websites",
     need: "Website",
-    intro: "Custom-designed websites, never templates. Every plan includes your domain, hosting and business emails for the first year.",
+    intro: "Custom-designed websites, never templates. Grow and Signature include your domain, hosting and business emails for the first year.",
     plans: [
       {
         name: "Launch",
         tagline: "For new businesses that need a professional presence fast.",
-        price: 650_000,
+        price: 850_000,
         billing: "one-time",
         delivery: "About 7 days",
         features: [
@@ -50,8 +50,7 @@ export const pricingCategories: PricingCategory[] = [
           "Mobile-friendly and fast",
           "WhatsApp chat button and contact form",
           "Google Maps and basic SEO",
-          "Free .co.tz domain and hosting for 1 year",
-          "3 business email addresses",
+          "Domain, hosting and email not included (TZS 150,000 per year)",
           "2 rounds of design changes",
           "1 month of free support",
         ],
@@ -77,14 +76,13 @@ export const pricingCategories: PricingCategory[] = [
       {
         name: "Signature",
         tagline: "For tour operators, hotels and shops that sell or take bookings online.",
-        price: 3_500_000,
+        price: 2_500_000,
         from: true,
         billing: "one-time",
         delivery: "About 30 days",
         features: [
           "Unlimited pages",
           "Online booking or e-commerce",
-          "M-Pesa, Mixx by Yas, Airtel Money and card payments",
           "English and Swahili versions",
           "Copywriting for your key pages",
           "GA4 and Meta Pixel tracking",
@@ -93,7 +91,7 @@ export const pricingCategories: PricingCategory[] = [
         ],
       },
     ],
-    note: "From year 2, domain, hosting and emails renew at TZS 150,000 per year.",
+    note: "Domain, hosting and emails cost TZS 150,000 per year: from the start on Launch, and from year 2 on Grow and Signature.",
   },
   {
     id: "systems",

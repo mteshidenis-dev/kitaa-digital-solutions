@@ -33,7 +33,7 @@ import {
 } from "@/lib/pricing";
 
 const included = [
-  { icon: Globe2, title: "Domain, hosting and email", text: "Free for the first year on every website." },
+  { icon: Globe2, title: "Domain, hosting and email", text: "Free for the first year on Grow and Signature." },
   { icon: Lock, title: "SSL security", text: "The padlock that tells visitors your site is safe." },
   { icon: Smartphone, title: "Mobile-first design", text: "Looks and works great on every phone." },
   { icon: MessageCircle, title: "WhatsApp button", text: "Visitors reach you in one tap." },
@@ -68,7 +68,7 @@ const paymentSteps = [
 const faqs = [
   {
     q: "Are there any hidden costs?",
-    a: "No. You get a written quote before we start, and that's what you pay. For websites, the only recurring cost is renewing your domain, hosting and email from year two (TZS 150,000 per year).",
+    a: "No. You get a written quote before we start, and that's what you pay. For websites, the only recurring cost is domain, hosting and email at TZS 150,000 per year: from the start on Launch, and from year two on Grow and Signature.",
   },
   {
     q: "Why do some prices say “From”?",

@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { siteContact } from "@/lib/site";
 import { Logo } from "./Navbar";
+import DotField from "./DotField";
 
 const Footer = () => (
   <footer className="relative overflow-hidden border-t border-white/[0.06] bg-background text-white">
     {/* top accent line */}
     <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+    {/* dot field background */}
+    <DotField className="absolute inset-0" />
 
     <div className="container relative z-10 mx-auto px-4 pb-10 pt-16">
       {/* ── MAIN GRID ── */}

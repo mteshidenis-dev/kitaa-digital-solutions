@@ -21,7 +21,7 @@ const FloatingWhatsApp = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-6 left-4 z-50 flex flex-col-reverse items-start gap-3 sm:left-6">
+    <div className="fixed bottom-6 left-4 z-30 flex flex-col-reverse items-start gap-3 sm:left-6">
       {/* Contact cards */}
       <AnimatePresence>
         {open && (

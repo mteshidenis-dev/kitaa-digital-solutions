@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, LayoutGrid, Mail, MessageCircle, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteContact } from "@/lib/site";
+import { services } from "@/lib/services";
+import DotField from "./DotField";
+import { pauseSmoothScroll, resumeSmoothScroll } from "./SmoothScroll";
 
 const navLinks = [
   { label: "Work", href: "/portfolio" },
@@ -32,13 +35,26 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock page scroll while the full-screen mobile menu is open.
+  // Lock page scroll (and pause smooth scrolling) while the full-screen mobile menu is open.
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
+    if (open) pauseSmoothScroll();
+    else resumeSmoothScroll();
     return () => {
       document.documentElement.style.overflow = "";
+      resumeSmoothScroll();
     };
   }, [open]);
+
+  const menuLinks = [
+    { label: "Home", href: "/" },
+    { label: "Work", href: "/portfolio" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
+  ];
+  const ease = [0.22, 1, 0.36, 1] as const;
 
   const isActive = (href: string) => location.pathname.startsWith(href);
 
@@ -103,35 +119,128 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-background px-4 pb-10 pt-28 lg:hidden"
+            className="fixed inset-0 z-[45] flex flex-col overflow-hidden bg-background lg:hidden"
           >
-            <div className="flex flex-col gap-2">
-              {[{ label: "Home", href: "/" }, ...navLinks, { label: "Blog", href: "/blog" }].map((link, i) => (
+            <DotField className="absolute inset-0 -z-10" mode="edges" />
+            <div
+              className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-72 w-[36rem] -translate-x-1/2 rounded-full blur-3xl"
+              style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.12), transparent)" }}
+            />
+
+            {/* Scrollable body */}
+            <div data-lenis-prevent className="flex-1 overflow-y-auto px-4 pb-8 pt-24">
+              <div className="mx-auto max-w-xl">
+                <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.3em] text-muted-foreground">Menu</p>
+                <ul className="border-t border-white/[0.08]">
+                  {menuLinks.map((link, i) => {
+                    const active = link.href === "/" ? location.pathname === "/" : isActive(link.href);
+                    return (
+                      <motion.li
+                        key={link.href}
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.06 + i * 0.045, duration: 0.5, ease }}
+                        className="border-b border-white/[0.08]"
+                      >
+                        <Link to={link.href} className="group flex items-center gap-4 py-4">
+                          <span className={`w-6 text-xs tabular-nums ${active ? "text-accent" : "text-white/35"}`}>
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span
+                            className={`flex-1 font-heading text-[2rem] font-extrabold leading-none tracking-[-0.02em] ${
+                              active ? "text-accent" : "text-white"
+                            }`}
+                          >
+                            {link.label}
+                          </span>
+                          <ArrowUpRight
+                            className={`h-5 w-5 transition-transform group-active:translate-x-0.5 ${
+                              active ? "text-accent" : "text-white/35"
+                            }`}
+                          />
+                        </Link>
+                      </motion.li>
+                    );
+                  })}
+                </ul>
+
                 <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.35, duration: 0.5, ease }}
+                  className="mt-8"
                 >
-                  <Link
-                    to={link.href}
-                    className={`block font-heading text-5xl font-extrabold tracking-[-0.02em] ${
-                      (link.href === "/" ? location.pathname === "/" : isActive(link.href)) ? "text-accent" : "text-white"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
+                  <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.3em] text-muted-foreground">
+                    Services
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {services.map((sv) => (
+                      <Link
+                        key={sv.href}
+                        to={sv.href}
+                        className={`flex items-center gap-3 rounded-2xl border p-3 transition-colors ${
+                          location.pathname === sv.href
+                            ? "border-accent/50 bg-accent/10"
+                            : "border-white/[0.07] bg-card/80 active:bg-white/[0.06]"
+                        }`}
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                          <sv.icon className="h-4 w-4" />
+                        </span>
+                        <span className="text-sm font-medium leading-tight text-white">{sv.title}</span>
+                      </Link>
+                    ))}
+                    <Link
+                      to="/services"
+                      className="flex items-center gap-3 rounded-2xl border border-dashed border-white/15 p-3 transition-colors active:bg-white/[0.06]"
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/[0.06] text-white">
+                        <LayoutGrid className="h-4 w-4" />
+                      </span>
+                      <span className="text-sm font-medium leading-tight text-white">All services</span>
+                    </Link>
+                  </div>
                 </motion.div>
-              ))}
+              </div>
             </div>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <a href={`mailto:${siteContact.email}`} className="block text-white">
-                {siteContact.email}
-              </a>
-              <a href={siteContact.phones[0].href} className="block">
-                {siteContact.phones[0].display}
-              </a>
-            </div>
+
+            {/* Fixed action bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5, ease }}
+              className="border-t border-white/[0.08] bg-surface/90 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 backdrop-blur-xl"
+            >
+              <div className="mx-auto max-w-xl">
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    to="/contact"
+                    className="btn-glow inline-flex h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold"
+                  >
+                    Start a project <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <a
+                    href={siteContact.phones[0].whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-glass inline-flex h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold"
+                  >
+                    <MessageCircle className="h-4 w-4" /> WhatsApp
+                  </a>
+                </div>
+                <div className="mt-3 flex items-center justify-center gap-5 text-xs text-muted-foreground">
+                  <a
+                    href={`mailto:${siteContact.email}`}
+                    className="inline-flex items-center gap-1.5 py-1.5 hover:text-white"
+                  >
+                    <Mail className="h-3.5 w-3.5 text-accent" /> {siteContact.email}
+                  </a>
+                  <a href={siteContact.phones[0].href} className="inline-flex items-center gap-1.5 py-1.5 hover:text-white">
+                    <Phone className="h-3.5 w-3.5 text-accent" /> Call us
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -31,13 +31,7 @@ const WorkTile = ({ project, featured = false }: { project: ProjectEntry; featur
       <h3 className={`font-heading font-extrabold text-white ${featured ? "text-2xl md:text-3xl" : "text-xl"}`}>
         {project.name}
       </h3>
-      <p
-        className={`mt-2 max-w-md text-sm leading-6 text-white/70 ${
-          featured ? "" : "line-clamp-2 md:max-h-0 md:opacity-0 md:transition-all md:duration-500 md:group-hover:max-h-16 md:group-hover:opacity-100"
-        }`}
-      >
-        {project.summary}
-      </p>
+      <p className={`mt-1.5 max-w-md leading-6 text-white/75 ${featured ? "text-[15px]" : "text-sm"}`}>{project.short}</p>
     </div>
   </Link>
 );

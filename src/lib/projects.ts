@@ -9,6 +9,8 @@ export type ProjectEntry = {
   category: string;
   headline: string;
   summary: string;
+  /** One short line shown on project cards. */
+  short: string;
   challenge: string;
   solution: string;
   audience: string;
@@ -30,6 +32,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Travel and Tours",
     headline: "A safari brand presence designed to look trustworthy, premium, and ready to convert interest.",
     summary: "A premium tour-brand website designed to present safari experiences with more trust, clarity, and booking confidence.",
+    short: "Safari and Kilimanjaro tours, booked with confidence.",
     challenge: "Travel and safari brands often compete in crowded markets where trust, presentation, and first impression determine whether a visitor enquires or leaves.",
     solution: "We structured the site around premium package visibility, cleaner storytelling, and a more credible presentation of the experience on offer.",
     audience: "Ideal for businesses that sell high-trust travel experiences and need a polished digital front door.",
@@ -49,6 +52,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Hospitality",
     headline: "A hospitality experience presented with more confidence, comfort, and booking appeal.",
     summary: "A refined hospitality website built to communicate comfort, quality, and booking appeal for a suites-based accommodation brand.",
+    short: "Boutique suites with a smooth booking experience.",
     challenge: "Hospitality brands need to make quality visible online before a guest ever makes contact, especially when trust and comfort drive booking decisions.",
     solution: "We positioned the site around cleaner accommodation presentation, calmer visual rhythm, and a more premium sense of stay quality.",
     audience: "A strong fit for hotels, apartments, and hospitality brands that need a more elevated online presence.",
@@ -68,6 +72,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Luxury Travel",
     headline: "A quieter, more elegant travel presence for a brand selling premium curated experiences.",
     summary: "A calm, upscale travel site focused on positioning curated tour experiences with elegance and simplicity.",
+    short: "Curated luxury safaris, presented with calm elegance.",
     challenge: "Luxury travel brands need more than information. They need a mood, a feeling of quality, and a presentation style that matches the value of the experience itself.",
     solution: "We shaped the site to feel restrained, polished, and premium, with clearer storytelling around curated travel offers and brand tone.",
     audience: "Best for travel brands selling experience, emotion, and premium service rather than generic listings.",
@@ -87,6 +92,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Adventure Travel",
     headline: "Adventure-driven presentation with enough structure to feel reliable, not chaotic.",
     summary: "An adventure-led tourism platform designed to make exploration feel credible, well-organized, and easy to enquire about.",
+    short: "Tanzania safaris and Kilimanjaro climbs, easy to book.",
     challenge: "Adventure brands often need to balance energy and excitement with enough clarity and structure to feel dependable to new customers.",
     solution: "We built a presentation system that keeps the adventurous spirit while making the brand, routes, and offer structure easier to understand and trust.",
     audience: "Useful for adventure companies that need to look structured and exciting at the same time.",
@@ -106,6 +112,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Educational Platform",
     headline: "A content-led educational platform designed for readability, structure, and intellectual trust.",
     summary: "A content-led platform designed to present ideas, articles, and educational messaging with more structure and accessibility.",
+    short: "Educational articles and ideas, clearly organised.",
     challenge: "Educational and idea-driven platforms succeed when the reading experience feels clear, credible, and respectful of the audience's attention.",
     solution: "We improved content hierarchy, readability, and page structure so ideas can carry more authority and stay easier to navigate.",
     audience: "Strong for knowledge brands, educational initiatives, and platforms publishing thoughtful long-form content.",
@@ -125,6 +132,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Organisation and Destination Promotion",
     headline: "An organisational web presence built to present destination storytelling and public-facing information with more authority.",
     summary: "An organisation-focused web presence designed to communicate mission, place, and public-facing information with more confidence.",
+    short: "Conservation, community, and eco-tourism in Tanzania.",
     challenge: "Public-facing organisations need clarity, trust, and message discipline so visitors quickly understand both the mission and the relevance of the work.",
     solution: "We framed the site around clearer communication, stronger structure, and a more polished presentation of both mission and destination narrative.",
     audience: "Relevant for organisations and initiatives that need clearer storytelling and a more trustworthy digital profile.",
@@ -144,6 +152,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Organisation and Impact",
     headline: "A modern impact-led platform designed to communicate vision, value, and mission with more force.",
     summary: "A purpose-driven website structured to communicate vision, initiatives, and audience value in a more compelling way.",
+    short: "Business coaching and mentoring for entrepreneurs.",
     challenge: "Impact organisations need digital platforms that can communicate seriousness, mission clarity, and public trust without feeling outdated or generic.",
     solution: "We positioned the website around a stronger mission narrative, clearer structure, and a more current design language that improves perceived legitimacy.",
     audience: "Useful for impact organisations, initiatives, and institutions that need a clear and modern public face.",
@@ -163,6 +172,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Tourism and Adventure",
     headline: "A travel showcase designed to sell destinations with more rhythm, confidence, and conversion readiness.",
     summary: "A travel showcase designed to package destination experiences with stronger visual rhythm and a more sales-ready presentation.",
+    short: "Tanzania adventure trips with a sales-ready showcase.",
     challenge: "Tour operators need websites that feel exciting enough to attract interest while staying structured enough to convert and reassure visitors.",
     solution: "We built a more persuasive travel presentation with cleaner packaging of experiences and a stronger sense of visual polish.",
     audience: "Great for tour operators that need premium positioning and easier enquiry conversion.",
@@ -182,6 +192,7 @@ export const recentProjects: ProjectEntry[] = [
     category: "Retail and Supplies",
     headline: "A cleaner retail-facing presence for a product brand that needs more structure and professional polish.",
     summary: "A business website created to present products and company information more clearly for a stationery and supplies brand.",
+    short: "Stationery and office supplies, clearly presented.",
     challenge: "Retail and supply businesses often need websites that can present products clearly without becoming visually cluttered or difficult to scan.",
     solution: "We improved product presentation, business clarity, and the overall professionalism of the digital brand environment.",
     audience: "Well suited to retail brands and product businesses that need a more structured digital catalogue feel.",

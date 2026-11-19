@@ -17,9 +17,9 @@ import { siteContact } from "@/lib/site";
 const bySlug = (slug: string) => recentProjects.find((p) => p.slug === slug);
 const workGrid = [
   { slug: "masatu-tours", span: "lg:col-span-2 lg:row-span-2" },
-  { slug: "become-beyond", span: "" },
+  { slug: "elem-adventures", span: "" },
   { slug: "tulia-essence-tours", span: "" },
-  { slug: "elem-adventures", span: "lg:col-span-2" },
+  { slug: "become-beyond", span: "lg:col-span-2" },
   { slug: "divine-wonders-adventures", span: "" },
 ]
   .map((item) => ({ ...item, project: bySlug(item.slug) }))

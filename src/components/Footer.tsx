@@ -44,7 +44,7 @@ const Footer = () => {
             <div>
               <h4 className="mb-5 font-hero text-xs font-bold uppercase tracking-[0.22em] text-white/40">Navigation</h4>
               <div className="flex flex-col">
-                {["Home", "About", "Services", "Portfolio", "Blog", "Contact"].map((label) => (
+                {["Home", "About", "Services", "Portfolio", "Pricing", "Blog", "Contact"].map((label) => (
                   <Link
                     key={label}
                     to={label === "Home" ? "/" : `/${label.toLowerCase()}`}

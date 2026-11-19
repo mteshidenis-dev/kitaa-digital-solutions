@@ -76,7 +76,8 @@ const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, seconda
             style={{ fontSize: "clamp(2.25rem, 4.6vw, 3.75rem)" }}
           >
             {title}
-            {accent && (stacked ? <br className="hidden sm:block" /> : " ")}
+            {accent && " "}
+            {accent && stacked && <br className="hidden sm:block" />}
             {accent && <span className="text-accent">{accent}</span>}
           </h1>
           {text && <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{text}</p>}

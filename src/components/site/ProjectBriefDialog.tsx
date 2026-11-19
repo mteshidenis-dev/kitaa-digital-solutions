@@ -17,7 +17,15 @@ const empty = { name: "", email: "", phone: "", need: "", idea: "", website: "" 
  * details and describe the problem or idea. It posts to the same /contact.php
  * handler as the Contact page, so messages arrive in the same inbox.
  */
-const ProjectBriefDialog = ({ children }: { children: ReactNode }) => {
+type ProjectBriefDialogProps = {
+  children: ReactNode;
+  /** Pre-select a topic, e.g. "Website". */
+  defaultNeed?: string;
+  /** Package the visitor picked on the Pricing page, e.g. "Websites: Grow". */
+  packageName?: string;
+};
+
+const ProjectBriefDialog = ({ children, defaultNeed, packageName }: ProjectBriefDialogProps) => {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState(empty);
   const [sending, setSending] = useState(false);
@@ -25,7 +33,10 @@ const ProjectBriefDialog = ({ children }: { children: ReactNode }) => {
 
   const onOpenChange = (next: boolean) => {
     setOpen(next);
-    if (next) pauseSmoothScroll();
+    if (next) {
+      pauseSmoothScroll();
+      if (defaultNeed) setForm((f) => ({ ...f, need: f.need || defaultNeed }));
+    }
     else {
       resumeSmoothScroll();
       // Reset after the closing animation so the next visitor starts fresh.
@@ -41,10 +52,13 @@ const ProjectBriefDialog = ({ children }: { children: ReactNode }) => {
       const message = [
         form.idea.trim(),
         "",
+        ...(packageName ? [`Package: ${packageName}`] : []),
         `Interested in: ${form.need || "Not specified"}`,
         `Phone / WhatsApp: ${form.phone.trim() || "Not provided"}`,
         "",
-        "(Sent from the \"Not sure what you need?\" form on the Services section)",
+        packageName
+          ? "(Sent from the Pricing page)"
+          : "(Sent from the \"Not sure what you need?\" form on the Services section)",
       ].join("\n");
       const res = await fetch("/contact.php", {
         method: "POST",
@@ -52,7 +66,9 @@ const ProjectBriefDialog = ({ children }: { children: ReactNode }) => {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          subject: `Free call request${form.need ? `: ${form.need}` : ""}`,
+          subject: packageName
+            ? `Package enquiry: ${packageName}`
+            : `Free call request${form.need ? `: ${form.need}` : ""}`,
           message,
           website: form.website,
         }),
@@ -106,11 +122,20 @@ const ProjectBriefDialog = ({ children }: { children: ReactNode }) => {
           ) : (
             <form onSubmit={submit}>
               <DialogPrimitive.Title className="pr-10 font-heading text-2xl font-extrabold leading-tight md:text-3xl">
-                Tell us the problem<span className="text-accent">.</span>
+                {packageName ? (
+                  <>
+                    Start with <span className="text-accent">{packageName.split(": ").pop()}</span>
+                  </>
+                ) : (
+                  <>
+                    Tell us the problem<span className="text-accent">.</span>
+                  </>
+                )}
               </DialogPrimitive.Title>
               <DialogPrimitive.Description className="mt-2 text-sm leading-6 text-muted-foreground">
-                No need to know the technical side. Describe what you want to achieve and we'll suggest the right
-                solution, free.
+                {packageName
+                  ? "Tell us a little about your business and we'll confirm the scope and a fixed quote within 24 hours."
+                  : "No need to know the technical side. Describe what you want to achieve and we'll suggest the right solution, free."}
               </DialogPrimitive.Description>
 
               <div className="mt-7 space-y-4">

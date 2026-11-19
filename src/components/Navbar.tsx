@@ -7,6 +7,7 @@ import { siteContact } from "@/lib/site";
 const navLinks = [
   { label: "Work", href: "/portfolio" },
   { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -53,7 +54,7 @@ const Navbar = () => {
             <Logo />
           </Link>
 
-          <div className="hidden items-center gap-10 md:flex">
+          <div className="hidden items-center gap-10 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -79,7 +80,7 @@ const Navbar = () => {
           </div>
 
           <button
-            className="relative flex h-10 w-10 items-center justify-center md:hidden"
+            className="relative flex h-10 w-10 items-center justify-center lg:hidden"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -102,7 +103,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-background px-4 pb-10 pt-28 md:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-background px-4 pb-10 pt-28 lg:hidden"
           >
             <div className="flex flex-col gap-2">
               {[{ label: "Home", href: "/" }, ...navLinks, { label: "Blog", href: "/blog" }].map((link, i) => (

@@ -161,3 +161,11 @@ html {
 body {
   overflow-x: hidden;
 }
+
+/* Horizontal tab bars that scroll on small screens without a visible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

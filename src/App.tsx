@@ -19,6 +19,7 @@ const ServiceSystems = lazy(() => import("./pages/services/Systems"));
 const ServiceGraphics = lazy(() => import("./pages/services/Graphics"));
 const ServiceSocialMedia = lazy(() => import("./pages/services/SocialMedia"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const ProjectCaseStudy = lazy(() => import("./pages/ProjectCaseStudy"));
 const About = lazy(() => import("./pages/About"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -58,6 +59,7 @@ const App = () => (
               <Route path="/services/graphics" element={<ServiceGraphics />} />
               <Route path="/services/social-media" element={<ServiceSocialMedia />} />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route path="/portfolio/:slug" element={<ProjectCaseStudy />} />
               <Route path="/about" element={<About />} />
               <Route path="/blog" element={<Blog />} />

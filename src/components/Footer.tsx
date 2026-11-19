@@ -7,9 +7,6 @@ const Footer = () => (
   <footer className="relative overflow-hidden border-t border-white/[0.06] bg-background text-white">
     {/* top accent line */}
     <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
-    {/* ambient glows */}
-    <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
-    <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-white/4 blur-3xl" />
 
     <div className="container relative z-10 mx-auto px-4 pb-10 pt-16">
       {/* ── MAIN GRID ── */}

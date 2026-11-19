@@ -34,7 +34,6 @@ const Portfolio = () => {
       <PageHero
         pageTitle="Portfolio"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Portfolio" }]}
-        label="Portfolio"
         title="Real projects."
         accent="Built to perform."
         text="Every project here was built from scratch, with no templates and no shortcuts. Each one is live, real, and designed to help a business grow."

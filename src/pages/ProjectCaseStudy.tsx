@@ -58,7 +58,7 @@ const ProjectCaseStudy = () => {
           <PageBreadcrumb
             pageTitle={project.name}
             items={[{ label: "Home", href: "/" }, { label: "Portfolio", href: "/portfolio" }, { label: project.name }]}
-            className="mb-8"
+            className="sr-only"
           />
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 24 }}
@@ -67,9 +67,8 @@ const ProjectCaseStudy = () => {
             className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-end"
           >
             <div>
-              <Chip>{project.category}</Chip>
               <h1
-                className="mt-6 font-hero font-extrabold leading-[1] tracking-[-0.03em] text-white"
+                className="font-hero font-extrabold leading-[1] tracking-[-0.03em] text-white"
                 style={{ fontSize: "clamp(2.75rem, 7vw, 5.5rem)" }}
               >
                 {project.name}

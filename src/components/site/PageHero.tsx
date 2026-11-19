@@ -3,12 +3,10 @@ import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import PageBreadcrumb, { type BreadcrumbItem } from "@/components/PageBreadcrumb";
-import { Chip } from "./SectionHeader";
 
 type Action = { to: string; label: string; external?: boolean };
 
 type PageHeroProps = {
-  label: string;
   title: ReactNode;
   accent?: ReactNode;
   text?: ReactNode;
@@ -45,7 +43,7 @@ const ActionLink = ({ action, className, children }: { action: Action; className
   );
 
 /** Inner-page hero: same voice as the homepage hero, at a smaller scale. */
-const PageHero = ({ label, title, accent, text, breadcrumb, pageTitle, primary, secondary, children }: PageHeroProps) => {
+const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, secondary, children }: PageHeroProps) => {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -65,15 +63,14 @@ const PageHero = ({ label, title, accent, text, breadcrumb, pageTitle, primary, 
       />
 
       <div className="container mx-auto max-w-4xl text-center">
-        <PageBreadcrumb pageTitle={pageTitle} items={breadcrumb} className="mb-8 [&_ol]:justify-center" />
+        <PageBreadcrumb pageTitle={pageTitle} items={breadcrumb} className="sr-only" />
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease }}
         >
-          <Chip>{label}</Chip>
           <h1
-            className="mt-6 font-hero font-extrabold leading-[1.02] tracking-[-0.03em] text-white text-balance"
+            className="font-hero font-extrabold leading-[1.02] tracking-[-0.03em] text-white text-balance"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4.75rem)" }}
           >
             {title} {accent && <span className="text-accent">{accent}</span>}

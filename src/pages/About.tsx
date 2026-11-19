@@ -68,7 +68,6 @@ const About = () => (
     <PageHero
       pageTitle="About"
       breadcrumb={[{ label: "Home", href: "/" }, { label: "About" }]}
-      label="About us"
       title="Built to help brands grow."
       accent="Designed to last."
       text="Kitaa Digital Solutions is a creative and engineering studio that helps growing businesses present themselves with more credibility and operate with less friction."

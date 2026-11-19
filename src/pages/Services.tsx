@@ -21,7 +21,6 @@ const Services = () => (
     <PageHero
       pageTitle="Services"
       breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}
-      label="Our services"
       title="Digital work built around"
       accent="outcomes, not deliverables."
       text="Strategy, design, engineering, and support under one roof, so businesses launch faster and operate with more confidence."

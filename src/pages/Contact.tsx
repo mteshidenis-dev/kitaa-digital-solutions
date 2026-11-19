@@ -72,7 +72,6 @@ const Contact = () => {
       <PageHero
         pageTitle="Contact"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]}
-        label="Contact us"
         title="Start the conversation."
         accent="We move fast."
         text="Tell us what you need built, fixed, or sharpened. We'll respond within 24 hours with a clear next step, no vague proposals and no endless back-and-forth."

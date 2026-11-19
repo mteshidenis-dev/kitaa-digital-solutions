@@ -64,7 +64,6 @@ const Blog = () => {
       <PageHero
         pageTitle="Blog"
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Blog" }]}
-        label="Insights"
         title="Ideas and notes for"
         accent="growing businesses."
         text="Practical thinking on websites, branding, systems, and the decisions businesses face when they outgrow improvised digital setups."

@@ -37,7 +37,6 @@ const ServicePage = ({ data }: { data: ServicePageData }) => {
       <PageHero
         pageTitle={data.name}
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: data.name }]}
-        label={data.name}
         title={data.hero.title}
         accent={data.hero.accent}
         text={data.hero.text}

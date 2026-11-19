@@ -1,6 +1,5 @@
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { Chip } from "@/components/site/SectionHeader";
 
 const suggestions = [
   { label: "Our work", to: "/portfolio" },
@@ -27,9 +26,8 @@ const NotFound = () => {
           404
         </p>
         <div className="-mt-10 md:-mt-16">
-          <Chip>Page not found</Chip>
           <h1
-            className="mt-6 font-hero font-extrabold leading-[1.05] tracking-[-0.03em] text-white"
+            className="font-hero font-extrabold leading-[1.05] tracking-[-0.03em] text-white"
             style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)" }}
           >
             This page took a wrong turn<span className="text-accent">.</span>

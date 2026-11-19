@@ -21,7 +21,6 @@ const LegalPage = ({ name, title, intro, highlights, sections, contactNote, disc
     <PageHero
       pageTitle={name}
       breadcrumb={[{ label: "Home", href: "/" }, { label: name }]}
-      label={name}
       title={title}
       text={intro}
     >

@@ -48,6 +48,7 @@ const data: ServicePageData = {
   hero: {
     title: "Websites that earn",
     accent: "trust.",
+    stacked: true,
     text: "We design and build custom websites from first principles — no templates, no shortcuts. Every site is optimised for speed, search, and conversion before it goes live.",
     cta: "Start your website",
   },

@@ -10,7 +10,7 @@ import WorkTile from "./WorkTile";
 
 export type ServicePageData = {
   name: string;
-  hero: { title: string; accent: string; text: string; cta: string };
+  hero: { title: string; accent: string; text: string; cta: string; stacked?: boolean };
   features: { label: string; title: string; items: { icon: LucideIcon; title: string; text: string }[] };
   includes: { label: string; title: string; text: string; items: string[] };
   cta: { title: string; accent: string; text: string };
@@ -39,6 +39,7 @@ const ServicePage = ({ data }: { data: ServicePageData }) => {
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: data.name }]}
         title={data.hero.title}
         accent={data.hero.accent}
+        stacked={data.hero.stacked}
         text={data.hero.text}
         primary={{ to: "/contact", label: data.hero.cta }}
         secondary={{ to: "/portfolio", label: "See our work" }}

@@ -48,6 +48,7 @@ const data: ServicePageData = {
   hero: {
     title: "A brand that looks",
     accent: "established.",
+    stacked: true,
     text: "Brand systems, logo design, and marketing graphics built from strategy — so your business looks consistent, established, and easier to trust everywhere it shows up.",
     cta: "Build your brand",
   },

@@ -9,6 +9,8 @@ type Action = { to: string; label: string; external?: boolean };
 type PageHeroProps = {
   title: ReactNode;
   accent?: ReactNode;
+  /** Put the accent on its own line (from small screens up). */
+  stacked?: boolean;
   text?: ReactNode;
   breadcrumb: BreadcrumbItem[];
   pageTitle: string;
@@ -43,7 +45,7 @@ const ActionLink = ({ action, className, children }: { action: Action; className
   );
 
 /** Inner-page hero: same voice as the homepage hero, at a smaller scale. */
-const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, secondary, children }: PageHeroProps) => {
+const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, secondary, children, stacked }: PageHeroProps) => {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -73,7 +75,9 @@ const PageHero = ({ title, accent, text, breadcrumb, pageTitle, primary, seconda
             className="font-hero font-extrabold leading-[1.02] tracking-[-0.03em] text-white text-balance"
             style={{ fontSize: "clamp(2.25rem, 4.6vw, 3.75rem)" }}
           >
-            {title} {accent && <span className="text-accent">{accent}</span>}
+            {title}
+            {accent && (stacked ? <br className="hidden sm:block" /> : " ")}
+            {accent && <span className="text-accent">{accent}</span>}
           </h1>
           {text && <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{text}</p>}
           {(primary || secondary) && (

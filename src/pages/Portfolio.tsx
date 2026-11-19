@@ -36,6 +36,7 @@ const Portfolio = () => {
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Portfolio" }]}
         title="Real projects."
         accent="Built to perform."
+        stacked
         text="Every project here was built from scratch, with no templates and no shortcuts. Each one is live, real, and designed to help a business grow."
       >
         <div className="mx-auto mt-12 grid max-w-xl grid-cols-3 divide-x divide-white/[0.08] rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur">

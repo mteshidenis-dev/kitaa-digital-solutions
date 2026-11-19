@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 export const Logo = ({ className = "" }: { className?: string }) => (
-  <span className={`font-hero text-[17px] font-semibold tracking-[-0.03em] text-white ${className}`}>
+  <span className={`font-hero text-[18px] font-extrabold tracking-[-0.01em] text-white ${className}`}>
     Kitaa Digital Solutions<span className="text-accent">.</span>
   </span>
 );
@@ -114,7 +114,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className={`block text-5xl font-semibold tracking-[-0.05em] ${
+                    className={`block font-heading text-5xl font-extrabold tracking-[-0.02em] ${
                       (link.href === "/" ? location.pathname === "/" : isActive(link.href)) ? "text-accent" : "text-white"
                     }`}
                   >

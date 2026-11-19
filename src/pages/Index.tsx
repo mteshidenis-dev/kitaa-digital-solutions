@@ -57,7 +57,7 @@ const WorkCard = ({ project, large = false }: { project: ProjectEntry; large?: b
       </span>
     </div>
     <div className="mt-5 flex items-baseline justify-between gap-4">
-      <h3 className="text-2xl font-medium tracking-[-0.03em] text-white md:text-3xl">{project.name}</h3>
+      <h3 className="font-heading text-2xl font-bold tracking-[-0.01em] text-white md:text-3xl">{project.name}</h3>
       <p className="shrink-0 text-sm text-muted-foreground">{project.category}</p>
     </div>
   </Link>
@@ -100,7 +100,7 @@ const Index = () => {
           </motion.div>
 
           <h1
-            className="mx-auto font-hero font-semibold leading-[0.92] tracking-[-0.055em] text-white"
+            className="mx-auto font-hero font-extrabold leading-[0.95] tracking-[-0.03em] text-white"
             style={{ fontSize: "clamp(3.2rem, 10.5vw, 10rem)" }}
           >
             <span className="block overflow-hidden pb-[0.06em]">
@@ -156,7 +156,7 @@ const Index = () => {
             <div>
               <SectionLabel>Selected work</SectionLabel>
               <h2
-                className="font-semibold leading-[0.95] tracking-[-0.05em] text-white"
+                className="font-extrabold leading-[0.98] tracking-[-0.025em] text-white"
                 style={{ fontSize: "clamp(2.75rem, 7vw, 6.5rem)" }}
               >
                 Work that earns
@@ -192,7 +192,7 @@ const Index = () => {
           <Reveal>
             <SectionLabel>The studio</SectionLabel>
             <p
-              className="max-w-6xl font-medium leading-[1.12] tracking-[-0.035em] text-muted-foreground"
+              className="max-w-6xl font-heading font-bold leading-[1.15] tracking-[-0.015em] text-muted-foreground"
               style={{ fontSize: "clamp(1.9rem, 4.4vw, 4rem)" }}
             >
               A focused studio in Dar es Salaam building{" "}
@@ -204,7 +204,7 @@ const Index = () => {
           <div className="mt-20 grid gap-10 border-t border-white/[0.08] pt-12 sm:grid-cols-3 md:mt-28">
             {stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.1}>
-                <p className="font-semibold tracking-[-0.05em] text-white" style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}>
+                <p className="font-heading font-extrabold tracking-[-0.03em] text-white" style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}>
                   {s.value}
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
@@ -220,7 +220,7 @@ const Index = () => {
           <Reveal className="mb-14 md:mb-20">
             <SectionLabel>What we do</SectionLabel>
             <h2
-              className="font-semibold leading-[0.95] tracking-[-0.05em] text-white"
+              className="font-extrabold leading-[0.98] tracking-[-0.025em] text-white"
               style={{ fontSize: "clamp(2.75rem, 7vw, 6.5rem)" }}
             >
               Services<span className="text-accent">.</span>
@@ -236,7 +236,7 @@ const Index = () => {
                 >
                   <span className="text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
                   <span
-                    className="font-medium tracking-[-0.04em] text-white transition-colors duration-300 group-hover:text-accent"
+                    className="font-heading font-bold tracking-[-0.02em] text-white transition-colors duration-300 group-hover:text-accent"
                     style={{ fontSize: "clamp(1.75rem, 4vw, 3.5rem)" }}
                   >
                     {s.title}
@@ -256,7 +256,7 @@ const Index = () => {
           <Reveal className="mb-16 md:mb-24">
             <SectionLabel>How we work</SectionLabel>
             <h2
-              className="max-w-4xl font-semibold leading-[0.95] tracking-[-0.05em] text-white"
+              className="max-w-4xl font-extrabold leading-[0.98] tracking-[-0.025em] text-white"
               style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
             >
               Four steps. No guesswork<span className="text-accent">.</span>
@@ -268,7 +268,7 @@ const Index = () => {
               <Reveal key={step.title} delay={i * 0.1}>
                 <div className="border-t border-white/[0.12] pt-8">
                   <p className="text-sm text-accent">{String(i + 1).padStart(2, "0")}</p>
-                  <h3 className="mt-6 text-3xl font-medium tracking-[-0.04em] text-white">{step.title}</h3>
+                  <h3 className="mt-6 text-3xl font-bold tracking-[-0.02em] text-white">{step.title}</h3>
                   <p className="mt-4 text-[15px] leading-7 text-muted-foreground">{step.text}</p>
                 </div>
               </Reveal>
@@ -288,7 +288,7 @@ const Index = () => {
             <SectionLabel>Next step</SectionLabel>
           </div>
           <h2
-            className="mx-auto font-semibold leading-[0.92] tracking-[-0.055em] text-white"
+            className="mx-auto font-extrabold leading-[0.95] tracking-[-0.03em] text-white"
             style={{ fontSize: "clamp(3rem, 9vw, 8.5rem)" }}
           >
             Let's build

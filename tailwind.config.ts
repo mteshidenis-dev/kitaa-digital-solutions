@@ -17,9 +17,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        hero: ['"Inter"', 'system-ui', 'sans-serif'],
-        heading: ['"Inter"', 'system-ui', 'sans-serif'],
-        display: ['"Inter"', 'system-ui', 'sans-serif'],
+        hero: ['"Nunito"', 'system-ui', 'sans-serif'],
+        heading: ['"Nunito"', 'system-ui', 'sans-serif'],
+        display: ['"Nunito"', 'system-ui', 'sans-serif'],
         body: ['"Inter"', 'system-ui', 'sans-serif'],
       },
       colors: {

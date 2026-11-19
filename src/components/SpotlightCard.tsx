@@ -29,7 +29,7 @@ const SpotlightCard = ({ children, className }: { children: ReactNode; className
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spot:opacity-100"
         style={{
-          background: "radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(31,116,242,0.13), transparent 45%)",
+          background: "radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(31,116,242, 0.065), transparent 45%)",
         }}
       />
       {/* light on the border */}
@@ -37,7 +37,7 @@ const SpotlightCard = ({ children, className }: { children: ReactNode; className
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover/spot:opacity-100"
         style={{
           padding: 1,
-          background: "radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(56,132,255,0.6), transparent 60%)",
+          background: "radial-gradient(260px circle at var(--x, 50%) var(--y, 50%), rgba(56,132,255, 0.3), transparent 60%)",
           WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
           WebkitMaskComposite: "xor",
           maskComposite: "exclude",

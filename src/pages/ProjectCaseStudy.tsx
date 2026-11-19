@@ -52,7 +52,7 @@ const ProjectCaseStudy = () => {
       <section className="relative isolate overflow-hidden px-4 pb-12 pt-32 md:pt-40">
         <div
           className="pointer-events-none absolute left-1/2 top-[30%] -z-10 h-[30rem] w-[60rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.28), transparent)" }}
+          style={{ background: "radial-gradient(closest-side, rgba(31,116,242, 0.14), transparent)" }}
         />
         <div className="container mx-auto">
           <PageBreadcrumb
@@ -99,7 +99,7 @@ const ProjectCaseStudy = () => {
       {/* ── Big screenshot in a browser frame ── */}
       <section className="px-4">
         <Reveal className="container mx-auto" y={50}>
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-card shadow-[0_40px_120px_-30px_rgba(31,116,242,0.45)]">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-card shadow-[0_40px_120px_-30px_rgba(31,116,242, 0.225)]">
             <div className="flex items-center gap-2 border-b border-white/[0.06] bg-white/[0.03] px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
@@ -116,7 +116,7 @@ const ProjectCaseStudy = () => {
                 }`}
               />
             ) : (
-              <div className="aspect-[16/9] w-full bg-gradient-to-br from-accent/20 to-card" />
+              <div className="aspect-[16/9] w-full bg-gradient-to-br from-accent/10 to-card" />
             )}
           </div>
         </Reveal>

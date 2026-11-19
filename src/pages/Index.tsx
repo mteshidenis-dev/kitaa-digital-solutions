@@ -80,7 +80,7 @@ const Index = () => {
         {/* A very soft glow behind the headline */}
         <div
           className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[34rem] w-[64rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.22), transparent)" }}
+          style={{ background: "radial-gradient(closest-side, rgba(31,116,242, 0.11), transparent)" }}
         />
 
         <div className="container mx-auto text-center">

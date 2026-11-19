@@ -95,7 +95,7 @@ const Blog = () => {
                 className="absolute inset-0"
                 style={{
                   background:
-                    "radial-gradient(circle at 30% 40%, rgba(31,116,242,0.55), transparent 55%), radial-gradient(circle at 80% 80%, rgba(56,132,255,0.3), transparent 50%)",
+                    "radial-gradient(circle at 30% 40%, rgba(31,116,242, 0.275), transparent 55%), radial-gradient(circle at 80% 80%, rgba(56,132,255, 0.15), transparent 50%)",
                 }}
               />
               <div

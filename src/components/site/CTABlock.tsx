@@ -19,11 +19,11 @@ const CTABlock = ({
 }: CTABlockProps) => (
   <section className="px-4 pb-4 md:pb-6">
     <Reveal className="container mx-auto">
-      <div className="rounded-3xl bg-gradient-to-br from-accent/70 via-white/10 to-accent/30 p-px">
+      <div className="rounded-3xl bg-gradient-to-br from-accent/30 via-white/10 to-accent/15 p-px">
         <div className="relative overflow-hidden rounded-[calc(1.5rem-1px)] bg-card px-6 py-14 text-center md:px-12 md:py-20">
           <div
             className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-            style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.45), transparent)" }}
+            style={{ background: "radial-gradient(closest-side, rgba(31,116,242, 0.225), transparent)" }}
           />
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.04]"

@@ -15,7 +15,7 @@ const NotFound = () => {
     <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden px-4 pb-20 pt-32">
       <div
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[30rem] w-[50rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
-        style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.3), transparent)" }}
+        style={{ background: "radial-gradient(closest-side, rgba(31,116,242, 0.15), transparent)" }}
       />
       <div className="container mx-auto max-w-3xl text-center">
         <p

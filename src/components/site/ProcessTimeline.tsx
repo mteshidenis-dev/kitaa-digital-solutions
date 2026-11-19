@@ -5,7 +5,7 @@ import { processSteps } from "@/lib/services";
 const ProcessTimeline = () => (
   <div className="relative grid gap-10 md:grid-cols-4 md:gap-6">
     {/* connecting line (desktop) */}
-    <div className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-accent/60 via-white/10 to-white/5 md:block" />
+    <div className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-accent/30 via-white/10 to-white/5 md:block" />
     {processSteps.map((step, i) => (
       <Reveal key={step.title} delay={i * 0.1} y={24}>
         <div className="relative flex gap-5 md:block">

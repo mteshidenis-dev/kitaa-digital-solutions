@@ -60,7 +60,7 @@ const Services = () => (
           <div className="relative grid gap-10 overflow-hidden rounded-3xl border border-white/[0.07] bg-card p-7 md:p-12 lg:grid-cols-2 lg:gap-16">
             <div
               className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full blur-3xl"
-              style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.25), transparent)" }}
+              style={{ background: "radial-gradient(closest-side, rgba(31,116,242, 0.125), transparent)" }}
             />
             <div className="relative">
               <Chip>How we engage</Chip>

@@ -38,7 +38,7 @@ const ServiceGrid = () => (
         className="group relative flex h-full min-h-[240px] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-7"
       >
         <div
-          className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/20 blur-3xl transition-transform duration-700 group-hover:scale-125"
+          className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-3xl transition-transform duration-700 group-hover:scale-125"
         />
         <p className="relative text-sm font-medium text-white/80">Not sure what you need?</p>
         <div className="relative">

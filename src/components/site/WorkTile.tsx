@@ -19,7 +19,7 @@ const WorkTile = ({ project, featured = false }: { project: ProjectEntry; featur
         }`}
       />
     ) : (
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-card" />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-card" />
     )}
     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/5" />
     <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[11px] font-medium text-white/85 backdrop-blur-md">

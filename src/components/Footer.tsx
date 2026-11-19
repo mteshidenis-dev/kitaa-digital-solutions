@@ -18,7 +18,7 @@ const Footer = () => {
         className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-surface"
       >
         {/* thin blue light along the top edge */}
-        <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
+        <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent" />
 
         <div className="container relative mx-auto px-6 pb-8 pt-14 md:px-10">
           {/* ── MAIN GRID ── */}

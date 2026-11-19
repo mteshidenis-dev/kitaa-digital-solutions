@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Reveal from "@/components/Reveal";
 import SpotlightCard from "@/components/SpotlightCard";
+import ProjectBriefDialog from "./ProjectBriefDialog";
 import { services } from "@/lib/services";
 
 /** Five service cards with a cursor spotlight, plus a "not sure?" nudge card. */
@@ -33,10 +34,11 @@ const ServiceGrid = () => (
 
     {/* Sixth tile: a nudge to talk */}
     <Reveal delay={0.16} y={30}>
-      <Link
-        to="/contact"
-        className="group relative flex h-full min-h-[240px] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-7"
-      >
+      <ProjectBriefDialog>
+        <button
+          type="button"
+          className="group relative flex h-full min-h-[240px] w-full flex-col justify-between overflow-hidden rounded-2xl bg-primary p-7 text-left focus:outline-none focus-visible:ring-4 focus-visible:ring-white/40"
+        >
         <div
           className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-3xl transition-transform duration-700 group-hover:scale-125"
         />
@@ -46,11 +48,12 @@ const ServiceGrid = () => (
             Tell us the problem. We'll suggest the right solution.
           </h3>
           <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white">
-            Book a free call
+            Share your idea
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
-      </Link>
+        </button>
+      </ProjectBriefDialog>
     </Reveal>
   </div>
 );

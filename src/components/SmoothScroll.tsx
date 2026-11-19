@@ -5,6 +5,11 @@ import "lenis/dist/lenis.css";
 
 let lenis: Lenis | null = null;
 
+/** Pause smooth scrolling (e.g. while a dialog is open) so the page behind stays still. */
+export const pauseSmoothScroll = () => lenis?.stop();
+/** Resume smooth scrolling after pauseSmoothScroll(). */
+export const resumeSmoothScroll = () => lenis?.start();
+
 /**
  * Gives the page a soft, inertial scroll on desktop (mouse wheel / trackpad).
  * Touch devices keep native scrolling, and it is skipped entirely for people

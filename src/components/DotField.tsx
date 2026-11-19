@@ -10,6 +10,8 @@ type DotFieldProps = {
   frameRef?: RefObject<HTMLElement>;
   /** How far (px) the glow spreads out from the framed element. */
   reach?: number;
+  /** "edges": keep the centre clear (for text) and let dots build up toward the sides and corners. */
+  mode?: "frame" | "edges";
 };
 
 /**
@@ -18,7 +20,7 @@ type DotFieldProps = {
  * distance, with some blue dots slowly twinkling. Drawn on a canvas, paused when
  * off screen, and static for people who prefer reduced motion.
  */
-const DotField = ({ className, gap = 22, frameRef, reach = 140 }: DotFieldProps) => {
+const DotField = ({ className, gap = 22, frameRef, reach = 140, mode = "frame" }: DotFieldProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -64,6 +66,13 @@ const DotField = ({ className, gap = 22, frameRef, reach = 140 }: DotFieldProps)
             const dy = Math.max(box.t - y, 0, y - box.b);
             const d = Math.hypot(dx, dy);
             weight = Math.max(0, 1 - d / reach) ** 1.15;
+          } else if (mode === "edges") {
+            // Elliptical clear zone in the middle; dots grow stronger toward the edges and fade at the bottom.
+            const nx = (x - width / 2) / (width * 0.5);
+            const ny = (y - height * 0.45) / (height * 0.55);
+            const nd = Math.hypot(nx, ny);
+            const bottomFade = Math.min(1, (height - y) / (height * 0.25));
+            weight = Math.min(1, Math.max(0, (nd - 0.55) / 0.6)) * bottomFade;
           } else {
             weight = Math.max(0, 1 - y / height);
           }
@@ -123,7 +132,7 @@ const DotField = ({ className, gap = 22, frameRef, reach = 140 }: DotFieldProps)
       ro.disconnect();
       io.disconnect();
     };
-  }, [gap, frameRef, reach]);
+  }, [gap, frameRef, reach, mode]);
 
   return <canvas ref={canvasRef} aria-hidden="true" className={cn("pointer-events-none h-full w-full", className)} />;
 };

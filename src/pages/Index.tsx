@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowRight, MessageCircle, Plus, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import CountUp from "@/components/CountUp";
+import DotField from "@/components/DotField";
 import Reveal from "@/components/Reveal";
 import CTABlock from "@/components/site/CTABlock";
 import SectionHeader, { Chip, sectionTitleClass, sectionTitleStyle } from "@/components/site/SectionHeader";
@@ -74,10 +75,12 @@ const Index = () => {
     <div className="relative bg-background">
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pb-16 pt-32">
-        {/* One soft glow, kept quiet */}
+        {/* Dots around the edges, centre kept clear for the headline */}
+        <DotField className="absolute inset-0 -z-10" mode="edges" />
+        {/* A very soft glow behind the headline */}
         <div
-          className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[38rem] w-[70rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.32), transparent)" }}
+          className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[34rem] w-[64rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-3xl"
+          style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.22), transparent)" }}
         />
 
         <div className="container mx-auto text-center">

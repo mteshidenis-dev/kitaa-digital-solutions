@@ -74,7 +74,7 @@ export const recentProjects: ProjectEntry[] = [
     domain: "bcbsuites.com",
     url: "https://bcbsuites.com",
     imageSrc: "/project-previews/bcb-suites.webp",
-    imageAlt: "BCB Suites hospitality website preview",
+    imageAlt: "Aerial view of BCB Suites lodge with Mount Kilimanjaro at sunrise",
     imageFit: "cover",
     category: "Hospitality",
     headline: "A hospitality experience presented with more confidence, comfort, and booking appeal.",

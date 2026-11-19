@@ -1,67 +1,191 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowRight, ArrowUpRight, Star } from "lucide-react";
+import {
+  AppWindow,
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Globe2,
+  Megaphone,
+  MessageCircle,
+  Palette,
+  Plus,
+  Star,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react";
 import { Link } from "react-router-dom";
+import CountUp from "@/components/CountUp";
 import Reveal from "@/components/Reveal";
+import SpotlightCard from "@/components/SpotlightCard";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { recentProjects, type ProjectEntry } from "@/lib/projects";
 import { siteContact } from "@/lib/site";
 
-const featuredSlugs = ["masatu-tours", "become-beyond", "tulia-essence-tours", "elem-adventures"];
-const featuredProjects = featuredSlugs
-  .map((slug) => recentProjects.find((p) => p.slug === slug))
-  .filter((p): p is ProjectEntry => Boolean(p));
+/* ── Content ─────────────────────────────────────────────────────────── */
 
-const services = [
-  { title: "Websites", href: "/services/websites", text: "Custom sites and landing pages that make a business look established." },
-  { title: "Applications", href: "/services/applications", text: "Web apps and dashboards built around how your team really works." },
-  { title: "Systems", href: "/services/systems", text: "Portals and automation that replace manual, error-prone processes." },
-  { title: "Brand & Graphics", href: "/services/graphics", text: "Identity, visual systems, and print that improve recall and trust." },
-  { title: "Social Media", href: "/services/social-media", text: "Content and management that keep your brand present and consistent." },
-];
+const bySlug = (slug: string) => recentProjects.find((p) => p.slug === slug);
+const workGrid = [
+  { slug: "masatu-tours", span: "lg:col-span-2 lg:row-span-2" },
+  { slug: "become-beyond", span: "" },
+  { slug: "tulia-essence-tours", span: "" },
+  { slug: "elem-adventures", span: "lg:col-span-2" },
+  { slug: "divine-wonders-adventures", span: "" },
+]
+  .map((item) => ({ ...item, project: bySlug(item.slug) }))
+  .filter((item): item is { slug: string; span: string; project: ProjectEntry } => Boolean(item.project));
 
-const processSteps = [
-  { title: "Clarify", text: "We define the audience, the goal, and what the business needs to say with more authority." },
-  { title: "Design", text: "Layout, rhythm, and hierarchy shaped with restraint, so it feels refined, not decorated." },
-  { title: "Build", text: "We ship the real thing: the site, the CMS, or the internal tools that keep it practical." },
-  { title: "Refine", text: "After launch we tighten weak points using real usage, not assumptions." },
+const services: { title: string; href: string; text: string; tags: string[]; icon: LucideIcon }[] = [
+  {
+    title: "Websites",
+    href: "/services/websites",
+    text: "Fast, custom websites and landing pages that make your business look established and bring in enquiries.",
+    tags: ["Business sites", "Landing pages", "SEO"],
+    icon: Globe2,
+  },
+  {
+    title: "Web Applications",
+    href: "/services/applications",
+    text: "Booking tools, dashboards, and customer portals built around how your team actually works.",
+    tags: ["Dashboards", "Portals", "Booking"],
+    icon: AppWindow,
+  },
+  {
+    title: "Business Systems",
+    href: "/services/systems",
+    text: "Replace spreadsheets and paperwork with simple systems for sales, stock, staff, and reporting.",
+    tags: ["Automation", "Reporting", "Admin tools"],
+    icon: Workflow,
+  },
+  {
+    title: "Brand & Graphics",
+    href: "/services/graphics",
+    text: "Logos, brand identity, company profiles, and print that make you memorable and consistent.",
+    tags: ["Logo", "Identity", "Profiles"],
+    icon: Palette,
+  },
+  {
+    title: "Social Media",
+    href: "/services/social-media",
+    text: "Content and page management that keep your brand active, visible, and on-message.",
+    tags: ["Content", "Management", "Ads"],
+    icon: Megaphone,
+  },
 ];
 
 const stats = [
-  { value: "50+", label: "Projects delivered" },
-  { value: "100%", label: "Custom builds" },
-  { value: "2019", label: "Studio founded" },
+  { value: "50+", label: "Projects delivered", count: true },
+  { value: "100%", label: "Custom built, no templates", count: true },
+  { value: "2019", label: "Building since", count: false },
+  { value: "24h", label: "Typical reply time", count: false },
+];
+
+const processSteps = [
+  { title: "Discovery call", text: "We learn your business, your customers, and what success looks like for this project." },
+  { title: "Design", text: "You see the look and structure early, and we refine it together before building." },
+  { title: "Build & launch", text: "We develop, test on phones and desktops, and launch on your domain." },
+  { title: "Grow", text: "After launch we keep improving based on real visitors and your feedback." },
+];
+
+const faqs = [
+  {
+    q: "How long does a website take?",
+    a: "It depends on the size of the project. After a short discovery call we give you a clear timeline before any work starts, and we keep you updated at every stage.",
+  },
+  {
+    q: "How much does a website cost?",
+    a: "Every business needs something different, so we quote per project. You get a clear written quote up front, so you know exactly what is included before we begin.",
+  },
+  {
+    q: "Do you work with businesses outside Dar es Salaam?",
+    a: "Yes. We work with clients across Tanzania and East Africa, remotely or in person.",
+  },
+  {
+    q: "Can I update the website myself?",
+    a: "Yes, where it makes sense we set up an easy editing system so your team can change text and images, and we show you how to use it at handover.",
+  },
+  {
+    q: "Do you help after the website is live?",
+    a: "Yes. We stay involved after launch to fix issues, make improvements, and help the site keep performing.",
+  },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const SectionLabel = ({ children }: { children: string }) => (
-  <p className="mb-6 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-    <span className="h-px w-8 bg-accent" />
-    {children}
-  </p>
+/* ── Small building blocks ───────────────────────────────────────────── */
+
+const SectionHeader = ({
+  label,
+  title,
+  accent,
+  text,
+  action,
+}: {
+  label: string;
+  title: string;
+  accent?: string;
+  text?: string;
+  action?: { to: string; label: string };
+}) => (
+  <Reveal className="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+    <div className="max-w-3xl">
+      <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium text-white/70">
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+        {label}
+      </span>
+      <h2
+        className="mt-5 font-extrabold leading-[1.05] tracking-[-0.02em] text-white text-balance"
+        style={{ fontSize: "clamp(2rem, 3.6vw, 3rem)" }}
+      >
+        {title} {accent && <span className="text-accent">{accent}</span>}
+      </h2>
+      {text && <p className="mt-4 max-w-xl text-[15px] leading-7 text-muted-foreground">{text}</p>}
+    </div>
+    {action && (
+      <Link
+        to={action.to}
+        className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/25 hover:bg-white/[0.04] md:self-auto"
+      >
+        {action.label}
+        <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      </Link>
+    )}
+  </Reveal>
 );
 
-const WorkCard = ({ project, large = false }: { project: ProjectEntry; large?: boolean }) => (
-  <Link to={`/portfolio/${project.slug}`} className="group block">
-    <div className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-card">
-      <img
-        src={project.imageSrc}
-        alt={project.imageAlt}
-        loading="lazy"
-        className={`w-full object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] ${
-          large ? "aspect-[4/3] md:aspect-[16/8]" : "aspect-[4/3]"
+const WorkTile = ({ project, featured }: { project: ProjectEntry; featured: boolean }) => (
+  <Link
+    to={`/portfolio/${project.slug}`}
+    className="group relative block h-full min-h-[280px] overflow-hidden rounded-2xl border border-white/[0.07] bg-card"
+  >
+    <img
+      src={project.imageSrc}
+      alt={project.imageAlt}
+      loading="lazy"
+      className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/5" />
+    <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-[11px] font-medium text-white/85 backdrop-blur-md">
+      {project.category}
+    </span>
+    <span className="absolute right-4 top-4 flex h-10 w-10 scale-90 items-center justify-center rounded-full bg-white text-background opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+      <ArrowUpRight className="h-4 w-4" />
+    </span>
+    <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+      <h3 className={`font-heading font-extrabold text-white ${featured ? "text-2xl md:text-3xl" : "text-xl"}`}>
+        {project.name}
+      </h3>
+      <p
+        className={`mt-2 max-w-md text-sm leading-6 text-white/70 ${
+          featured ? "" : "line-clamp-2 md:max-h-0 md:opacity-0 md:transition-all md:duration-500 md:group-hover:max-h-16 md:group-hover:opacity-100"
         }`}
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <span className="absolute right-5 top-5 flex h-12 w-12 translate-y-2 items-center justify-center rounded-full bg-white text-background opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-        <ArrowUpRight className="h-5 w-5" />
-      </span>
-    </div>
-    <div className="mt-5 flex items-baseline justify-between gap-4">
-      <h3 className="font-heading text-2xl font-bold tracking-[-0.01em] text-white md:text-3xl">{project.name}</h3>
-      <p className="shrink-0 text-sm text-muted-foreground">{project.category}</p>
+      >
+        {project.summary}
+      </p>
     </div>
   </Link>
 );
+
+/* ── Page ────────────────────────────────────────────────────────────── */
 
 const Index = () => {
   const reduce = useReducedMotion();
@@ -149,127 +273,157 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* ── SELECTED WORK (large imagery) ────────────────────────────── */}
-      <section className="px-4 py-28 md:py-40">
-        <div className="container mx-auto">
-          <Reveal className="mb-16 flex flex-col gap-8 md:mb-24 md:flex-row md:items-end md:justify-between">
-            <div>
-              <SectionLabel>Selected work</SectionLabel>
-              <h2
-                className="font-extrabold leading-[0.98] tracking-[-0.025em] text-white"
-                style={{ fontSize: "clamp(2.75rem, 7vw, 6.5rem)" }}
-              >
-                Work that earns
-                <br />
-                trust<span className="text-accent">.</span>
-              </h2>
+      {/* ── CLIENT STRIP ─────────────────────────────────────────────── */}
+      <section className="border-y border-white/[0.06] bg-surface/60 py-7">
+        <div className="container mx-auto flex flex-col items-center gap-5 px-4 md:flex-row md:gap-10">
+          <p className="shrink-0 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            Trusted by
+          </p>
+          <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]">
+            <div className="flex w-max animate-marquee items-center gap-12 hover:[animation-play-state:paused]">
+              {[...recentProjects, ...recentProjects].map((p, i) => (
+                <Link
+                  key={`${p.slug}-${i}`}
+                  to={`/portfolio/${p.slug}`}
+                  className="whitespace-nowrap font-heading text-lg font-extrabold text-white/35 transition-colors hover:text-white"
+                  tabIndex={i >= recentProjects.length ? -1 : undefined}
+                >
+                  {p.name}
+                </Link>
+              ))}
             </div>
-            <Link
-              to="/portfolio"
-              className="group inline-flex items-center gap-2 self-start text-sm font-medium text-white md:self-auto"
-            >
-              All projects
-              <ArrowUpRight className="h-4 w-4 text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </Reveal>
-
-          <div className="grid gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-24">
-            {featuredProjects.map((project, i) => {
-              const large = i === 0 || i === 3;
-              return (
-                <Reveal key={project.slug} className={large ? "md:col-span-2" : ""} delay={large ? 0 : (i % 2) * 0.12}>
-                  <WorkCard project={project} large={large} />
-                </Reveal>
-              );
-            })}
           </div>
         </div>
       </section>
 
-      {/* ── STATEMENT ────────────────────────────────────────────────── */}
-      <section className="px-4 py-28 md:py-40">
+      {/* ── SELECTED WORK (bento) ────────────────────────────────────── */}
+      <section className="px-4 py-20 md:py-28">
         <div className="container mx-auto">
-          <Reveal>
-            <SectionLabel>The studio</SectionLabel>
-            <p
-              className="max-w-6xl font-heading font-bold leading-[1.15] tracking-[-0.015em] text-muted-foreground"
-              style={{ fontSize: "clamp(1.9rem, 4.4vw, 4rem)" }}
-            >
-              A focused studio in Dar es Salaam building{" "}
-              <span className="text-white">websites, systems, and brands</span> for businesses that want to{" "}
-              <span className="text-white">look established</span>, and stay useful long after launch.
-            </p>
-          </Reveal>
+          <SectionHeader
+            label="Selected work"
+            title="Recent projects we're"
+            accent="proud of."
+            text="Tourism, hospitality, education, and organisations across Tanzania, each built to win trust and bring in enquiries."
+            action={{ to: "/portfolio", label: "View all projects" }}
+          />
 
-          <div className="mt-20 grid gap-10 border-t border-white/[0.08] pt-12 sm:grid-cols-3 md:mt-28">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.1}>
-                <p className="font-heading font-extrabold tracking-[-0.03em] text-white" style={{ fontSize: "clamp(3rem, 6vw, 5rem)" }}>
-                  {s.value}
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-3">
+            {workGrid.map(({ slug, span, project }, i) => (
+              <Reveal key={slug} className={`${span} ${i === 0 ? "sm:col-span-2 lg:col-span-2" : ""}`} delay={(i % 3) * 0.08} y={30}>
+                <WorkTile project={project} featured={i === 0} />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES (big list) ─────────────────────────────────────── */}
-      <section className="px-4 py-28 md:py-40">
+      {/* ── SERVICES (spotlight cards) ───────────────────────────────── */}
+      <section className="px-4 py-20 md:py-28">
         <div className="container mx-auto">
-          <Reveal className="mb-14 md:mb-20">
-            <SectionLabel>What we do</SectionLabel>
-            <h2
-              className="font-extrabold leading-[0.98] tracking-[-0.025em] text-white"
-              style={{ fontSize: "clamp(2.75rem, 7vw, 6.5rem)" }}
-            >
-              Services<span className="text-accent">.</span>
-            </h2>
-          </Reveal>
+          <SectionHeader
+            label="What we do"
+            title="Everything your business needs"
+            accent="online."
+            text="One team for design, development, and branding, so everything looks and works as one."
+            action={{ to: "/services", label: "All services" }}
+          />
 
-          <div className="border-t border-white/[0.08]">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s, i) => (
-              <Reveal key={s.href} y={24} delay={i * 0.05}>
-                <Link
-                  to={s.href}
-                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-6 border-b border-white/[0.08] py-8 md:grid-cols-[5rem_1fr_1fr_auto] md:py-10"
-                >
-                  <span className="text-sm text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-                  <span
-                    className="font-heading font-bold tracking-[-0.02em] text-white transition-colors duration-300 group-hover:text-accent"
-                    style={{ fontSize: "clamp(1.75rem, 4vw, 3.5rem)" }}
-                  >
-                    {s.title}
-                  </span>
-                  <span className="hidden max-w-sm text-sm leading-7 text-muted-foreground md:block">{s.text}</span>
-                  <ArrowUpRight className="h-6 w-6 text-muted-foreground transition-all duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent" />
+              <Reveal key={s.href} delay={(i % 3) * 0.08} y={30}>
+                <Link to={s.href} className="block h-full">
+                  <SpotlightCard className="h-full p-7">
+                    <div className="flex items-start justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-accent/25 bg-accent/10 text-accent">
+                        <s.icon className="h-5 w-5" />
+                      </div>
+                      <ArrowUpRight className="h-5 w-5 text-white/30 transition-all duration-300 group-hover/spot:-translate-y-0.5 group-hover/spot:translate-x-0.5 group-hover/spot:text-accent" />
+                    </div>
+                    <h3 className="mt-6 font-heading text-xl font-extrabold text-white">{s.title}</h3>
+                    <p className="mt-2.5 text-sm leading-6 text-muted-foreground">{s.text}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {s.tags.map((t) => (
+                        <span key={t} className="rounded-full bg-white/[0.05] px-2.5 py-1 text-[11px] font-medium text-white/60">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </SpotlightCard>
                 </Link>
               </Reveal>
             ))}
+
+            {/* Sixth tile: a nudge to talk */}
+            <Reveal delay={0.16} y={30}>
+              <Link
+                to="/contact"
+                className="group relative flex h-full min-h-[240px] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-7"
+              >
+                <div
+                  className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/20 blur-3xl transition-transform duration-700 group-hover:scale-125"
+                />
+                <p className="relative text-sm font-medium text-white/80">Not sure what you need?</p>
+                <div className="relative">
+                  <h3 className="font-heading text-2xl font-extrabold leading-tight text-white">
+                    Tell us the problem. We'll suggest the right solution.
+                  </h3>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white">
+                    Book a free call
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── PROCESS ──────────────────────────────────────────────────── */}
-      <section className="px-4 py-28 md:py-40">
+      {/* ── NUMBERS ──────────────────────────────────────────────────── */}
+      <section className="px-4">
         <div className="container mx-auto">
-          <Reveal className="mb-16 md:mb-24">
-            <SectionLabel>How we work</SectionLabel>
-            <h2
-              className="max-w-4xl font-extrabold leading-[0.98] tracking-[-0.025em] text-white"
-              style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
-            >
-              Four steps. No guesswork<span className="text-accent">.</span>
-            </h2>
+          <Reveal>
+            <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-white/[0.07] bg-card lg:grid-cols-4">
+              {stats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className={`relative p-7 md:p-9 ${i % 2 === 1 ? "border-l border-white/[0.07]" : ""} ${
+                    i >= 2 ? "border-t border-white/[0.07] lg:border-t-0 lg:border-l" : ""
+                  }`}
+                >
+                  <p className="font-heading text-4xl font-extrabold text-white md:text-5xl">
+                    {s.count ? <CountUp value={s.value} /> : s.value}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </Reveal>
+        </div>
+      </section>
 
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+      {/* ── PROCESS (timeline) ───────────────────────────────────────── */}
+      <section className="px-4 py-20 md:py-28">
+        <div className="container mx-auto">
+          <SectionHeader
+            label="How we work"
+            title="A simple process,"
+            accent="no surprises."
+            text="You always know what's happening, what's next, and when it will be ready."
+          />
+
+          <div className="relative grid gap-10 md:grid-cols-4 md:gap-6">
+            {/* connecting line (desktop) */}
+            <div className="pointer-events-none absolute left-0 right-0 top-6 hidden h-px bg-gradient-to-r from-accent/60 via-white/10 to-white/5 md:block" />
             {processSteps.map((step, i) => (
-              <Reveal key={step.title} delay={i * 0.1}>
-                <div className="border-t border-white/[0.12] pt-8">
-                  <p className="text-sm text-accent">{String(i + 1).padStart(2, "0")}</p>
-                  <h3 className="mt-6 text-3xl font-bold tracking-[-0.02em] text-white">{step.title}</h3>
-                  <p className="mt-4 text-[15px] leading-7 text-muted-foreground">{step.text}</p>
+              <Reveal key={step.title} delay={i * 0.1} y={24}>
+                <div className="relative flex gap-5 md:block">
+                  <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-background font-heading text-sm font-extrabold text-white ring-8 ring-background">
+                    <span className={i === 0 ? "text-accent" : ""}>{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div className="md:mt-6">
+                    <h3 className="font-heading text-lg font-extrabold text-white">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.text}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -277,37 +431,97 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden px-4 py-32 md:py-48">
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[30rem] w-[60rem] max-w-[160vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.28), transparent)" }}
-        />
-        <Reveal className="container mx-auto text-center">
-          <div className="flex justify-center">
-            <SectionLabel>Next step</SectionLabel>
-          </div>
-          <h2
-            className="mx-auto font-extrabold leading-[0.95] tracking-[-0.03em] text-white"
-            style={{ fontSize: "clamp(3rem, 9vw, 8.5rem)" }}
-          >
-            Let's build
-            <br />
-            something<span className="text-accent">.</span>
-          </h2>
-          <div className="mt-14 flex flex-col items-center justify-center gap-6 sm:flex-row">
-            <Link
-              to="/contact"
-              className="btn-glow inline-flex h-14 items-center justify-center gap-2 rounded-full px-9 text-base font-semibold"
+      {/* ── FAQ ──────────────────────────────────────────────────────── */}
+      <section className="px-4 pb-20 md:pb-28">
+        <div className="container mx-auto grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium text-white/70">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              FAQ
+            </span>
+            <h2
+              className="mt-5 font-extrabold leading-[1.05] tracking-[-0.02em] text-white text-balance"
+              style={{ fontSize: "clamp(2rem, 3.6vw, 3rem)" }}
             >
-              Start a project <ArrowRight className="h-4 w-4" />
-            </Link>
+              Questions, <span className="text-accent">answered.</span>
+            </h2>
+            <p className="mt-4 max-w-sm text-[15px] leading-7 text-muted-foreground">
+              Can't find what you're looking for? Message us on WhatsApp and we'll reply quickly.
+            </p>
             <a
-              href={`mailto:${siteContact.email}`}
-              className="text-base text-muted-foreground underline-offset-8 transition-colors hover:text-white hover:underline"
+              href={siteContact.phones[0].whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-accent"
             >
-              {siteContact.email}
+              <MessageCircle className="h-4 w-4 text-accent" />
+              Chat on WhatsApp
             </a>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <Accordion type="single" collapsible defaultValue="faq-0" className="space-y-3">
+              {faqs.map((f, i) => (
+                <AccordionItem
+                  key={f.q}
+                  value={`faq-${i}`}
+                  className="rounded-xl border border-white/[0.07] bg-card px-5 transition-colors data-[state=open]:border-white/[0.14]"
+                >
+                  <AccordionTrigger className="py-5 text-left font-heading text-base font-bold text-white hover:no-underline [&>svg]:hidden">
+                    {f.q}
+                    <Plus className="h-4 w-4 shrink-0 text-accent transition-transform duration-300 [[data-state=open]_&]:rotate-45" />
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-sm leading-7 text-muted-foreground">{f.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      <section className="px-4 pb-24 md:pb-32">
+        <Reveal className="container mx-auto">
+          <div className="rounded-3xl bg-gradient-to-br from-accent/70 via-white/10 to-accent/30 p-px">
+            <div className="relative overflow-hidden rounded-[calc(1.5rem-1px)] bg-card px-6 py-14 text-center md:px-12 md:py-20">
+              <div
+                className="pointer-events-none absolute left-1/2 top-0 h-64 w-[40rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+                style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.45), transparent)" }}
+              />
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.04]"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
+                  backgroundSize: "40px 40px",
+                }}
+              />
+              <h2
+                className="relative mx-auto max-w-3xl font-extrabold leading-[1.05] tracking-[-0.02em] text-white"
+                style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
+              >
+                Ready to take your business <span className="text-accent">online?</span>
+              </h2>
+              <p className="relative mx-auto mt-5 max-w-lg text-[15px] leading-7 text-muted-foreground">
+                Tell us about your project. We'll reply within 24 hours with honest advice and a clear next step.
+              </p>
+              <div className="relative mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link
+                  to="/contact"
+                  className="btn-glow inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold sm:w-auto"
+                >
+                  Start your project <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a
+                  href={siteContact.phones[0].whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-glass inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold sm:w-auto"
+                >
+                  <MessageCircle className="h-4 w-4" /> WhatsApp us
+                </a>
+              </div>
+            </div>
           </div>
         </Reveal>
       </section>

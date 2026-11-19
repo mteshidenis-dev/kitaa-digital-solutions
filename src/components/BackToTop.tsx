@@ -26,10 +26,10 @@ const BackToTop = () => {
           onClick={scrollToTop}
           whileTap={{ scale: 0.88 }}
           aria-label="Back to top"
-          className="fixed bottom-6 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-background text-accent shadow-[0_8px_28px_rgba(9,34,53,0.14)] sm:right-6"
+          className="fixed bottom-6 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-background text-accent shadow-[0_8px_28px_rgba(0,0,0,0.14)] sm:right-6"
           style={{
             border: "2px dashed",
-            borderColor: "#F97316",
+            borderColor: "#1f74f2",
           }}
         >
           <ArrowUp size={20} strokeWidth={2.5} />

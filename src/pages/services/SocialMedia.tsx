@@ -68,8 +68,8 @@ const ServiceSocialMedia = () => {
   return (
   <div>
     {/* ── HERO ── */}
-    <section className="relative isolate overflow-hidden bg-[#050d1a] px-4 pb-20 pt-28 md:pt-36">
-      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse at 72% 45%, rgba(233,120,17,0.07) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(9,34,90,0.7) 0%, transparent 55%)" }} />
+    <section className="relative isolate overflow-hidden bg-background px-4 pb-20 pt-28 md:pt-36">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse at 72% 45%, rgba(31,116,242,0.07) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(31,116,242,0.16) 0%, transparent 55%)" }} />
       <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
 
       <div className="container relative z-10 mx-auto max-w-4xl text-center">
@@ -82,7 +82,7 @@ const ServiceSocialMedia = () => {
           <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
             Social Media Management
           </span>
-          <h1 className="mt-5 font-hero font-black text-2xl leading-tight text-white sm:text-4xl md:text-6xl">
+          <h1 className="mt-5 font-hero font-bold text-2xl leading-tight text-white sm:text-4xl md:text-6xl">
             Social media that builds presence<br />
             <span className="text-accent">without burning your time</span>
           </h1>
@@ -110,13 +110,13 @@ const ServiceSocialMedia = () => {
     </section>
 
     {/* ── FEATURES ── */}
-    <section className="bg-[#f7f6f3] px-4 py-20">
+    <section className="bg-surface px-4 py-20">
       <div className="container mx-auto">
         <div className="mb-12 text-center">
           <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
             What we handle
           </span>
-          <h2 className="mt-4 font-hero font-black text-2xl text-foreground sm:text-3xl md:text-4xl">
+          <h2 className="mt-4 font-hero font-bold text-2xl text-foreground sm:text-3xl md:text-4xl">
             Everything your social presence needs to grow consistently
           </h2>
         </div>
@@ -126,7 +126,7 @@ const ServiceSocialMedia = () => {
             <CarouselContent>
               {features.map((f) => (
                 <CarouselItem key={f.title} className="basis-full min-w-0">
-                  <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-[0_8px_30px_rgba(9,34,53,0.06)] h-full">
+                  <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] h-full">
                     <div className="absolute inset-x-0 top-0 h-[3px] bg-accent" />
                     <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <f.icon className="h-5 w-5" />
@@ -149,7 +149,7 @@ const ServiceSocialMedia = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.07 }}
-              className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-[0_8px_30px_rgba(9,34,53,0.06)]"
+              className="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
             >
               <div className="absolute inset-x-0 top-0 h-[3px] bg-accent" />
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
@@ -164,13 +164,13 @@ const ServiceSocialMedia = () => {
     </section>
 
     {/* ── WHAT'S INCLUDED ── */}
-    <section className="bg-white px-4 py-20">
+    <section className="bg-card px-4 py-20">
       <div className="container mx-auto grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
         <div>
           <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
             Monthly retainer
           </span>
-          <h2 className="mt-4 font-hero font-black text-2xl text-foreground sm:text-3xl md:text-4xl">
+          <h2 className="mt-4 font-hero font-bold text-2xl text-foreground sm:text-3xl md:text-4xl">
             What's included every month
           </h2>
           <p className="mt-4 text-sm leading-7 text-muted-foreground">
@@ -183,7 +183,7 @@ const ServiceSocialMedia = () => {
             <CarouselContent>
               {includes.map((item) => (
                 <CarouselItem key={item} className="basis-full min-w-0">
-                  <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-[#f7f6f3] px-5 py-4 h-full">
+                  <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-surface px-5 py-4 h-full">
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
                     <span className="text-sm font-medium text-foreground">{item}</span>
                   </div>
@@ -196,7 +196,7 @@ const ServiceSocialMedia = () => {
         {/* Desktop list */}
         <div className="hidden lg:grid gap-3">
           {includes.map((item) => (
-            <div key={item} className="flex items-start gap-3 rounded-xl border border-border/60 bg-[#f7f6f3] px-5 py-4">
+            <div key={item} className="flex items-start gap-3 rounded-xl border border-border/60 bg-surface px-5 py-4">
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <span className="text-sm font-medium text-foreground">{item}</span>
             </div>
@@ -206,9 +206,9 @@ const ServiceSocialMedia = () => {
     </section>
 
     {/* ── CTA ── */}
-    <section className="bg-[#050d1a] px-4 py-16">
+    <section className="bg-background px-4 py-16">
       <div className="container mx-auto max-w-3xl text-center">
-        <h2 className="font-hero font-black text-2xl text-white sm:text-3xl md:text-4xl">
+        <h2 className="font-hero font-bold text-2xl text-white sm:text-3xl md:text-4xl">
           Last time you posted was <span className="text-accent">too long ago</span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/50">

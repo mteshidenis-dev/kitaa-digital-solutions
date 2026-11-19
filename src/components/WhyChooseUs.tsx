@@ -17,13 +17,13 @@ const reasons = [
 ];
 
 const ReasonCard = ({ r }: { r: (typeof reasons)[number] }) => (
-  <div className="flex items-start gap-4 p-5 rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 hover:bg-primary-foreground/10 transition-colors h-full">
+  <div className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-white/[0.08] hover:border-accent/40 transition-colors h-full">
     <div className="w-11 h-11 rounded-xl bg-accent/20 text-accent flex items-center justify-center shrink-0">
       <r.icon size={20} />
     </div>
     <div>
       <h3 className="font-heading font-semibold text-sm mb-1">{r.title}</h3>
-      <p className="text-xs text-primary-foreground/60 leading-relaxed">{r.desc}</p>
+      <p className="text-xs text-white/60 leading-relaxed">{r.desc}</p>
     </div>
   </div>
 );
@@ -31,7 +31,7 @@ const ReasonCard = ({ r }: { r: (typeof reasons)[number] }) => (
 const WhyChooseUs = () => {
   const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
   return (
-  <section className="section-padding bg-primary text-primary-foreground">
+  <section className="section-padding border-y border-white/[0.06] bg-surface text-white">
     <div className="container mx-auto">
       <div className="grid lg:grid-cols-12 gap-12">
         <motion.div
@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
           <h2 className="text-3xl md:text-4xl font-heading font-bold mt-3 mb-4">
             Why Choose Kitaa?
           </h2>
-          <p className="text-primary-foreground/60 leading-relaxed">
+          <p className="text-white/60 leading-relaxed">
             We combine creativity and technology to deliver solutions that make a real difference for your business.
           </p>
         </motion.div>

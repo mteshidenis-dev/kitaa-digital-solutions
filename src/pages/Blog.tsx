@@ -67,13 +67,13 @@ const Blog = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="relative isolate overflow-hidden bg-[#050d1a] px-4 pb-20 pt-28 md:pt-36">
+      <section className="relative isolate overflow-hidden bg-background px-4 pb-20 pt-28 md:pt-36">
         {/* Orb gradients */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at 70% 42%, rgba(233,120,17,0.09) 0%, transparent 55%), radial-gradient(ellipse at 16% 36%, rgba(9,34,90,0.7) 0%, transparent 55%)",
+              "radial-gradient(ellipse at 70% 42%, rgba(31,116,242,0.09) 0%, transparent 55%), radial-gradient(ellipse at 16% 36%, rgba(31,116,242,0.16) 0%, transparent 55%)",
           }}
         />
         {/* Grid overlay */}
@@ -100,7 +100,7 @@ const Blog = () => {
             <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
               Insights
             </span>
-            <h1 className="mt-5 font-hero font-black text-2xl leading-tight text-white sm:text-4xl md:text-[3.25rem]">
+            <h1 className="mt-5 font-hero font-bold text-2xl leading-tight text-white sm:text-4xl sm:leading-[1.1] md:text-[3.25rem]">
               Ideas and notes for
               <br />
               <span className="text-accent">growing businesses.</span>
@@ -123,7 +123,7 @@ const Blog = () => {
               { value: "Free", label: "Always" },
             ].map(({ value, label }) => (
               <div key={label} className="flex flex-col items-center gap-1 px-3 py-4">
-                <span className="font-hero text-xl font-black text-white sm:text-2xl">{value}</span>
+                <span className="font-hero text-xl font-bold text-white sm:text-2xl">{value}</span>
                 <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/45">{label}</span>
               </div>
             ))}
@@ -138,14 +138,14 @@ const Blog = () => {
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="group relative overflow-hidden rounded-3xl border border-border/60 bg-[#050d1a] shadow-[0_8px_48px_rgba(9,34,53,0.18)]"
+            className="group relative overflow-hidden rounded-3xl border border-border/60 bg-background shadow-[0_8px_48px_rgba(0,0,0,0.18)]"
           >
             {/* subtle orb inside the card */}
             <div
               className="pointer-events-none absolute inset-0"
               style={{
                 backgroundImage:
-                  "radial-gradient(ellipse at 80% 50%, rgba(233,120,17,0.07) 0%, transparent 60%)",
+                  "radial-gradient(ellipse at 80% 50%, rgba(31,116,242,0.07) 0%, transparent 60%)",
               }}
             />
             <div className="relative z-10 grid gap-8 p-8 md:p-12 lg:grid-cols-[1fr_320px] lg:items-center">
@@ -158,7 +158,7 @@ const Blog = () => {
                     {featured.category}
                   </span>
                 </div>
-                <h2 className="mt-5 font-hero font-black text-xl leading-snug text-white sm:text-2xl md:text-3xl">
+                <h2 className="mt-5 font-hero font-bold text-xl leading-snug text-white sm:text-2xl md:text-3xl">
                   {featured.title}
                 </h2>
                 <p className="mt-4 max-w-xl text-base leading-8 text-white/60">{featured.excerpt}</p>
@@ -217,7 +217,7 @@ const Blog = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.97 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className="group flex flex-col rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(9,34,53,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_36px_rgba(9,34,53,0.12)]"
+                  className="group flex flex-col rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_36px_rgba(0,0,0,0.12)]"
                 >
                   {/* Category colour bar */}
                   <div className="h-1 w-full rounded-t-2xl bg-accent/40" />
@@ -260,13 +260,13 @@ const Blog = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-3xl border border-border/60 bg-card p-8 shadow-[0_4px_32px_rgba(9,34,53,0.07)] md:flex md:items-center md:justify-between md:gap-8"
+            className="rounded-3xl border border-border/60 bg-card p-8 shadow-[0_4px_32px_rgba(0,0,0,0.07)] md:flex md:items-center md:justify-between md:gap-8"
           >
             <div className="max-w-2xl">
               <p className="text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
                 Content strategy
               </p>
-              <h2 className="mt-3 text-xl font-hero font-black tracking-[-0.03em] text-foreground md:text-2xl">
+              <h2 className="mt-3 text-xl font-hero font-bold tracking-[-0.03em] text-foreground md:text-2xl">
                 Want us to build a blog content plan that actually supports your business goals?
               </h2>
               <p className="mt-2 text-sm text-muted-foreground font-normal">

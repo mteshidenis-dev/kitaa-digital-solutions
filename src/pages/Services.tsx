@@ -54,7 +54,7 @@ const engagementModel = [
 ];
 
 const DeliveryCard = ({ area }: { area: (typeof deliveryAreas)[number] }) => (
-  <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-white p-6 shadow-[0_8px_30px_rgba(9,34,53,0.05)] h-full">
+  <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] h-full">
     <div className="absolute inset-x-0 top-0 h-[3px] bg-accent" />
     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
       <area.icon className="h-4 w-4" />
@@ -70,8 +70,8 @@ const Services = () => {
   <div className="pt-20">
 
     {/* ── HERO ── */}
-    <section className="relative isolate overflow-hidden bg-[#050d1a] px-4 pb-14 pt-24 md:pt-32">
-      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse at 72% 45%, rgba(233,120,17,0.07) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(9,34,90,0.7) 0%, transparent 55%)" }} />
+    <section className="relative isolate overflow-hidden bg-background px-4 pb-14 pt-24 md:pt-32">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse at 72% 45%, rgba(31,116,242,0.07) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(31,116,242,0.16) 0%, transparent 55%)" }} />
       <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
 
       <div className="container relative z-10 mx-auto max-w-3xl text-center">
@@ -84,7 +84,7 @@ const Services = () => {
           <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-[10px] font-hero font-bold uppercase tracking-[0.22em] text-accent">
             Our Services
           </span>
-          <h1 className="mt-4 font-hero font-black text-3xl leading-tight text-white md:text-5xl">
+          <h1 className="mt-4 font-hero font-bold text-3xl leading-tight text-white md:text-5xl">
             Digital work built around<br />
             <span className="text-accent">outcomes, not deliverables</span>
           </h1>
@@ -127,13 +127,13 @@ const Services = () => {
     </section>
 
     {/* ── DELIVERY AREAS ── */}
-    <section className="bg-[#f7f6f3] px-4 py-14">
+    <section className="bg-surface px-4 py-14">
       <div className="container mx-auto">
         <div className="mb-10 text-center">
           <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-[10px] font-hero font-bold uppercase tracking-[0.18em] text-accent">
             What we deliver
           </span>
-          <h2 className="mt-3 font-hero font-black text-2xl text-foreground md:text-3xl">
+          <h2 className="mt-3 font-hero font-bold text-2xl text-foreground md:text-3xl">
             Four core areas of work
           </h2>
         </div>
@@ -174,14 +174,14 @@ const Services = () => {
     <ServicesSection />
 
     {/* ── ENGAGEMENT MODEL ── */}
-    <section className="bg-[#050d1a] px-4 py-14">
+    <section className="bg-background px-4 py-14">
       <div className="container mx-auto grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-[10px] font-hero font-bold uppercase tracking-[0.18em] text-accent">
             <LayoutTemplate className="h-3 w-3" />
             How we engage
           </span>
-          <h2 className="mt-4 font-hero font-black text-2xl text-white md:text-3xl">
+          <h2 className="mt-4 font-hero font-bold text-2xl text-white md:text-3xl">
             We scope around the problem, then build the minimum system that solves it <span className="text-accent">properly.</span>
           </h2>
           <p className="mt-4 text-sm leading-7 text-white/50">
@@ -203,7 +203,7 @@ const Services = () => {
               transition={{ delay: i * 0.07 }}
               className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/4 px-5 py-4"
             >
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-accent font-hero font-black text-[10px] text-white">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-accent font-hero font-bold text-[10px] text-white">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <p className="text-sm leading-6 text-white/70">{item}</p>

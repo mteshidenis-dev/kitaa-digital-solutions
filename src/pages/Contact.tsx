@@ -76,13 +76,13 @@ const Contact = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="relative isolate overflow-hidden bg-[#050d1a] px-4 pb-20 pt-28 md:pt-36">
+      <section className="relative isolate overflow-hidden bg-background px-4 pb-20 pt-28 md:pt-36">
         {/* Orb gradients */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at 75% 40%, rgba(233,120,17,0.09) 0%, transparent 55%), radial-gradient(ellipse at 18% 38%, rgba(9,34,90,0.7) 0%, transparent 55%)",
+              "radial-gradient(ellipse at 75% 40%, rgba(31,116,242,0.09) 0%, transparent 55%), radial-gradient(ellipse at 18% 38%, rgba(31,116,242,0.16) 0%, transparent 55%)",
           }}
         />
         {/* Grid overlay */}
@@ -109,7 +109,7 @@ const Contact = () => {
             <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
               Contact Us
             </span>
-            <h1 className="mt-5 font-hero font-black text-2xl leading-tight text-white sm:text-4xl md:text-[3.25rem]">
+            <h1 className="mt-5 font-hero font-bold text-2xl leading-tight text-white sm:text-4xl sm:leading-[1.1] md:text-[3.25rem]">
               Start the conversation.
               <br />
               <span className="text-accent">We move fast.</span>
@@ -171,7 +171,7 @@ const Contact = () => {
             >
               <div className="mb-2 text-center">
                 <p className="text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">Reach us directly</p>
-                <h2 className="mt-2 text-2xl font-hero font-black tracking-[-0.03em] text-foreground sm:text-3xl">
+                <h2 className="mt-2 text-2xl font-hero font-bold tracking-[-0.03em] text-foreground sm:text-3xl">
                   Multiple ways to connect
                 </h2>
                 <p className="mt-3 text-sm leading-7 text-muted-foreground">
@@ -196,12 +196,12 @@ const Contact = () => {
                   <a
                     key={ch.value}
                     href={ch.href}
-                    className="rounded-2xl border border-border/60 bg-card p-4 shadow-[0_2px_16px_rgba(9,34,53,0.05)] transition-colors hover:border-accent/30"
+                    className="rounded-2xl border border-border/60 bg-card p-4 shadow-[0_2px_16px_rgba(0,0,0,0.05)] transition-colors hover:border-accent/30"
                   >
                     {inner}
                   </a>
                 ) : (
-                  <div key={ch.value} className="rounded-2xl border border-border/60 bg-card p-4 shadow-[0_2px_16px_rgba(9,34,53,0.05)]">
+                  <div key={ch.value} className="rounded-2xl border border-border/60 bg-card p-4 shadow-[0_2px_16px_rgba(0,0,0,0.05)]">
                     {inner}
                   </div>
                 );
@@ -232,9 +232,9 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.06 }}
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-border/60 bg-card p-6 shadow-[0_4px_32px_rgba(9,34,53,0.07)] md:p-10"
+              className="rounded-3xl border border-border/60 bg-card p-6 shadow-[0_4px_32px_rgba(0,0,0,0.07)] md:p-10"
             >
-              <h3 className="font-hero font-black text-xl tracking-[-0.03em] text-foreground sm:text-2xl">
+              <h3 className="font-hero font-bold text-xl tracking-[-0.03em] text-foreground sm:text-2xl">
                 Tell us about the project
               </h3>
               <p className="mt-1.5 text-sm text-muted-foreground">
@@ -305,7 +305,7 @@ const Contact = () => {
                   type="submit"
                   size="lg"
                   disabled={sending}
-                  className="h-13 w-full gap-2 rounded-xl font-hero font-bold text-base"
+                  className="h-12 w-full gap-2 rounded-xl font-hero font-bold text-base"
                 >
                   {sending ? "Sending…" : <>Send message <Send size={17} /></>}
                 </Button>
@@ -319,7 +319,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45 }}
-            className="mt-10 rounded-3xl border border-border/60 bg-card p-8 shadow-[0_4px_32px_rgba(9,34,53,0.07)] md:flex md:items-center md:justify-between md:gap-8"
+            className="mt-10 rounded-3xl border border-border/60 bg-card p-8 shadow-[0_4px_32px_rgba(0,0,0,0.07)] md:flex md:items-center md:justify-between md:gap-8"
           >
             <div className="max-w-2xl">
               <p className="text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">

@@ -12,7 +12,7 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center px-4 pb-20 pt-32">
-      <div className="w-full max-w-3xl rounded-[2rem] border border-primary/10 bg-card p-10 text-center shadow-[0_24px_80px_rgba(9,34,53,0.08)] md:p-14">
+      <div className="w-full max-w-3xl rounded-[2rem] border border-primary/10 bg-card p-10 text-center shadow-[0_24px_80px_rgba(0,0,0,0.08)] md:p-14">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-accent/12 text-accent">
           <Compass className="h-8 w-8" />
         </div>

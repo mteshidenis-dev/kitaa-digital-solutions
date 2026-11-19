@@ -10,7 +10,7 @@ const CTASection = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative bg-primary rounded-3xl p-12 md:p-20 text-center overflow-hidden"
+        className="relative rounded-3xl border border-white/[0.08] bg-[radial-gradient(ellipse_at_center,rgba(31,116,242,0.35),transparent_65%)] bg-card p-12 md:p-20 text-center overflow-hidden"
       >
         {/* Decorative elements */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px]" />

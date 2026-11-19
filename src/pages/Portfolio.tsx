@@ -33,7 +33,7 @@ const ProjectCard = ({
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, scale: 0.97 }}
     transition={{ duration: 0.32, delay: index * 0.04 }}
-    className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(9,34,53,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_36px_rgba(9,34,53,0.12)]"
+    className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_36px_rgba(0,0,0,0.12)]"
   >
     {/* Image */}
     <div className="relative overflow-hidden">
@@ -93,13 +93,13 @@ const Portfolio = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="relative isolate overflow-hidden bg-[#050d1a] px-4 pb-20 pt-28 md:pt-36">
+      <section className="relative isolate overflow-hidden bg-background px-4 pb-20 pt-28 md:pt-36">
         {/* Orbs */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(ellipse at 70% 50%, rgba(233,120,17,0.08) 0%, transparent 55%), radial-gradient(ellipse at 15% 40%, rgba(9,34,90,0.7) 0%, transparent 55%)",
+              "radial-gradient(ellipse at 70% 50%, rgba(31,116,242,0.08) 0%, transparent 55%), radial-gradient(ellipse at 15% 40%, rgba(31,116,242,0.16) 0%, transparent 55%)",
           }}
         />
         {/* Subtle grid */}
@@ -126,7 +126,7 @@ const Portfolio = () => {
             <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
               Our Work
             </span>
-            <h1 className="mt-5 font-hero font-black text-2xl leading-tight text-white sm:text-4xl md:text-[3.5rem]">
+            <h1 className="mt-5 font-hero font-bold text-2xl leading-tight text-white sm:text-4xl sm:leading-[1.1] md:text-[3.5rem]">
               Real projects.
               <br />
               <span className="text-accent">Built to perform.</span>
@@ -164,7 +164,7 @@ const Portfolio = () => {
           >
             {stats.map(({ value, label }) => (
               <div key={label} className="flex flex-col items-center gap-1 px-3 py-4">
-                <CountUp value={value} className="font-hero text-xl font-black text-white sm:text-2xl" />
+                <CountUp value={value} className="font-hero text-xl font-bold text-white sm:text-2xl" />
                 <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/45">
                   {label}
                 </span>

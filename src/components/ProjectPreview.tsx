@@ -26,7 +26,7 @@ const ProjectPreview = ({
             loading="lazy"
             className={cn(
               "h-full w-full",
-              project.imageFit === "contain" ? "object-contain bg-white p-6" : "object-cover",
+              project.imageFit === "contain" ? "object-contain bg-card p-6" : "object-cover",
               imageClassName,
             )}
           />

@@ -20,7 +20,7 @@ type Props = {
 /**
  * Renders a visual breadcrumb nav + injects JSON-LD BreadcrumbList schema for Google.
  * Also updates the document <title> when pageTitle is supplied.
- * variant="dark"  → white/muted text, for use inside dark (bg-[#050d1a]) hero sections
+ * variant="dark"  → white/muted text, for use inside dark (bg-background) hero sections
  * variant="light" → muted-foreground text, for use on light backgrounds
  */
 const PageBreadcrumb = ({ items, variant = "dark", pageTitle, className }: Props) => {

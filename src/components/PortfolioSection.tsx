@@ -13,7 +13,7 @@ import {
 import { recentProjects } from "@/lib/projects";
 
 const PortfolioCard = ({ p }: { p: (typeof recentProjects)[number] }) => (
-  <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(9,34,53,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_36px_rgba(9,34,53,0.12)]">
+  <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0_8px_36px_rgba(0,0,0,0.12)]">
     {/* Image */}
     <div className="relative overflow-hidden">
       <ProjectPreview

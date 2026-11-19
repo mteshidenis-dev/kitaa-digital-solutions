@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowUpRight, Phone, Mail, MapPin, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { siteContact } from "@/lib/site";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -22,8 +20,17 @@ const serviceItems = [
   { label: "Social Media", href: "/services/social-media", desc: "Management & content" },
 ];
 
+export const Logo = ({ className = "" }: { className?: string }) => (
+  <span className={`font-hero text-[17px] font-semibold tracking-[-0.02em] ${className}`}>
+    <span className="text-accent">Kitaa</span>
+    <span className="text-white"> Digital Solutions</span>
+    <span className="text-accent">.</span>
+  </span>
+);
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const servicesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -33,6 +40,13 @@ const Navbar = () => {
     setOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const openDropdown = () => {
     if (servicesTimer.current) clearTimeout(servicesTimer.current);
     setServicesOpen(true);
@@ -41,47 +55,29 @@ const Navbar = () => {
     servicesTimer.current = setTimeout(() => setServicesOpen(false), 120);
   };
 
-  return (
-    <>
-      {/* ── TOP INFO BAR ─────────────────────────────────────────── */}
-      <div className="fixed left-0 right-0 top-0 z-50 hidden border-b border-black/[0.08] bg-accent md:block">
-        <div className="container mx-auto flex h-9 items-center justify-between px-4">
-          {/* Left: phone + email */}
-          <div className="flex items-center gap-5">
-            <a
-              href={siteContact.phones[1].href}
-              className="flex items-center gap-1.5 text-[11px] font-medium text-white/90 transition-colors hover:text-white"
-            >
-              <Phone className="h-3 w-3" />
-              {siteContact.phones[1].display}
-            </a>
-            <a
-              href={`mailto:${siteContact.email}`}
-              className="flex items-center gap-1.5 text-[11px] font-medium text-white/90 transition-colors hover:text-white"
-            >
-              <Mail className="h-3 w-3" />
-              {siteContact.email}
-            </a>
-          </div>
-          {/* Right: location */}
-          <div className="flex items-center gap-1.5 text-[11px] font-medium text-white/90">
-            <MapPin className="h-3 w-3" />
-            Arusha, Tanzania
-          </div>
-        </div>
-      </div>
+  const isActive = (href: string) =>
+    href === "/" ? location.pathname === "/" : location.pathname.startsWith(href);
 
-      {/* ── MAIN NAV ─────────────────────────────────────────────── */}
-      <nav
-        className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 md:top-9 border-b border-border/70 bg-background shadow-[0_10px_40px_rgba(9,34,53,0.08)]`}
-      >
-      <div className="container mx-auto flex h-20 items-center justify-between px-4">
-        <Link to="/" className="flex items-center">
-          <span className="font-hero text-2xl font-black leading-none text-primary">Kitaa</span>
-          <span className="font-hero text-2xl font-black leading-none text-accent">&nbsp;Digital Solutions</span>
+  const linkClass = (href: string) =>
+    `flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors ${
+      isActive(href) ? "text-white" : "text-white/60 hover:text-white"
+    }`;
+
+  return (
+    <nav
+      className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${
+        scrolled || open
+          ? "border-b border-white/[0.06] bg-background/75 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:h-[72px]">
+        <Link to="/" aria-label="Kitaa Digital Solutions home">
+          <Logo />
         </Link>
 
-        <div className="hidden items-center rounded-full border border-border/70 bg-white/70 px-3 py-2 shadow-[0_18px_45px_rgba(9,34,53,0.06)] backdrop-blur md:flex">
+        {/* Desktop links */}
+        <div className="hidden items-center lg:flex">
           {navLinks.map((link) =>
             link.label === "Services" ? (
               <div
@@ -90,55 +86,42 @@ const Navbar = () => {
                 onMouseEnter={openDropdown}
                 onMouseLeave={closeDropdown}
               >
-                <Link
-                  to="/services"
-                  className={`relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                    location.pathname.startsWith("/services")
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
+                <Link to="/services" className={linkClass("/services")}>
                   Services
                   <ChevronDown
                     size={13}
                     className={`transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`}
                   />
-                  {location.pathname.startsWith("/services") && (
-                    <motion.div
-                      layoutId="nav-underline"
-                      className="absolute inset-0 -z-10 rounded-full bg-secondary"
-                    />
-                  )}
                 </Link>
 
                 <AnimatePresence>
                   {servicesOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute left-0 top-[calc(100%+6px)] z-50 w-60 overflow-hidden rounded-2xl border border-border/70 bg-white shadow-[0_20px_60px_rgba(9,34,53,0.14)]"
+                      className="absolute left-1/2 top-[calc(100%+8px)] z-50 w-64 -translate-x-1/2 overflow-hidden rounded-xl border border-white/10 bg-popover/95 shadow-[0_24px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl"
                     >
                       <div className="p-2">
                         <Link
                           to="/services"
-                          className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-bold text-foreground transition-colors hover:bg-secondary"
+                          className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/[0.06]"
                         >
                           All Services
                           <ArrowUpRight size={14} className="text-accent" />
                         </Link>
-                        <div className="my-1.5 h-px bg-border/50" />
+                        <div className="my-1.5 h-px bg-white/[0.06]" />
                         {serviceItems.map((item) => (
                           <Link
                             key={item.href}
                             to={item.href}
-                            className={`flex flex-col rounded-xl px-3 py-2.5 transition-colors hover:bg-secondary ${
-                              location.pathname === item.href ? "bg-secondary" : ""
+                            className={`flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-white/[0.06] ${
+                              location.pathname === item.href ? "bg-white/[0.06]" : ""
                             }`}
                           >
-                            <span className="text-sm font-semibold text-foreground">{item.label}</span>
-                            <span className="text-xs text-muted-foreground">{item.desc}</span>
+                            <span className="text-sm font-medium text-white">{item.label}</span>
+                            <span className="text-xs text-white/50">{item.desc}</span>
                           </Link>
                         ))}
                       </div>
@@ -147,66 +130,53 @@ const Navbar = () => {
                 </AnimatePresence>
               </div>
             ) : (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                  location.pathname === link.href
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
+              <Link key={link.href} to={link.href} className={linkClass(link.href)}>
                 {link.label}
-                {location.pathname === link.href && (
-                  <motion.div
-                    layoutId="nav-underline"
-                    className="absolute inset-0 -z-10 rounded-full bg-secondary"
-                  />
-                )}
               </Link>
             )
           )}
         </div>
 
-        <div className="hidden md:block">
-          <Link to="/contact">
-            <Button className="gap-2 rounded-full px-6 font-semibold shadow-[0_16px_35px_rgba(233,120,17,0.24)]">
-              Book a Call <ArrowUpRight size={16} />
-            </Button>
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-5 lg:flex">
+          <Link to="/portfolio" className="text-[13px] font-semibold text-white transition-colors hover:text-accent">
+            See Our Work
+          </Link>
+          <Link
+            to="/contact"
+            className="btn-glow inline-flex h-9 items-center gap-1.5 rounded-lg px-4 text-[13px] font-semibold"
+          >
+            Book a Call
           </Link>
         </div>
 
         <button
-          className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/70 bg-white/70 shadow-[0_12px_30px_rgba(9,34,53,0.05)] backdrop-blur md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-white lg:hidden"
           onClick={() => setOpen(!open)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
         >
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-b border-border/70 bg-background/95 backdrop-blur-2xl md:hidden"
+            className="overflow-hidden border-t border-white/[0.06] lg:hidden"
           >
-            <div className="container mx-auto flex flex-col gap-2 px-4 py-6">
-              {navLinks.map((link, i) =>
+            <div className="container mx-auto flex flex-col gap-1 px-4 py-5">
+              {navLinks.map((link) =>
                 link.label === "Services" ? (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
+                  <div key={link.href}>
                     <button
                       onClick={() => setMobileServicesOpen((v) => !v)}
-                      className={`flex w-full items-center justify-between rounded-2xl px-4 py-3 text-base font-medium transition-colors ${
-                        location.pathname.startsWith("/services")
-                          ? "bg-secondary text-foreground"
-                          : "text-muted-foreground hover:bg-card hover:text-foreground"
+                      className={`flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                        isActive("/services") ? "bg-white/[0.06] text-white" : "text-white/70 hover:bg-white/[0.04] hover:text-white"
                       }`}
                     >
                       Services
@@ -223,19 +193,16 @@ const Navbar = () => {
                           exit={{ opacity: 0, height: 0 }}
                           className="overflow-hidden"
                         >
-                          <div className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-accent/30 pl-3">
-                            <Link
-                              to="/services"
-                              className="block rounded-xl px-3 py-2 text-sm font-bold text-foreground hover:bg-secondary"
-                            >
+                          <div className="ml-4 mt-1 flex flex-col gap-1 border-l border-accent/40 pl-3">
+                            <Link to="/services" className="block rounded-lg px-3 py-2 text-sm font-semibold text-white hover:bg-white/[0.04]">
                               All Services
                             </Link>
                             {serviceItems.map((item) => (
                               <Link
                                 key={item.href}
                                 to={item.href}
-                                className={`block rounded-xl px-3 py-2 text-sm transition-colors hover:bg-card hover:text-foreground ${
-                                  location.pathname === item.href ? "text-foreground" : "text-muted-foreground"
+                                className={`block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-white/[0.04] hover:text-white ${
+                                  location.pathname === item.href ? "text-white" : "text-white/60"
                                 }`}
                               >
                                 {item.label}
@@ -245,38 +212,30 @@ const Navbar = () => {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </div>
                 ) : (
-                  <motion.div
+                  <Link
                     key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
+                    to={link.href}
+                    className={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                      isActive(link.href) ? "bg-white/[0.06] text-white" : "text-white/70 hover:bg-white/[0.04] hover:text-white"
+                    }`}
                   >
-                    <Link
-                      to={link.href}
-                      className={`block rounded-2xl px-4 py-3 text-base font-medium transition-colors ${
-                        location.pathname === link.href
-                          ? "bg-secondary text-foreground"
-                          : "text-muted-foreground hover:bg-card hover:text-foreground"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
+                    {link.label}
+                  </Link>
                 )
               )}
-              <Link to="/contact" className="mt-2">
-                <Button className="w-full rounded-full font-semibold">
-                  Book a Call
-                </Button>
+              <Link
+                to="/contact"
+                className="btn-glow mt-3 flex h-12 items-center justify-center rounded-lg text-base font-semibold"
+              >
+                Book a Call
               </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </nav>
-    </>
   );
 };
 

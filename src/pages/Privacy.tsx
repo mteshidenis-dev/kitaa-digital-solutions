@@ -77,7 +77,7 @@ const Privacy = () => (
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.08 }}
-          className="rounded-[1.9rem] border border-primary/10 bg-slate-950 p-6 text-white shadow-[0_24px_80px_rgba(9,34,53,0.22)] md:p-8"
+          className="rounded-[1.9rem] border border-primary/10 bg-card p-6 text-white shadow-[0_24px_80px_rgba(0,0,0,0.22)] md:p-8"
         >
           <div className="space-y-4">
             {[
@@ -87,7 +87,7 @@ const Privacy = () => (
             ].map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-white/5 p-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-orange-300">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 text-blue-300">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <div>
@@ -103,7 +103,7 @@ const Privacy = () => (
     </section>
 
     <section className="px-4 pb-24">
-      <div className="container mx-auto rounded-[2rem] border border-border/70 bg-card p-8 shadow-[0_20px_60px_rgba(9,34,53,0.05)] md:p-10">
+      <div className="container mx-auto rounded-[2rem] border border-border/70 bg-card p-8 shadow-[0_20px_60px_rgba(0,0,0,0.05)] md:p-10">
         <div className="grid gap-6">
           {sections.map((section, index) => (
             <motion.div

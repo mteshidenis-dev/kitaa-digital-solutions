@@ -2,76 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Theme: near-black canvas with an electric-blue accent and soft blue glows.
+ * The whole site uses this one dark palette (there is no light mode).
+ */
 @layer base {
   :root {
-    --background: 42 33% 98%;
-    --foreground: 209 61% 14%;
+    --background: 228 33% 3%;      /* #05060a */
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 209 61% 14%;
+    --surface: 226 30% 5%;         /* slightly lifted section background */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 209 61% 14%;
+    --card: 225 25% 7%;            /* #0d0f15 */
+    --card-foreground: 0 0% 98%;
 
-    --primary: 209 75% 16%;
+    --popover: 225 25% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 215 92% 54%;        /* electric blue #1f74f2 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 34 42% 94%;
-    --secondary-foreground: 209 75% 16%;
+    --secondary: 225 20% 11%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 35 24% 95%;
-    --muted-foreground: 210 16% 42%;
+    --muted: 225 20% 11%;
+    --muted-foreground: 222 12% 66%;
 
-    --accent: 24 93% 49%;
+    --accent: 215 92% 58%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 32 23% 88%;
-    --input: 32 23% 88%;
-    --ring: 24 93% 49%;
+    --border: 225 16% 15%;
+    --input: 225 16% 17%;
+    --ring: 215 92% 58%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 209 75% 12%;
+    --sidebar-background: 225 25% 6%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 24 93% 49%;
+    --sidebar-primary: 215 92% 54%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 209 75% 20%;
+    --sidebar-accent: 225 20% 12%;
     --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 209 50% 25%;
-    --sidebar-ring: 24 93% 49%;
+    --sidebar-border: 225 16% 15%;
+    --sidebar-ring: 215 92% 58%;
 
-    /* Custom tokens */
-    --navy: 209 75% 17%;
-    --navy-light: 209 60% 25%;
-    --navy-dark: 209 80% 10%;
-    --orange: 24 93% 49%;
-    --orange-light: 24 90% 60%;
-    --orange-dark: 24 95% 40%;
-  }
+    /* Legacy names kept so older classes still resolve to the new palette */
+    --navy: 225 25% 7%;
+    --navy-light: 225 20% 12%;
+    --navy-dark: 228 33% 3%;
+    --orange: 215 92% 58%;
+    --orange-light: 213 94% 68%;
+    --orange-dark: 217 91% 45%;
 
-  .dark {
-    --background: 209 80% 6%;
-    --foreground: 0 0% 95%;
-    --card: 209 75% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 209 75% 10%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 24 93% 49%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 209 50% 15%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 209 50% 15%;
-    --muted-foreground: 210 15% 60%;
-    --accent: 24 93% 49%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 95%;
-    --border: 209 50% 20%;
-    --input: 209 50% 20%;
-    --ring: 24 93% 49%;
+    color-scheme: dark;
   }
 }
 
@@ -81,22 +67,22 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
-    background-image:
-      radial-gradient(circle at top left, rgba(233, 120, 17, 0.12), transparent 24%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.92));
     min-height: 100vh;
+    font-feature-settings: "cv11", "ss01";
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
+    letter-spacing: -0.02em;
   }
   ::selection {
-    background: rgba(233, 120, 17, 0.18);
+    background: rgba(31, 116, 242, 0.35);
+    color: #fff;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-accent;
   }
   .bg-navy-gradient {
     background: linear-gradient(135deg, hsl(var(--navy-dark)) 0%, hsl(var(--navy)) 50%, hsl(var(--navy-light)) 100%);
@@ -108,13 +94,33 @@
     @apply py-20 md:py-28 px-4;
   }
   .section-kicker {
-    @apply inline-flex items-center rounded-full border border-accent/15 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent;
+    @apply inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-accent;
   }
+
+  /* Big soft blue light, used behind hero content */
+  .hero-glow {
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 62%, rgba(31, 116, 242, 0.85) 0%, rgba(31, 116, 242, 0.22) 42%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 30% 70%, rgba(56, 132, 255, 0.25) 0%, transparent 70%);
+    filter: blur(20px);
+  }
+
+  /* Translucent "glass" button, as in "See how it works" */
+  .btn-glass {
+    @apply border border-white/15 bg-white/[0.06] text-white backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.12];
+  }
+
+  /* Solid blue button with a soft glow */
+  .btn-glow {
+    @apply bg-primary text-primary-foreground transition-all hover:bg-primary/90;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 10px 30px -8px rgba(31, 116, 242, 0.7);
+  }
+
   .hero-orb {
     position: absolute;
     border-radius: 9999px;
-    filter: blur(70px);
-    opacity: 0.45;
+    filter: blur(80px);
+    opacity: 0.5;
     pointer-events: none;
   }
   .hero-orb-left {
@@ -122,25 +128,25 @@
     top: 2rem;
     height: 28rem;
     width: 28rem;
-    background: rgba(233, 120, 17, 0.28);
+    background: rgba(31, 116, 242, 0.28);
   }
   .hero-orb-right {
     right: -9rem;
     top: 3rem;
     height: 30rem;
     width: 30rem;
-    background: rgba(9, 34, 53, 0.18);
+    background: rgba(56, 132, 255, 0.16);
   }
   .premium-panel {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8)),
-      radial-gradient(circle at top left, rgba(233, 120, 17, 0.1), transparent 40%);
-    box-shadow: 0 28px 80px rgba(9, 34, 53, 0.08);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
+      radial-gradient(circle at top left, rgba(31, 116, 242, 0.12), transparent 45%);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
   }
   .premium-grid {
     background-image:
-      linear-gradient(rgba(9, 34, 53, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(9, 34, 53, 0.05) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .text-balance {
@@ -151,6 +157,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  background: hsl(228 33% 3%);
 }
 
 body {

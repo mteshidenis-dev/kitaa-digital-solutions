@@ -14,7 +14,7 @@ const ProjectCaseStudy = () => {
     return (
       <div className="pt-20">
         <section className="px-4 pb-24 pt-20">
-          <div className="container mx-auto max-w-3xl rounded-[2rem] border border-border/70 bg-card p-10 text-center shadow-[0_20px_60px_rgba(9,34,53,0.06)]">
+          <div className="container mx-auto max-w-3xl rounded-[2rem] border border-border/70 bg-card p-10 text-center shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
             <p className="text-sm uppercase tracking-[0.24em] text-muted-foreground">Project not found</p>
             <h1 className="mt-4 font-heading text-5xl font-semibold tracking-[-0.04em] text-foreground">This case study is not available.</h1>
             <p className="mt-6 text-base leading-8 text-muted-foreground">
@@ -52,7 +52,7 @@ const ProjectCaseStudy = () => {
         </div>
         <div className="container mx-auto grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-card/80 px-4 py-2 text-sm text-foreground shadow-[0_10px_30px_rgba(9,34,53,0.06)] backdrop-blur">
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-card/80 px-4 py-2 text-sm text-foreground shadow-[0_10px_30px_rgba(0,0,0,0.06)] backdrop-blur">
               <BadgeCheck className="h-4 w-4 text-accent" />
               {project.category}
             </div>
@@ -79,24 +79,24 @@ const ProjectCaseStudy = () => {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.08 }}
-            className={`rounded-[2rem] border border-border/70 bg-gradient-to-br ${project.accent} p-8 shadow-[0_24px_80px_rgba(9,34,53,0.1)]`}
+            className={`rounded-[2rem] border border-white/[0.08] bg-card p-8 shadow-[0_40px_120px_-30px_rgba(31,116,242,0.45)]`}
           >
             <ProjectPreview
               project={project}
-              className="h-64 rounded-[1.6rem] border border-white/45 bg-white/70 shadow-[0_18px_40px_rgba(9,34,53,0.08)]"
+              className="h-64 rounded-[1.6rem] border border-white/[0.08] bg-white/[0.03] shadow-[0_18px_40px_rgba(0,0,0,0.08)]"
               imageClassName="h-full w-full"
             />
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-[1.5rem] border border-white/60 bg-white/70 p-5 backdrop-blur">
+              <div className="rounded-[1.5rem] border border-white/[0.08] bg-white/[0.03] p-5 backdrop-blur">
                 <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Domain</p>
                 <p className="mt-3 text-xl font-semibold text-foreground">{project.domain}</p>
               </div>
-              <div className="rounded-[1.5rem] border border-white/60 bg-white/70 p-5 backdrop-blur">
+              <div className="rounded-[1.5rem] border border-white/[0.08] bg-white/[0.03] p-5 backdrop-blur">
                 <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Best fit</p>
                 <p className="mt-3 text-xl font-semibold text-foreground">{project.category}</p>
               </div>
             </div>
-            <div className="mt-5 rounded-[1.5rem] border border-white/60 bg-white/70 p-5 backdrop-blur">
+            <div className="mt-5 rounded-[1.5rem] border border-white/[0.08] bg-white/[0.03] p-5 backdrop-blur">
               <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Audience value</p>
               <p className="mt-3 text-sm leading-8 text-foreground/85">{project.audience}</p>
             </div>
@@ -126,7 +126,7 @@ const ProjectCaseStudy = () => {
             <h2 className="mt-4 font-heading text-4xl font-semibold leading-[0.95] tracking-[-0.04em] text-foreground">What this kind of engagement includes</h2>
             <div className="mt-6 space-y-3">
               {project.deliverables.map((deliverable) => (
-                <div key={deliverable} className="rounded-[1.4rem] border border-border/70 bg-white/70 p-4 text-sm leading-7 text-foreground/85">
+                <div key={deliverable} className="rounded-[1.4rem] border border-border/70 bg-white/[0.04] p-4 text-sm leading-7 text-foreground/85">
                   {deliverable}
                 </div>
               ))}
@@ -140,7 +140,7 @@ const ProjectCaseStudy = () => {
             </div>
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {project.outcomes.map((outcome) => (
-                <div key={outcome} className="rounded-[1.5rem] border border-border/70 bg-white/70 p-5 backdrop-blur">
+                <div key={outcome} className="rounded-[1.5rem] border border-border/70 bg-white/[0.04] p-5 backdrop-blur">
                   <p className="text-sm leading-8 text-foreground/85">{outcome}</p>
                 </div>
               ))}
@@ -156,11 +156,11 @@ const ProjectCaseStudy = () => {
       </section>
 
       <section className="px-4 pb-20">
-        <div className="container mx-auto rounded-[2rem] bg-navy-gradient px-7 py-10 text-white shadow-[0_30px_90px_rgba(9,34,53,0.26)] md:px-10 md:py-12">
+        <div className="container mx-auto rounded-[2rem] bg-navy-gradient px-7 py-10 text-white shadow-[0_30px_90px_rgba(0,0,0,0.26)] md:px-10 md:py-12">
           <div className="grid gap-8 grid-cols-1 lg:grid-cols-[1.02fr_0.98fr] lg:items-end">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white/80">
-                <BadgeCheck className="h-4 w-4 text-orange-300" />
+                <BadgeCheck className="h-4 w-4 text-blue-300" />
                 Premium case study
               </span>
               <h2 className="mt-5 max-w-3xl font-heading text-5xl font-semibold leading-[0.95] tracking-[-0.04em]">

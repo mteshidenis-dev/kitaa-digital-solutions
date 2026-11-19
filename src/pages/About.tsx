@@ -75,12 +75,12 @@ const team = [
 const About = () => (
   <div>
     {/* ── HERO ── */}
-    <section className="relative isolate overflow-hidden bg-[#050d1a] px-4 pb-20 pt-28 md:pt-36">
+    <section className="relative isolate overflow-hidden bg-background px-4 pb-20 pt-28 md:pt-36">
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse at 72% 45%, rgba(233,120,17,0.08) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(9,34,90,0.7) 0%, transparent 55%)",
+            "radial-gradient(ellipse at 72% 45%, rgba(31,116,242,0.08) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(31,116,242,0.16) 0%, transparent 55%)",
         }}
       />
       <div
@@ -106,7 +106,7 @@ const About = () => (
           <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
             About Us
           </span>
-          <h1 className="mt-5 font-hero font-black text-2xl leading-tight text-white sm:text-4xl md:text-[3.5rem]">
+          <h1 className="mt-5 font-hero font-bold text-2xl leading-tight text-white sm:text-4xl sm:leading-[1.1] md:text-[3.5rem]">
             Built to help brands grow.
             <br />
             <span className="text-accent">Designed to last.</span>
@@ -141,7 +141,7 @@ const About = () => (
         >
           {stats.map(({ value, label }) => (
             <div key={label} className="flex flex-col items-center gap-1 px-3 py-4">
-              <CountUp value={value} className="font-hero text-xl font-black text-white sm:text-2xl" />
+              <CountUp value={value} className="font-hero text-xl font-bold text-white sm:text-2xl" />
               <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/45">{label}</span>
             </div>
           ))}
@@ -159,7 +159,7 @@ const About = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-2xl border border-border/60 bg-card p-7 shadow-[0_2px_16px_rgba(9,34,53,0.06)]"
+            className="rounded-2xl border border-border/60 bg-card p-7 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
               <item.icon className="h-5 w-5" />
@@ -178,7 +178,7 @@ const About = () => (
         {/* Main content */}
         <div>
           <span className="section-kicker">How We Work</span>
-          <h2 className="mt-4 font-hero text-2xl font-black tracking-tight text-foreground sm:text-3xl md:text-4xl">
+          <h2 className="mt-4 font-hero text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             Less like an agency. More like a focused studio.
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
@@ -193,7 +193,7 @@ const About = () => (
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.06 }}
-                className="flex items-start gap-4 rounded-2xl border border-border/60 bg-card p-5 shadow-[0_2px_12px_rgba(9,34,53,0.05)]"
+                className="flex items-start gap-4 rounded-2xl border border-border/60 bg-card p-5 shadow-[0_2px_12px_rgba(0,0,0,0.05)]"
               >
                 <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent text-white">
                   <BadgeCheck className="h-4 w-4" />
@@ -213,7 +213,7 @@ const About = () => (
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-2xl border border-border/60 bg-card p-6 shadow-[0_2px_16px_rgba(9,34,53,0.06)]"
+            className="rounded-2xl border border-border/60 bg-card p-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
           >
             <h3 className="font-hero text-sm font-bold uppercase tracking-[0.16em] text-muted-foreground">
               Quick facts
@@ -236,7 +236,7 @@ const About = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.06 }}
-            className="rounded-2xl border border-border/60 bg-card p-6 shadow-[0_2px_16px_rgba(9,34,53,0.06)]"
+            className="rounded-2xl border border-border/60 bg-card p-6 shadow-[0_2px_16px_rgba(0,0,0,0.06)]"
           >
             <h3 className="font-hero text-sm font-bold uppercase tracking-[0.16em] text-muted-foreground">
               Core values
@@ -262,7 +262,7 @@ const About = () => (
       <div className="container mx-auto">
         <div className="mb-10 text-center">
           <span className="section-kicker">Leadership</span>
-          <h2 className="mt-4 font-hero text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+          <h2 className="mt-4 font-hero text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             The people behind Kitaa Digital Solutions.
           </h2>
           <p className="mt-3 text-sm text-muted-foreground">
@@ -277,7 +277,7 @@ const About = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(9,34,53,0.07)] transition-shadow hover:shadow-[0_10px_40px_rgba(9,34,53,0.14)]"
+              className="group overflow-hidden rounded-2xl border border-border/60 bg-card shadow-[0_2px_16px_rgba(0,0,0,0.07)] transition-shadow hover:shadow-[0_10px_40px_rgba(0,0,0,0.14)]"
             >
               {/* Photo */}
               <div className="relative w-full overflow-hidden bg-muted" style={{ aspectRatio: "3/4" }}>
@@ -290,7 +290,7 @@ const About = () => (
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-accent/8">
-                    <span className="font-hero text-6xl font-black text-accent/25">{m.initials}</span>
+                    <span className="font-hero text-6xl font-bold text-accent/25">{m.initials}</span>
                   </div>
                 )}
                 <span className="absolute bottom-3 left-3 rounded-full bg-accent px-3.5 py-1.5 text-[11px] font-bold text-white shadow-lg">

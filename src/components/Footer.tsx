@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { siteContact } from "@/lib/site";
+import { Logo } from "./Navbar";
 
 const Footer = () => (
-  <footer className="relative overflow-hidden bg-[#050d1a] text-white">
-    {/* white gap separating footer from the dark section above */}
-    <div className="h-8 bg-[#f7f6f3]" />
+  <footer className="relative overflow-hidden border-t border-white/[0.06] bg-background text-white">
     {/* top accent line */}
     <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
     {/* ambient glows */}
-    <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-orange-400/8 blur-3xl" />
+    <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
     <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-white/4 blur-3xl" />
 
     <div className="container relative z-10 mx-auto px-4 pb-10 pt-16">
@@ -18,16 +17,15 @@ const Footer = () => (
 
         {/* Brand column */}
         <div>
-          <div className="mb-4 leading-none">
-            <span className="font-hero font-black text-2xl text-white">Kitaa</span>
-            <span className="font-hero font-black text-2xl text-accent"> Digital Solutions</span>
+          <div className="mb-4">
+            <Logo className="text-xl" />
           </div>
           <p className="max-w-[260px] text-sm leading-7 text-white/55">
             Premium websites and digital systems for growing businesses.
           </p>
           <Link
             to="/contact"
-            className="mt-6 inline-flex items-center gap-2 rounded-sm bg-accent px-5 py-2.5 text-sm font-hero font-bold text-white transition-opacity hover:opacity-90"
+            className="mt-6 inline-flex items-center gap-2 btn-glow rounded-lg px-5 py-2.5 text-sm font-semibold"
           >
             Start a project
             <ArrowUpRight size={15} />

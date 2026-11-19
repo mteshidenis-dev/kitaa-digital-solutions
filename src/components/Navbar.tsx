@@ -13,7 +13,7 @@ const navLinks = [
 
 export const Logo = ({ className = "" }: { className?: string }) => (
   <span className={`font-hero text-[18px] font-extrabold tracking-[-0.01em] text-white ${className}`}>
-    Kitaa Digital Solutions<span className="text-accent">.</span>
+    Kitaa Digital Solutions
   </span>
 );
 

@@ -109,7 +109,7 @@ const Index = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative z-10 mx-auto max-w-4xl text-center"
+          className="relative z-10 mx-auto max-w-4xl pb-24 text-center md:pb-32"
         >
           {/* Rating line */}
           <div className="mb-7 flex items-center justify-center gap-3">
@@ -151,46 +151,6 @@ const Index = () => {
           </div>
         </motion.div>
 
-        {/* Showcase: browser window + phone, floating in the blue light */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-          className="relative mx-auto mt-16 max-w-5xl pb-16 md:mt-20 md:pb-24"
-          style={{ perspective: "1600px" }}
-        >
-          <div
-            className="relative overflow-hidden rounded-xl border border-white/10 bg-card shadow-[0_40px_120px_-20px_rgba(31,116,242,0.55),0_0_0_1px_rgba(255,255,255,0.04)]"
-            style={{ transform: "rotateX(8deg)", transformOrigin: "center top" }}
-          >
-            <div className="flex items-center gap-2 border-b border-white/[0.06] bg-white/[0.03] px-4 py-3">
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="mx-auto rounded-md bg-white/[0.05] px-4 py-1 text-[11px] text-white/45">
-                {featuredProjects[0].domain}
-              </span>
-            </div>
-            <img
-              src={featuredProjects[0].imageSrc}
-              alt={featuredProjects[0].imageAlt}
-              className="aspect-[16/9] w-full object-cover object-top"
-              fetchPriority="high"
-            />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/80 to-transparent" />
-          </div>
-
-          {featuredProjects[2]?.imageSrc && (
-            <div className="absolute -bottom-2 right-2 hidden w-[22%] overflow-hidden rounded-[1.6rem] border-[5px] border-[#14161c] bg-card shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_-10px_rgba(31,116,242,0.6)] md:block lg:-right-6">
-              <img
-                src={featuredProjects[2].imageSrc}
-                alt={featuredProjects[2].imageAlt}
-                className="aspect-[9/19] w-full object-cover object-left-top"
-                loading="lazy"
-              />
-            </div>
-          )}
-        </motion.div>
       </div>
 
 {/* ── Services strip ─────────────────────────────────────────── */}

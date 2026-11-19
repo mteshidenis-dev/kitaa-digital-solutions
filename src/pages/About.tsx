@@ -174,7 +174,6 @@ const About = () => (
               <SpotlightCard className="h-full p-7 md:p-8">
                 <div className="flex items-center gap-5">
                   <div className="relative shrink-0">
-                    <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-accent to-accent/0 opacity-60 blur-md transition-opacity duration-500 group-hover/spot:opacity-100" />
                     <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-accent to-[#0b3d91] font-heading text-xl font-extrabold text-white">
                       {m.initials}
                     </div>

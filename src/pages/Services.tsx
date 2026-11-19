@@ -1,50 +1,13 @@
-import Autoplay from "embla-carousel-autoplay";
-import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, BarChart3, Globe2, LayoutTemplate, Megaphone, Palette, ServerCog, Workflow } from "lucide-react";
-import { useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import ServicesSection from "@/components/ServicesSection";
-import ProcessSection from "@/components/ProcessSection";
+import Reveal from "@/components/Reveal";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import CTASection from "@/components/CTASection";
-import { Button } from "@/components/ui/button";
-import PageBreadcrumb from "@/components/PageBreadcrumb";
-
-const serviceLinks = [
-  { label: "Websites", href: "/services/websites", icon: Globe2 },
-  { label: "Applications", href: "/services/applications", icon: ServerCog },
-  { label: "Systems", href: "/services/systems", icon: Workflow },
-  { label: "Graphics", href: "/services/graphics", icon: Palette },
-  { label: "Social Media", href: "/services/social-media", icon: Megaphone },
-];
-
-const deliveryAreas = [
-  {
-    title: "Brand-first websites",
-    text: "High-credibility websites and landing pages designed to explain value quickly and convert interest cleanly.",
-    icon: Globe2,
-  },
-  {
-    title: "Operational systems",
-    text: "Custom portals, workflows, and admin tools that remove repetitive work and improve business visibility.",
-    icon: Workflow,
-  },
-  {
-    title: "Identity and creative",
-    text: "Visual systems and marketing design that make the company look consistent, established, and easier to trust.",
-    icon: Palette,
-  },
-  {
-    title: "Reporting layers",
-    text: "Dashboards and tracking setups that help teams understand demand, performance, and next actions.",
-    icon: BarChart3,
-  },
-];
+import CTABlock from "@/components/site/CTABlock";
+import PageHero from "@/components/site/PageHero";
+import ProcessTimeline from "@/components/site/ProcessTimeline";
+import SectionHeader, { Chip, sectionTitleClass, sectionTitleStyle } from "@/components/site/SectionHeader";
+import ServiceGrid from "@/components/site/ServiceGrid";
+import { services } from "@/lib/services";
 
 const engagementModel = [
   "Strategy and positioning before design",
@@ -53,171 +16,103 @@ const engagementModel = [
   "Post-launch refinement for commercial performance",
 ];
 
-const DeliveryCard = ({ area }: { area: (typeof deliveryAreas)[number] }) => (
-  <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] h-full">
-    <div className="absolute inset-x-0 top-0 h-[3px] bg-accent" />
-    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
-      <area.icon className="h-4 w-4" />
-    </div>
-    <h3 className="mt-4 font-hero font-bold text-sm text-foreground">{area.title}</h3>
-    <p className="mt-2 text-xs leading-6 text-muted-foreground">{area.text}</p>
+const Services = () => (
+  <div>
+    <PageHero
+      pageTitle="Services"
+      breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}
+      label="Our services"
+      title="Digital work built around"
+      accent="outcomes, not deliverables."
+      text="Strategy, design, engineering, and support under one roof, so businesses launch faster and operate with more confidence."
+      primary={{ to: "/contact", label: "Discuss your project" }}
+      secondary={{ to: "/portfolio", label: "View our portfolio" }}
+    >
+      <div className="mt-10 flex flex-wrap justify-center gap-2">
+        {services.map((s) => (
+          <Link
+            key={s.href}
+            to={s.href}
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/75 transition-colors hover:border-accent hover:text-white"
+          >
+            <s.icon className="h-3.5 w-3.5 text-accent" />
+            {s.title}
+          </Link>
+        ))}
+      </div>
+    </PageHero>
+
+    <section className="px-4 py-16 md:py-24">
+      <div className="container mx-auto">
+        <SectionHeader
+          label="What we do"
+          title="Five ways we help your business"
+          accent="grow online."
+          text="Pick one service or combine them. Either way, one team handles design, development, and branding."
+        />
+        <ServiceGrid />
+      </div>
+    </section>
+
+    {/* How we engage */}
+    <section className="px-4 py-16 md:py-24">
+      <div className="container mx-auto">
+        <Reveal>
+          <div className="relative grid gap-10 overflow-hidden rounded-3xl border border-white/[0.07] bg-card p-7 md:p-12 lg:grid-cols-2 lg:gap-16">
+            <div
+              className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full blur-3xl"
+              style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.25), transparent)" }}
+            />
+            <div className="relative">
+              <Chip>How we engage</Chip>
+              <h2 className={`mt-5 ${sectionTitleClass}`} style={sectionTitleStyle}>
+                We scope around the problem, then build what solves it{" "}
+                <span className="text-accent">properly.</span>
+              </h2>
+              <p className="mt-4 max-w-md text-[15px] leading-7 text-muted-foreground">
+                Some clients need a sharper site. Others need operations cleaned up behind the scenes. The work changes,
+                but the standard stays the same.
+              </p>
+              <Link
+                to="/contact"
+                className="btn-glow mt-8 inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-semibold"
+              >
+                Start a project <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <ol className="relative space-y-3 self-center">
+              {engagementModel.map((item, i) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-4 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:border-accent/40"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent font-heading text-xs font-extrabold text-white">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[15px] text-white/85">{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+
+    <section className="px-4 py-16 md:py-24">
+      <div className="container mx-auto">
+        <SectionHeader
+          label="How we work"
+          title="A simple process,"
+          accent="no surprises."
+          text="You always know what's happening, what's next, and when it will be ready."
+        />
+        <ProcessTimeline />
+      </div>
+    </section>
+
+    <WhyChooseUs />
+    <CTABlock />
   </div>
 );
-
-const Services = () => {
-  const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
-  return (
-  <div className="pt-20">
-
-    {/* ── HERO ── */}
-    <section className="relative isolate overflow-hidden bg-background px-4 pb-14 pt-24 md:pt-32">
-      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: "radial-gradient(ellipse at 72% 45%, rgba(31,116,242,0.07) 0%, transparent 55%), radial-gradient(ellipse at 14% 35%, rgba(31,116,242,0.16) 0%, transparent 55%)" }} />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.035]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "44px 44px" }} />
-
-      <div className="container relative z-10 mx-auto max-w-3xl text-center">
-        <PageBreadcrumb
-          pageTitle="Services"
-          items={[{ label: "Home", href: "/" }, { label: "Services" }]}
-          className="mb-7"
-        />
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
-          <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-[10px] font-hero font-bold uppercase tracking-[0.22em] text-accent">
-            Our Services
-          </span>
-          <h1 className="mt-4 font-hero font-bold text-3xl leading-tight text-white md:text-5xl">
-            Digital work built around<br />
-            <span className="text-accent">outcomes, not deliverables</span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/55">
-            Strategy, design, engineering, and support under one roof — so businesses launch faster and operate with more confidence.
-          </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <Link to="/contact">
-              <Button className="h-11 rounded-sm px-7 font-hero font-bold">
-                Discuss your project <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link to="/portfolio">
-              <Button variant="outline" className="h-11 rounded-sm border-white/20 bg-white/5 px-7 font-hero font-bold text-white hover:bg-white/10">
-                View our portfolio
-              </Button>
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Service quick-nav pills */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.15 }}
-          className="mt-10 flex flex-wrap justify-center gap-2"
-        >
-          {serviceLinks.map((s) => (
-            <Link
-              key={s.href}
-              to={s.href}
-              className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-hero font-bold text-white/70 transition-all hover:border-accent/40 hover:bg-accent/10 hover:text-white"
-            >
-              <s.icon className="h-3.5 w-3.5 text-accent" />
-              {s.label}
-            </Link>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-
-    {/* ── DELIVERY AREAS ── */}
-    <section className="bg-surface px-4 py-14">
-      <div className="container mx-auto">
-        <div className="mb-10 text-center">
-          <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-[10px] font-hero font-bold uppercase tracking-[0.18em] text-accent">
-            What we deliver
-          </span>
-          <h2 className="mt-3 font-hero font-bold text-2xl text-foreground md:text-3xl">
-            Four core areas of work
-          </h2>
-        </div>
-        {/* Mobile carousel */}
-        <div className="md:hidden">
-          <Carousel
-            opts={{ loop: true, align: "start" }}
-            plugins={[autoplay.current]}
-            className="w-full"
-          >
-            <CarouselContent>
-              {deliveryAreas.map((area) => (
-                <CarouselItem key={area.title} className="basis-full min-w-0">
-                  <DeliveryCard area={area} />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-
-        {/* Desktop grid */}
-        <div className="hidden md:grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {deliveryAreas.map((area, index) => (
-            <motion.div
-              key={area.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ delay: index * 0.06 }}
-            >
-              <DeliveryCard area={area} />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <ServicesSection />
-
-    {/* ── ENGAGEMENT MODEL ── */}
-    <section className="bg-background px-4 py-14">
-      <div className="container mx-auto grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-accent/15 px-4 py-1.5 text-[10px] font-hero font-bold uppercase tracking-[0.18em] text-accent">
-            <LayoutTemplate className="h-3 w-3" />
-            How we engage
-          </span>
-          <h2 className="mt-4 font-hero font-bold text-2xl text-white md:text-3xl">
-            We scope around the problem, then build the minimum system that solves it <span className="text-accent">properly.</span>
-          </h2>
-          <p className="mt-4 text-sm leading-7 text-white/50">
-            Some clients need a sharper site. Others need operations cleaned up behind the scenes. The work changes, but the standard stays the same.
-          </p>
-          <Link to="/contact" className="mt-6 inline-flex">
-            <Button className="h-10 rounded-sm px-6 font-hero font-bold text-sm">
-              Start a project <ArrowUpRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-        <div className="grid gap-3">
-          {engagementModel.map((item, i) => (
-            <motion.div
-              key={item}
-              initial={{ opacity: 0, x: 16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07 }}
-              className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/4 px-5 py-4"
-            >
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-accent font-hero font-bold text-[10px] text-white">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="text-sm leading-6 text-white/70">{item}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <ProcessSection />
-    <WhyChooseUs />
-    <CTASection />
-  </div>
-  );
-};
 
 export default Services;

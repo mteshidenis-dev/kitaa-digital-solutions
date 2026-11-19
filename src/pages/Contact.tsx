@@ -1,22 +1,11 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronDown,
-  Clock,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Send,
-} from "lucide-react";
+import { ArrowUpRight, Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { siteContact } from "@/lib/site";
 import { toast } from "sonner";
-import PageBreadcrumb from "@/components/PageBreadcrumb";
+import Reveal from "@/components/Reveal";
+import PageHero from "@/components/site/PageHero";
+import { Chip } from "@/components/site/SectionHeader";
+import { siteContact } from "@/lib/site";
 
 const channels = [
   {
@@ -41,6 +30,11 @@ const channels = [
     note: "Available for on-site meetings",
   },
 ];
+
+const topics = ["New website", "Web app", "Business system", "Branding", "Social media", "Something else"];
+
+const inputClass =
+  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-[15px] text-white placeholder:text-white/35 outline-none transition-colors focus:border-accent focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/15";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "", website: "" });
@@ -75,268 +69,229 @@ const Contact = () => {
 
   return (
     <div>
-      {/* ── HERO ── */}
-      <section className="relative isolate overflow-hidden bg-background px-4 pb-20 pt-28 md:pt-36">
-        {/* Orb gradients */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse at 75% 40%, rgba(31,116,242,0.09) 0%, transparent 55%), radial-gradient(ellipse at 18% 38%, rgba(31,116,242,0.16) 0%, transparent 55%)",
-          }}
-        />
-        {/* Grid overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
-            backgroundSize: "44px 44px",
-          }}
-        />
+      <PageHero
+        pageTitle="Contact"
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "Contact" }]}
+        label="Contact us"
+        title="Start the conversation."
+        accent="We move fast."
+        text="Tell us what you need built, fixed, or sharpened. We'll respond within 24 hours with a clear next step, no vague proposals and no endless back-and-forth."
+        primary={{ to: "#contact-form", label: "Send a message", external: false }}
+        secondary={{ to: siteContact.phones[0].whatsappHref ?? "/contact", label: "WhatsApp us", external: true }}
+      >
+        <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/70">
+          <Clock className="h-4 w-4 text-accent" />
+          We reply within <span className="font-semibold text-white">24 hours</span>
+        </div>
+      </PageHero>
 
-        <div className="container relative z-10 mx-auto max-w-3xl text-center">
-          <PageBreadcrumb
-            pageTitle="Contact"
-            items={[{ label: "Home", href: "/" }, { label: "Contact" }]}
-            className="mb-7"
-          />
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block rounded-full bg-accent/15 px-4 py-1.5 text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
-              Contact Us
-            </span>
-            <h1 className="mt-5 font-hero font-bold text-2xl leading-tight text-white sm:text-4xl sm:leading-[1.1] md:text-[3.25rem]">
-              Start the conversation.
-              <br />
-              <span className="text-accent">We move fast.</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/60">
-              Tell us what you need built, fixed, or sharpened. We'll respond within 24 hours with a clear next step — no vague proposals, no endless back-and-forth.
-            </p>
-            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <a href="#contact-form">
-                <Button size="lg" className="h-12 w-full rounded-sm px-8 font-hero font-bold sm:w-auto">
-                  Send a message <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
-              <a
-                href={siteContact.phones[0].whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-12 w-full rounded-sm border-white/20 bg-white/5 px-8 font-semibold text-white hover:bg-white/10 sm:w-auto"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  WhatsApp us
-                </Button>
-              </a>
+      <section id="contact-form" className="scroll-mt-24 px-4 pb-20 md:pb-28">
+        <div className="container mx-auto grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          {/* Channels */}
+          <Reveal className="flex flex-col gap-3">
+            <div className="mb-3">
+              <Chip>Reach us directly</Chip>
+              <h2 className="mt-5 font-heading text-3xl font-extrabold text-white">Multiple ways to connect</h2>
+              <p className="mt-3 text-[15px] leading-7 text-muted-foreground">
+                Use the channel that fits best. We monitor all of them during business hours.
+              </p>
             </div>
-          </motion.div>
+            {channels.map((ch) => {
+              const body = (
+                <>
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                    <ch.icon className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-xs uppercase tracking-[0.16em] text-muted-foreground">{ch.label}</span>
+                    <span className="mt-0.5 block truncate font-medium text-white">{ch.value}</span>
+                    <span className="block text-xs text-muted-foreground">{ch.note}</span>
+                  </span>
+                  {ch.href && (
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-white/30 transition-colors group-hover:text-accent" />
+                  )}
+                </>
+              );
+              const cls =
+                "group flex items-center gap-4 rounded-2xl border border-white/[0.07] bg-card p-4 transition-colors hover:border-accent/40";
+              return ch.href ? (
+                <a key={ch.label + ch.value} href={ch.href} className={cls}>
+                  {body}
+                </a>
+              ) : (
+                <div key={ch.label + ch.value} className={cls}>
+                  {body}
+                </div>
+              );
+            })}
+            <a
+              href={siteContact.phones[0].whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-1 flex items-center gap-4 rounded-2xl bg-accent p-4 text-white transition-colors hover:bg-accent/90"
+            >
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15">
+                <MessageCircle className="h-5 w-5" />
+              </span>
+              <span className="flex-1">
+                <span className="block font-semibold">Chat on WhatsApp</span>
+                <span className="block text-xs text-white/75">Quick questions, fast replies</span>
+              </span>
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+          </Reveal>
 
-          {/* Response time strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto mt-12 flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 backdrop-blur-sm"
-            style={{ width: "fit-content" }}
-          >
-            <Clock className="h-4 w-4 text-accent" />
-            <span className="text-sm font-medium text-white/70">
-              Average first response: <span className="text-white font-semibold">under 4 hours</span>
-            </span>
-          </motion.div>
+          {/* Form */}
+          <Reveal delay={0.1}>
+            <form
+              onSubmit={handleSubmit}
+              className="relative overflow-hidden rounded-3xl border border-white/[0.07] bg-card p-6 md:p-10"
+            >
+              <div
+                className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full blur-3xl"
+                style={{ background: "radial-gradient(closest-side, rgba(31,116,242,0.22), transparent)" }}
+              />
+              <div className="relative">
+                <h2 className="font-heading text-2xl font-extrabold text-white md:text-3xl">Tell us about the project</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  The more context you give, the faster we can respond with something actually useful.
+                </p>
+
+                <div className="mt-8 space-y-5">
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="cf-name" className="mb-2 block text-sm font-medium text-white">
+                        Your name
+                      </label>
+                      <input
+                        id="cf-name"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        placeholder="Jane Doe"
+                        autoComplete="name"
+                        required
+                        className={inputClass}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="cf-email" className="mb-2 block text-sm font-medium text-white">
+                        Email address
+                      </label>
+                      <input
+                        id="cf-email"
+                        type="email"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        placeholder="jane@company.com"
+                        autoComplete="email"
+                        required
+                        className={inputClass}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="cf-subject" className="mb-2 block text-sm font-medium text-white">
+                      What do you need?
+                    </label>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {topics.map((t) => (
+                        <button
+                          key={t}
+                          type="button"
+                          onClick={() => setForm({ ...form, subject: t })}
+                          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                            form.subject === t
+                              ? "border-accent bg-accent text-white"
+                              : "border-white/10 text-white/65 hover:border-white/25 hover:text-white"
+                          }`}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                    <input
+                      id="cf-subject"
+                      value={form.subject}
+                      onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                      placeholder="Or type it here, e.g. a booking website for our lodge"
+                      required
+                      className={inputClass}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="cf-message" className="mb-2 block text-sm font-medium text-white">
+                      Message
+                    </label>
+                    <textarea
+                      id="cf-message"
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      placeholder="Describe your project, goals, timeline, and any constraints you have in mind…"
+                      rows={6}
+                      required
+                      className={`${inputClass} resize-none`}
+                    />
+                  </div>
+
+                  {/* Honeypot field: hidden from people, catches spam bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={form.website}
+                    onChange={(e) => setForm({ ...form, website: e.target.value })}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="btn-glow inline-flex h-12 w-full items-center justify-center gap-2 rounded-full text-[15px] font-semibold disabled:opacity-70"
+                  >
+                    {sending ? (
+                      "Sending…"
+                    ) : (
+                      <>
+                        Send message <Send className="h-4 w-4" />
+                      </>
+                    )}
+                  </button>
+                  <p className="text-center text-xs text-muted-foreground">
+                    By sending this form you agree to our{" "}
+                    <Link to="/privacy" className="underline underline-offset-4 hover:text-white">
+                      privacy policy
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </div>
+            </form>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── CONTACT SECTION ── */}
-      <section id="contact-form" className="px-4 py-16 md:py-24">
-        <div className="container mx-auto">
-          <div className="grid gap-8 lg:grid-cols-[340px_1fr]">
-
-            {/* Left – channels */}
-            <motion.div
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
-              className="flex flex-col gap-4"
-            >
-              <div className="mb-2 text-center">
-                <p className="text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">Reach us directly</p>
-                <h2 className="mt-2 text-2xl font-hero font-bold tracking-[-0.03em] text-foreground sm:text-3xl">
-                  Multiple ways to connect
-                </h2>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                  Use the channel that fits best. We monitor all of them during business hours.
-                </p>
-              </div>
-
-              {channels.map((ch) => {
-                const inner = (
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                      <ch.icon size={18} />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{ch.label}</p>
-                      <p className="mt-0.5 truncate font-semibold text-foreground">{ch.value}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{ch.note}</p>
-                    </div>
-                  </div>
-                );
-                return ch.href ? (
-                  <a
-                    key={ch.value}
-                    href={ch.href}
-                    className="rounded-2xl border border-border/60 bg-card p-4 shadow-[0_2px_16px_rgba(0,0,0,0.05)] transition-colors hover:border-accent/30"
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <div key={ch.value} className="rounded-2xl border border-border/60 bg-card p-4 shadow-[0_2px_16px_rgba(0,0,0,0.05)]">
-                    {inner}
-                  </div>
-                );
-              })}
-
-              <a
-                href={siteContact.phones[0].whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-2xl bg-accent p-4 text-white transition-colors hover:bg-accent/90"
-              >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/15">
-                  <MessageCircle size={18} />
-                </div>
-                <div>
-                  <p className="font-hero font-bold text-sm">Chat on WhatsApp</p>
-                  <p className="text-xs text-white/70">Quick questions, fast replies</p>
-                </div>
-                <ArrowRight size={16} className="ml-auto shrink-0 opacity-70" />
-              </a>
-            </motion.div>
-
-            {/* Right – form */}
-            <motion.form
-              id="contact-form-card"
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.06 }}
-              onSubmit={handleSubmit}
-              className="rounded-3xl border border-border/60 bg-card p-6 shadow-[0_4px_32px_rgba(0,0,0,0.07)] md:p-10"
-            >
-              <h3 className="font-hero font-bold text-xl tracking-[-0.03em] text-foreground sm:text-2xl">
-                Tell us about the project
-              </h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">
-                The more context you give, the faster we can respond with something actually useful.
-              </p>
-
-              <div className="mt-7 space-y-5">
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold text-foreground">Your name</label>
-                    <Input
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="Jane Doe"
-                      required
-                      className="h-12 rounded-xl"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block text-sm font-semibold text-foreground">Email address</label>
-                    <Input
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="jane@company.com"
-                      required
-                      className="h-12 rounded-xl"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-foreground">What do you need?</label>
-                  <Input
-                    value={form.subject}
-                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                    placeholder="e.g. New website, Brand refresh, Custom system…"
-                    required
-                    className="h-12 rounded-xl"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-semibold text-foreground">Message</label>
-                  <Textarea
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Describe your project, goals, timeline, and any constraints you have in mind…"
-                    rows={6}
-                    required
-                    className="rounded-xl resize-none"
-                  />
-                </div>
-
-                {/* Honeypot field: hidden from people, catches spam bots */}
-                <input
-                  type="text"
-                  name="website"
-                  value={form.website}
-                  onChange={(e) => setForm({ ...form, website: e.target.value })}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  className="absolute -left-[9999px] h-0 w-0 opacity-0"
-                />
-
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={sending}
-                  className="h-12 w-full gap-2 rounded-xl font-hero font-bold text-base"
-                >
-                  {sending ? "Sending…" : <>Send message <Send size={17} /></>}
-                </Button>
-              </div>
-            </motion.form>
-          </div>
-
-          {/* ── Bottom CTA strip ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
-            className="mt-10 rounded-3xl border border-border/60 bg-card p-8 shadow-[0_4px_32px_rgba(0,0,0,0.07)] md:flex md:items-center md:justify-between md:gap-8"
+      {/* Nudge to services */}
+      <section className="px-4 pb-24 md:pb-32">
+        <Reveal className="container mx-auto">
+          <Link
+            to="/services"
+            className="group flex flex-col gap-6 rounded-3xl border border-white/[0.07] bg-card p-7 transition-colors hover:border-accent/40 md:flex-row md:items-center md:justify-between md:p-10"
           >
-            <div className="max-w-2xl">
-              <p className="text-xs font-hero font-bold uppercase tracking-[0.18em] text-accent">
-                Still shaping the brief?
+            <div>
+              <Chip>Still shaping the brief?</Chip>
+              <p className="mt-4 max-w-2xl font-heading text-2xl font-bold leading-snug text-white md:text-3xl">
+                Not sure exactly what you need yet? Our services page outlines every engagement type and what to expect.
               </p>
-              <h2 className="mt-3 text-xl font-hero font-normal tracking-[-0.02em] text-muted-foreground md:text-xl">
-                Not sure exactly what you need yet? Start with our services page — it outlines every engagement type and what to expect.
-              </h2>
             </div>
-            <Link to="/services" className="mt-6 block shrink-0 md:mt-0">
-              <Button size="lg" variant="outline" className="h-12 w-full rounded-xl border-border/60 px-7 font-hero font-bold md:w-auto">
-                See our services
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent text-white transition-transform duration-300 group-hover:rotate-45">
+              <ArrowUpRight className="h-6 w-6" />
+            </span>
+          </Link>
+        </Reveal>
       </section>
     </div>
   );

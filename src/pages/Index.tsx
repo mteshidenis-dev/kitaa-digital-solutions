@@ -193,7 +193,7 @@ const Index = () => {
             action={{ to: "/portfolio", label: "View all projects" }}
           />
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:auto-rows-[290px] lg:grid-cols-3 lg:gap-6">
             {workGrid.map(({ slug, span, project }, i) => (
               <Reveal key={slug} className={`${span} ${i === 0 ? "sm:col-span-2 lg:col-span-2" : ""}`} delay={(i % 3) * 0.08} y={30}>
                 <WorkTile project={project} featured={i === 0} />

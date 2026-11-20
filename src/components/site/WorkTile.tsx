@@ -6,7 +6,7 @@ import type { ProjectEntry } from "@/lib/projects";
 const WorkTile = ({ project, featured = false }: { project: ProjectEntry; featured?: boolean }) => (
   <Link
     to={`/portfolio/${project.slug}`}
-    className="group relative block h-full min-h-[280px] overflow-hidden rounded-2xl border border-white/[0.07] bg-card"
+    className="group relative block h-full min-h-[280px] overflow-hidden lg:min-h-0 rounded-2xl border border-white/[0.07] bg-card"
   >
     {project.imageSrc ? (
       <img

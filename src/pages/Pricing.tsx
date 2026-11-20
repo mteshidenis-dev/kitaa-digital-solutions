@@ -20,8 +20,8 @@ import CTABlock from "@/components/site/CTABlock";
 import PageHero from "@/components/site/PageHero";
 import SectionHeader, { Chip } from "@/components/site/SectionHeader";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Plus } from "lucide-react";
-import { whatsappLink } from "@/lib/site";
+import { Mail, Plus } from "lucide-react";
+import { siteContact, whatsappLink } from "@/lib/site";
 
 /** How each pricing tab reads inside a sentence, e.g. "the Grow website plan". */
 const serviceName: Record<string, string> = {
@@ -402,8 +402,40 @@ const Pricing = () => {
 
       {/* FAQ */}
       <section className="px-4 py-12 md:py-16">
-        <div className="container mx-auto max-w-3xl">
-          <SectionHeader center label="Pricing FAQ" title="Questions about" accent="pricing." />
+        <div className="container mx-auto grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionHeader
+              className="mb-8 md:mb-8"
+              label="Pricing FAQ"
+              title="Questions about"
+              accent="pricing."
+              text="Straight answers on quotes, payments and what's included. Anything else, just ask."
+            />
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl border border-white/[0.07] bg-card p-6">
+                <p className="font-heading text-lg font-bold text-white">Still have a question?</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Talk to us directly. We reply within 24 hours, usually much sooner.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <a
+                    href={whatsappLink("Hi Kitaa, I have a question about your pricing.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-glow inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-semibold"
+                  >
+                    <MessageCircle className="h-4 w-4" /> WhatsApp us
+                  </a>
+                  <a
+                    href={`mailto:${siteContact.email}?subject=${encodeURIComponent("Question about pricing")}`}
+                    className="btn-glass inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-semibold"
+                  >
+                    <Mail className="h-4 w-4" /> Email us
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
           <Reveal>
             <Accordion type="single" collapsible defaultValue="faq-0" className="space-y-3">
               {faqs.map((f, i) => (

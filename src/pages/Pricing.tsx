@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BadgeCheck,
@@ -17,10 +18,19 @@ import {
 import Reveal from "@/components/Reveal";
 import CTABlock from "@/components/site/CTABlock";
 import PageHero from "@/components/site/PageHero";
-import ProjectBriefDialog from "@/components/site/ProjectBriefDialog";
 import SectionHeader, { Chip } from "@/components/site/SectionHeader";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Plus } from "lucide-react";
+import { whatsappLink } from "@/lib/site";
+
+/** How each pricing tab reads inside a sentence, e.g. "the Grow website plan". */
+const serviceName: Record<string, string> = {
+  websites: "website",
+  systems: "systems",
+  branding: "branding",
+  social: "social media",
+  care: "care & SEO",
+};
 import {
   addOns,
   billingLabel,
@@ -136,16 +146,24 @@ const PlanCard = ({ plan, category, usd }: { plan: Plan; category: PricingCatego
         ))}
       </ul>
 
-      <ProjectBriefDialog defaultNeed={category.need} packageName={`${category.label}: ${plan.name}`}>
-        <button
-          type="button"
-          className={`mt-8 inline-flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold ${
-            plan.popular ? "btn-glow" : "btn-glass"
-          }`}
-        >
-          Choose {plan.name}
-        </button>
-      </ProjectBriefDialog>
+      <Link
+        to={`/contact?plan=${encodeURIComponent(plan.name)}&service=${category.id}`}
+        className={`mt-8 inline-flex h-12 w-full items-center justify-center rounded-full text-sm font-semibold ${
+          plan.popular ? "btn-glow" : "btn-glass"
+        }`}
+      >
+        Choose {plan.name}
+      </Link>
+      <a
+        href={whatsappLink(
+          `Hi Kitaa, I found you on your website. I'm interested in the ${plan.name} ${serviceName[category.id] ?? ""} plan.`,
+        )}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-2 inline-flex items-center justify-center gap-1.5 py-2 text-xs text-white/60 transition-colors hover:text-white"
+      >
+        <MessageCircle className="h-3.5 w-3.5 text-accent" /> or ask about {plan.name} on WhatsApp
+      </a>
     </div>
   );
 };
@@ -174,11 +192,12 @@ const Pricing = () => {
         })),
       ),
     };
-    const el = document.createElement("script");
+    // Reuse the tag if it's already in the pre-rendered HTML, so it's never duplicated.
+    const el = (document.getElementById("pricing-schema") as HTMLScriptElement | null) ?? document.createElement("script");
     el.type = "application/ld+json";
     el.id = "pricing-schema";
     el.textContent = JSON.stringify(data);
-    document.head.appendChild(el);
+    if (!el.isConnected) document.head.appendChild(el);
     return () => el.remove();
   }, []);
 
@@ -225,7 +244,7 @@ const Pricing = () => {
       {/* Category tabs */}
       <section className="sticky top-16 z-30 border-y border-white/[0.06] bg-background/80 px-4 backdrop-blur-xl md:top-20">
         <div className="container mx-auto">
-          <div className="no-scrollbar -mx-4 flex gap-1 overflow-x-auto px-4 py-3 md:justify-center" role="tablist">
+          <div className="no-scrollbar -mx-4 flex gap-1 overflow-x-auto px-4 py-3 [mask-image:linear-gradient(to_right,#000_85%,transparent)] md:justify-center md:[mask-image:none]" role="tablist">
             {pricingCategories.map((c) => (
               <button
                 key={c.id}

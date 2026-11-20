@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
-import { siteContact } from "@/lib/site";
+import { SHOW_BLOG, siteContact } from "@/lib/site";
 import { services } from "@/lib/services";
 import { Logo } from "./Navbar";
 import DotField from "./DotField";
+import SocialLinks from "./site/SocialLinks";
 
 const explore = [
   { label: "Home", href: "/" },
@@ -14,7 +15,7 @@ const explore = [
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
-];
+].filter((l) => SHOW_BLOG || l.href !== "/blog");
 
 const whatsapp = siteContact.whatsapp.href;
 
@@ -63,6 +64,7 @@ const Footer = () => {
                   <MessageCircle className="h-4 w-4" /> WhatsApp
                 </a>
               </div>
+              <SocialLinks className="mt-6" />
             </div>
 
             {/* Quick contact tiles (phones and tablets) */}
@@ -145,10 +147,10 @@ const Footer = () => {
             </p>
             <p>© {new Date().getFullYear()} Kitaa Digital Solutions. All rights reserved.</p>
             <div className="flex gap-5">
-              <Link to="/privacy" className="py-1.5 transition-colors hover:text-white">
+              <Link to="/privacy" className="py-2.5 transition-colors hover:text-white">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="py-1.5 transition-colors hover:text-white">
+              <Link to="/terms" className="py-2.5 transition-colors hover:text-white">
                 Terms &amp; Conditions
               </Link>
             </div>

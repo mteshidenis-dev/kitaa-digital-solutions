@@ -14,7 +14,7 @@ const WorkTile = ({ project, featured = false }: { project: ProjectEntry; featur
         alt={project.imageAlt}
         loading="lazy"
         style={{ objectPosition: project.imagePosition }}
-        className={`absolute inset-0 h-full w-full transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 ${
+        className={`absolute inset-0 h-full w-full transition-transform [transition-duration:1200ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 ${
           project.imageFit === "contain" ? "object-contain bg-white/[0.03] p-10" : "object-cover object-top"
         }`}
       />

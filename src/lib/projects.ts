@@ -22,6 +22,15 @@ export type ProjectEntry = {
   value: string[];
   outcomes: string[];
   accent: string;
+  /** "social" for social media case studies (posts/reels); websites are the default. */
+  type?: "website" | "social";
+  /** Measured results, e.g. { label: "Enquiries per month", value: "+40%" }. Shown only when present. */
+  results?: { label: string; value: string }[];
+  /** Before/after screenshots in /public, shown side by side when both exist. */
+  beforeImage?: string;
+  afterImage?: string;
+  /** A real client quote for this project. Shown only when present. */
+  testimonial?: { quote: string; name: string; role: string };
 };
 
 export const recentProjects: ProjectEntry[] = [
@@ -45,6 +54,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Stronger brand credibility", "Clearer package presentation", "More premium visitor experience"],
     outcomes: ["Helps prospects trust the brand faster", "Supports better package comparison", "Creates a more premium first impression"],
     accent: "from-[#eed3bc] via-[#f8ece2] to-[#fffaf6]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "bcb-safaris",
@@ -67,6 +77,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Premium first impression", "Clear destination storytelling", "Easier path to enquiry"],
     outcomes: ["Helps travellers trust the brand quickly", "Showcases Tanzania's highlights in one place", "Turns inspiration into enquiries"],
     accent: "from-[#e8dcc5] via-[#f4ede0] to-[#fbf8f2]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "bcb-suites",
@@ -87,6 +98,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Better accommodation presentation", "Higher trust perception", "Cleaner guest journey"],
     outcomes: ["Improves perceived quality of stay", "Makes rooms easier to evaluate", "Supports stronger booking intent"],
     accent: "from-[#dae5ef] via-[#edf4f8] to-[#fafcfe]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "tulia-essence-tours",
@@ -107,6 +119,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Luxury visual tone", "Clear package storytelling", "Stronger brand distinction"],
     outcomes: ["Makes the brand feel more elevated", "Supports premium package framing", "Improves memorability and distinction"],
     accent: "from-[#f1dfcf] via-[#faf2ea] to-[#fffdf9]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "elem-adventures",
@@ -128,6 +141,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Sharper storytelling", "More confident enquiries", "Improved travel-brand presence"],
     outcomes: ["Balances energy with credibility", "Clarifies what the business offers", "Supports higher-quality enquiries"],
     accent: "from-[#d8e4d4] via-[#eff6ec] to-[#fbfdf9]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "injili-ya-sayansi",
@@ -149,6 +163,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Cleaner content hierarchy", "More readable experience", "Stronger content credibility"],
     outcomes: ["Makes content easier to absorb", "Improves trust in the platform", "Supports deeper engagement with articles and ideas"],
     accent: "from-[#e2e6f2] via-[#f3f5fb] to-[#fcfdff]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "easy-amazing-tanzania",
@@ -170,6 +185,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Improved public trust", "Clearer mission communication", "More polished destination visibility"],
     outcomes: ["Supports better public understanding", "Improves credibility with visitors", "Presents the organisation with more confidence"],
     accent: "from-[#d7ece8] via-[#eff8f6] to-[#fbfefd]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "become-beyond",
@@ -191,6 +207,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Clearer mission story", "Stronger donor or community confidence", "More modern organisational identity"],
     outcomes: ["Helps visitors understand the mission faster", "Supports trust with partners or communities", "Improves public-facing brand quality"],
     accent: "from-[#efe0d3] via-[#faf3ed] to-[#fffdfb]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
     slug: "divine-wonders-adventures",
@@ -211,9 +228,10 @@ export const recentProjects: ProjectEntry[] = [
     value: ["More attractive tour presentation", "Better conversion readiness", "Higher-quality first impression"],
     outcomes: ["Strengthens visual appeal", "Improves enquiry readiness", "Makes the brand feel more established"],
     accent: "from-[#e4d4c7] via-[#f7eee8] to-[#fffdfb]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
   {
-    slug: "elbethel-stationary",
+    slug: "elbethel-stationery",
     name: "Elbethel Stationery",
     domain: "elbethelstationery.com",
     url: "https://elbethelstationery.com",
@@ -233,6 +251,7 @@ export const recentProjects: ProjectEntry[] = [
     value: ["Clearer product visibility", "Better business presentation", "Stronger professional polish"],
     outcomes: ["Makes products easier to browse", "Improves business credibility", "Creates a more organised retail presence"],
     accent: "from-[#dfe3e8] via-[#f4f6f8] to-[#fcfdfe]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
   },
 ];
 

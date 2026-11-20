@@ -9,9 +9,11 @@ import SectionHeader, { Chip, sectionTitleClass, sectionTitleStyle } from "@/com
 import WorkTile from "@/components/site/WorkTile";
 import ServiceGrid from "@/components/site/ServiceGrid";
 import ProcessTimeline from "@/components/site/ProcessTimeline";
+import SocialLinks from "@/components/site/SocialLinks";
+import Testimonials from "@/components/site/Testimonials";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { recentProjects, type ProjectEntry } from "@/lib/projects";
-import { siteContact } from "@/lib/site";
+import { activeSocialLinks, FOUNDED_YEAR, siteContact } from "@/lib/site";
 
 /* ── Content ─────────────────────────────────────────────────────────── */
 
@@ -29,7 +31,7 @@ const workGrid = [
 const stats = [
   { value: "50+", label: "Projects delivered", count: true },
   { value: "100%", label: "Custom built, no templates", count: true },
-  { value: "2019", label: "Building since", count: false },
+  { value: String(FOUNDED_YEAR), label: "Building since", count: false },
   { value: "24h", label: "Typical reply time", count: false },
 ];
 
@@ -40,7 +42,16 @@ const faqs = [
   },
   {
     q: "How much does a website cost?",
-    a: "Every business needs something different, so we quote per project. You get a clear written quote up front, so you know exactly what is included before we begin.",
+    a: (
+      <>
+        Websites start at TZS 850,000 for our Launch package. Every business needs something different, so you get a
+        clear written quote up front and know exactly what's included before we begin.{" "}
+        <Link to="/pricing" className="font-medium text-white underline underline-offset-4 hover:text-accent">
+          See all prices
+        </Link>
+        .
+      </>
+    ),
   },
   {
     q: "Do you work with businesses outside Arusha?",
@@ -118,7 +129,7 @@ const Index = () => {
             transition={{ duration: 0.9, delay: 0.55, ease }}
           >
             <p className="mx-auto mt-10 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-              Kitaa Digital Solutions designs websites, apps, and brands that make your business look established, win trust, and turn visitors into customers.
+              Kitaa Digital Solutions designs websites, apps, and brands that help businesses in Arusha and across Tanzania look established, win trust, and turn visitors into customers.
             </p>
             <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
@@ -191,6 +202,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* ── TESTIMONIALS (hidden until a testimonial is published) ──── */}
+      <Testimonials />
 
       {/* ── SERVICES (spotlight cards) ───────────────────────────────── */}
       <section className="px-4 py-12 md:py-16">
@@ -285,6 +299,16 @@ const Index = () => {
           </Reveal>
         </div>
       </section>
+
+      {/* ── FOLLOW US (only shows once social links are set) ────────── */}
+      {activeSocialLinks().length > 0 && (
+        <section className="px-4 pb-10">
+          <Reveal className="container mx-auto flex flex-col items-center gap-4 text-center">
+            <p className="text-sm text-muted-foreground">Follow our latest work</p>
+            <SocialLinks />
+          </Reveal>
+        </section>
+      )}
 
       <CTABlock />
     </div>

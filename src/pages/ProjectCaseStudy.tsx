@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Check, Globe2, Sparkles, Target, TrendingUp, Users } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, Globe2, Quote, Sparkles, Target, TrendingUp, Users } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import Reveal from "@/components/Reveal";
@@ -150,6 +150,71 @@ const ProjectCaseStudy = () => {
           ))}
         </div>
       </section>
+
+      {/* ── Results (only when real numbers exist) ── */}
+      {project.results && project.results.length > 0 && (
+        <section className="px-4 pb-12 md:pb-16">
+          <Reveal className="container mx-auto">
+            <Chip>Results</Chip>
+            <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-2xl border border-white/[0.07] bg-card lg:grid-cols-4">
+              {project.results.map((r, i) => (
+                <div
+                  key={r.label}
+                  className={`p-6 md:p-8 ${i % 2 ? "border-l border-white/[0.07]" : ""} ${
+                    i >= 2 ? "border-t border-white/[0.07] lg:border-t-0 lg:border-l" : ""
+                  }`}
+                >
+                  <p className="font-heading text-3xl font-extrabold text-white md:text-4xl">{r.value}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{r.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      )}
+
+      {/* ── Before / after (only when both images exist) ── */}
+      {project.beforeImage && project.afterImage && (
+        <section className="px-4 pb-12 md:pb-16">
+          <Reveal className="container mx-auto">
+            <Chip>Before and after</Chip>
+            <div className="mt-5 grid gap-4 md:grid-cols-2">
+              {[
+                { label: "Before", src: project.beforeImage },
+                { label: "After", src: project.afterImage },
+              ].map((img) => (
+                <figure key={img.label} className="overflow-hidden rounded-2xl border border-white/[0.07] bg-card">
+                  <img
+                    src={img.src}
+                    alt={`${project.name} website ${img.label.toLowerCase()} the redesign`}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover object-top"
+                  />
+                  <figcaption className="px-5 py-3 text-sm text-muted-foreground">{img.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </Reveal>
+        </section>
+      )}
+
+      {/* ── Client quote (only when a real quote exists) ── */}
+      {project.testimonial && (
+        <section className="px-4 pb-12 md:pb-16">
+          <Reveal className="container mx-auto">
+            <figure className="rounded-3xl border border-white/[0.07] bg-card p-7 md:p-12">
+              <Quote className="h-8 w-8 text-accent" aria-hidden="true" />
+              <blockquote className="mt-6 max-w-3xl font-heading text-2xl font-bold leading-snug text-white md:text-3xl">
+                “{project.testimonial.quote}”
+              </blockquote>
+              <figcaption className="mt-6 text-sm text-muted-foreground">
+                <span className="font-semibold text-white">{project.testimonial.name}</span>, {project.testimonial.role},{" "}
+                {project.name}
+              </figcaption>
+            </figure>
+          </Reveal>
+        </section>
+      )}
 
       {/* ── Deliverables + Outcomes ── */}
       <section className="px-4 pb-12 md:pb-16">

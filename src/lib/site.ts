@@ -1,12 +1,28 @@
+export const SITE_URL = "https://kitaadigitalsolutions.tech";
+
+/** Year the studio started. Used for "Building since" and "years" stats. TODO: owner to confirm. */
+export const FOUNDED_YEAR = 2019;
+export const yearsInBusiness = () => new Date().getFullYear() - FOUNDED_YEAR;
+
+/** Set to true when the blog has real articles; it then reappears in the menu, footer and sitemap. */
+export const SHOW_BLOG = false;
+
 /** WhatsApp line used by every "WhatsApp us" button on the site. */
 const whatsappNumber = "255763346078";
+const defaultWhatsappMessage = "Hi Kitaa, I found you on your website and I'd like to talk about a project.";
+
+/** WhatsApp chat link with a pre-filled message. */
+export const whatsappLink = (message: string = defaultWhatsappMessage) =>
+  `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
 export const siteContact = {
   email: "info@kitaadigitalsolutions.tech",
   location: "Arusha, Tanzania",
+  /** TODO: street address (shown on /contact and in structured data once filled in). */
+  address: "",
   whatsapp: {
     display: "+255 763 346 078",
-    href: `https://wa.me/${whatsappNumber}`,
+    href: whatsappLink(),
   },
   phones: [
     {
@@ -23,6 +39,20 @@ export const siteContact = {
     },
   ],
 };
+
+/**
+ * Social profiles. Only entries with a URL are shown on the site, so
+ * nothing broken goes live. TODO: add the real profile URLs.
+ */
+export const socialLinks: { name: "Instagram" | "Facebook" | "TikTok" | "LinkedIn" | "X"; url: string }[] = [
+  { name: "Instagram", url: "" }, // TODO: e.g. https://www.instagram.com/<handle>
+  { name: "Facebook", url: "" }, // TODO: e.g. https://www.facebook.com/<page>
+  { name: "TikTok", url: "" }, // TODO: e.g. https://www.tiktok.com/@<handle>
+  { name: "LinkedIn", url: "" }, // TODO: e.g. https://www.linkedin.com/company/<page>
+  { name: "X", url: "" }, // TODO: optional, e.g. https://x.com/<handle>
+];
+
+export const activeSocialLinks = () => socialLinks.filter((s) => s.url);
 
 export const legalMeta = {
   effectiveDate: "9 March 2026",

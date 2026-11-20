@@ -23,14 +23,8 @@ type Props = {
  * variant="dark"  → white/muted text, for use inside dark (bg-background) hero sections
  * variant="light" → muted-foreground text, for use on light backgrounds
  */
-const PageBreadcrumb = ({ items, variant = "dark", pageTitle, className }: Props) => {
-  useEffect(() => {
-    if (!pageTitle) return;
-    const prev = document.title;
-    document.title = `${pageTitle} | Kitaa Digital Solutions`;
-    return () => { document.title = prev; };
-  }, [pageTitle]);
-
+// Page titles are managed centrally by RouteSeo; pageTitle is kept for compatibility.
+const PageBreadcrumb = ({ items, variant = "dark", className }: Props) => {
   useEffect(() => {
     const schema = {
       "@context": "https://schema.org",

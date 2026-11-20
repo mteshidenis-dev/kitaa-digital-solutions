@@ -8,6 +8,8 @@ import { recentProjects, type ProjectEntry } from "@/lib/projects";
 
 /** Groups the detailed project categories into a few useful filters. */
 const groupOf = (p: ProjectEntry) => {
+  // Social media projects get their own filter as soon as one is added (type: "social").
+  if (p.type === "social") return "Social media";
   const c = p.category.toLowerCase();
   if (c.includes("hospitality")) return "Hospitality";
   if (c.includes("educat")) return "Education";

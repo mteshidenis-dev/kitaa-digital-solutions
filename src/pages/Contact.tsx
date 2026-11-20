@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ArrowUpRight, Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import Reveal from "@/components/Reveal";
 import PageHero from "@/components/site/PageHero";
 import { Chip } from "@/components/site/SectionHeader";
+import SocialLinks from "@/components/site/SocialLinks";
 import { siteContact } from "@/lib/site";
 
 const channels = [
@@ -25,7 +26,7 @@ const channels = [
   {
     icon: MapPin,
     label: "Location",
-    value: siteContact.location,
+    value: siteContact.address ? `${siteContact.address}, ${siteContact.location}` : siteContact.location,
     href: undefined as string | undefined,
     note: "Available for on-site meetings",
   },
@@ -33,11 +34,36 @@ const channels = [
 
 const topics = ["New website", "Web app", "Business system", "Branding", "Social media", "Something else"];
 
+/** Maps the ?service= value from the Pricing page to a topic chip and a readable name. */
+const serviceFromPricing: Record<string, { topic: string; name: string }> = {
+  websites: { topic: "New website", name: "website" },
+  systems: { topic: "Business system", name: "systems" },
+  branding: { topic: "Branding", name: "branding" },
+  social: { topic: "Social media", name: "social media" },
+  care: { topic: "Something else", name: "care & SEO" },
+};
+
+const mapQuery = encodeURIComponent(
+  siteContact.address ? `${siteContact.address}, ${siteContact.location}` : siteContact.location,
+);
+
 const inputClass =
   "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-white placeholder:text-white/35 md:text-[15px] outline-none transition-colors focus:border-accent focus:bg-white/[0.05] focus:ring-4 focus:ring-accent/15";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "", website: "" });
+  const [params] = useSearchParams();
+  // Pre-fill from Pricing links like /contact?plan=Grow&service=websites
+  const [form, setForm] = useState(() => {
+    const plan = params.get("plan");
+    const svc = serviceFromPricing[params.get("service") ?? ""];
+    return {
+      name: "",
+      email: "",
+      subject: svc?.topic ?? "",
+      message: plan ? `Hi Kitaa, I'm interested in the ${plan} ${svc?.name ?? ""} plan.`.replace("  ", " ") : "",
+      website: "",
+    };
+  });
   const [sending, setSending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -138,6 +164,16 @@ const Contact = () => {
               </span>
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
+            <SocialLinks className="mt-2" label="Follow us" />
+            <div className="mt-2 overflow-hidden rounded-2xl border border-white/[0.07] bg-card">
+              <iframe
+                title="Kitaa Digital Solutions location on Google Maps"
+                src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-56 w-full grayscale invert-[0.9] hue-rotate-180"
+              />
+            </div>
           </Reveal>
 
           {/* Form */}

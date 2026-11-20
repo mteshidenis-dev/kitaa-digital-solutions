@@ -1,4 +1,5 @@
-import { BadgeCheck, Check, Compass, Globe2, Layers3, MapPin, Target, Zap } from "lucide-react";
+import { BadgeCheck, Check, Compass, Globe2, Layers3, Linkedin, MapPin, Target, Zap } from "lucide-react";
+import { FOUNDED_YEAR, yearsInBusiness } from "@/lib/site";
 import CountUp from "@/components/CountUp";
 import Reveal from "@/components/Reveal";
 import SpotlightCard from "@/components/SpotlightCard";
@@ -10,7 +11,7 @@ import SectionHeader, { Chip, sectionTitleClass, sectionTitleStyle } from "@/com
 const stats = [
   { value: "50+", label: "Projects" },
   { value: "30+", label: "Clients" },
-  { value: "5+", label: "Years" },
+  { value: `${yearsInBusiness()}+`, label: "Years" },
   { value: "98%", label: "Satisfied" },
 ];
 
@@ -42,7 +43,7 @@ const principles = [
 const quickFacts = [
   { icon: MapPin, label: "Based in Tanzania" },
   { icon: Globe2, label: "Serving clients regionally" },
-  { icon: Zap, label: "Studio founded in 2019" },
+  { icon: Zap, label: `Studio founded in ${FOUNDED_YEAR}` },
   { icon: BadgeCheck, label: "100% custom builds" },
 ];
 
@@ -52,6 +53,8 @@ const team = [
   {
     name: "Steven Shiyo",
     initials: "SS",
+    photo: "", // TODO: optional square photo, e.g. "/team/steven.webp"
+    linkedin: "", // TODO: LinkedIn profile URL
     role: "Founder & Lead Developer",
     bio: "Focused on turning complex briefs into clear, fast, maintainable digital products.",
     focus: ["Engineering", "Web apps", "Systems"],
@@ -59,6 +62,8 @@ const team = [
   {
     name: "Denis Mteshi",
     initials: "DM",
+    photo: "", // TODO: optional square photo, e.g. "/team/denis.webp"
+    linkedin: "", // TODO: LinkedIn profile URL
     role: "Co-Founder & Creative Director",
     bio: "Shapes every project's visual language so it feels credible, current, and conversion-ready.",
     focus: ["Brand", "UI design", "Creative direction"],
@@ -174,12 +179,34 @@ const About = () => (
               <SpotlightCard className="h-full p-7 md:p-8">
                 <div className="flex items-center gap-5">
                   <div className="relative shrink-0">
-                    <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-accent font-heading text-xl font-extrabold text-white">
-                      {m.initials}
-                    </div>
+                    {m.photo ? (
+                      <img
+                        src={m.photo}
+                        alt={m.name}
+                        loading="lazy"
+                        className="relative h-16 w-16 rounded-2xl border border-white/10 object-cover"
+                      />
+                    ) : (
+                      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-accent font-heading text-xl font-extrabold text-white">
+                        {m.initials}
+                      </div>
+                    )}
                   </div>
                   <div className="min-w-0">
-                    <h3 className="font-heading text-2xl font-extrabold text-white">{m.name}</h3>
+                    <h3 className="flex items-center gap-2 font-heading text-2xl font-extrabold text-white">
+                      {m.name}
+                      {m.linkedin && (
+                        <a
+                          href={m.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${m.name} on LinkedIn`}
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/60 transition-colors hover:border-accent hover:text-white"
+                        >
+                          <Linkedin className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+                    </h3>
                     <p className="mt-0.5 text-sm font-medium text-accent">{m.role}</p>
                   </div>
                 </div>

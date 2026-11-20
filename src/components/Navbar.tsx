@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, LayoutGrid, Mail, MessageCircle, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { siteContact } from "@/lib/site";
+import { SHOW_BLOG, siteContact } from "@/lib/site";
 import { services } from "@/lib/services";
 import DotField from "./DotField";
 import { pauseSmoothScroll, resumeSmoothScroll } from "./SmoothScroll";
@@ -53,7 +53,7 @@ const Navbar = () => {
     { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
-  ];
+  ].filter((l) => SHOW_BLOG || l.href !== "/blog");
   const ease = [0.22, 1, 0.36, 1] as const;
 
   const isActive = (href: string) => location.pathname.startsWith(href);

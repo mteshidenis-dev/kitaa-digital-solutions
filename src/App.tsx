@@ -3,10 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollManager from "./components/ScrollManager";
+import RouteSeo from "./components/RouteSeo";
 import SmoothScroll from "./components/SmoothScroll";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import BackToTop from "./components/BackToTop";
@@ -43,6 +44,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollManager />
+        <RouteSeo />
         <SmoothScroll />
         <Navbar />
         <main className="min-h-screen">
@@ -57,6 +59,10 @@ const App = () => (
               <Route path="/services/social-media" element={<ServiceSocialMedia />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route
+                path="/portfolio/elbethel-stationary"
+                element={<Navigate to="/portfolio/elbethel-stationery" replace />}
+              />
               <Route path="/portfolio/:slug" element={<ProjectCaseStudy />} />
               <Route path="/about" element={<About />} />
               <Route path="/blog" element={<Blog />} />

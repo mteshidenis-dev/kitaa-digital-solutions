@@ -32,7 +32,7 @@ const Footer = () => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (
-    <footer className="relative isolate overflow-hidden px-3 pb-24 pt-40 text-white md:px-6 md:pt-52 lg:pb-6">
+    <footer className="relative isolate overflow-hidden px-3 pb-24 pt-14 text-white md:px-6 md:pt-16 lg:pb-6">
       {/* Dots frame the card: brightest at its edges, rising and fading into the page above */}
       <DotField className="absolute inset-0 -z-10" frameRef={cardRef} reach={230} />
 

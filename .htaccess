@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Old case study address (slug typo) -> new address
+  RewriteRule ^portfolio/elbethel-stationary/?$ /portfolio/elbethel-stationery [R=301,L]
+
+  # Serve real files and directories as they are
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Pre-rendered pages: /pricing -> /_pages/pricing.html (built by scripts/prerender.mjs)
+  RewriteCond %{DOCUMENT_ROOT}/_pages/$1.html -f
+  RewriteRule ^(.+?)/?$ _pages/$1.html [L]
+
+  # Everything else (e.g. unknown URLs) loads the app shell, which shows the right page or a 404
+  RewriteRule ^ app-shell.html [QSA,L]
+</IfModule>

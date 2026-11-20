@@ -1,0 +1,16 @@
+import{j as t}from"./vendor-motion-BiCCMODA.js";import{S as i}from"./ServicePage-RhwGSy8B.js";import{e,E as a}from"./index-CKxOJSwN.js";import{S as o}from"./smartphone-B_XhtouP.js";import{Z as s}from"./zap-CoM2ViVi.js";import"./vendor-react-CqhOsFqI.js";import"./PageHero-CjLjHsBh.js";import"./PageBreadcrumb-C1qqT5dI.js";import"./check-2KrYBf6c.js";import"./vendor-ui-Bto997Lj.js";import"./vendor-query-vg_p2esw.js";/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const r=e("ChartNoAxesColumn",[["line",{x1:"18",x2:"18",y1:"20",y2:"10",key:"1xfpm4"}],["line",{x1:"12",x2:"12",y1:"20",y2:"4",key:"be30l9"}],["line",{x1:"6",x2:"6",y1:"20",y2:"14",key:"1r4le6"}]]);/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const n=e("LayoutTemplate",[["rect",{width:"18",height:"7",x:"3",y:"3",rx:"1",key:"f1a2em"}],["rect",{width:"9",height:"7",x:"3",y:"14",rx:"1",key:"jqznyg"}],["rect",{width:"5",height:"7",x:"16",y:"14",rx:"1",key:"q5h2i8"}]]);/**
+ * @license lucide-react v0.462.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const c=e("Search",[["circle",{cx:"11",cy:"11",r:"8",key:"4ej97u"}],["path",{d:"m21 21-4.3-4.3",key:"1qie3q"}]]),d=[{icon:n,title:"Custom design, always",text:"Every site is designed from your brand and goals — no templates, no cloned layouts. Each screen is intentional."},{icon:o,title:"Mobile-first",text:"Optimised for every screen size from day one. Tested across devices, not adapted as an afterthought."},{icon:s,title:"Built for speed",text:"Performance-tuned builds that pass Core Web Vitals and load under 3 seconds globally."},{icon:c,title:"SEO ready",text:"Semantic HTML, structured metadata, sitemaps, and canonical tags built in from the very start."},{icon:a,title:"CMS integration",text:"Edit any content without touching code. We configure and hand over a clean, user-friendly CMS."},{icon:r,title:"Analytics & tracking",text:"GA4, conversion events, and goal tracking wired and verified before launch day."}],l=["Discovery session and wireframes","Custom design in Figma","Development in React, Next.js or WordPress","Domain and hosting guidance","Contact forms and third-party integrations","Post-launch speed and SEO optimisation"],m={name:"Websites",hero:{title:"Websites that earn",accent:"trust.",stacked:!0,text:"We design and build custom websites from first principles — no templates, no shortcuts. Every site is optimised for speed, search, and conversion before it goes live.",cta:"Start your website"},features:{label:"What you get",title:"Everything a high-performing website needs",items:d},includes:{label:"Scope",title:"What's included in every website project",text:"We manage every stage from strategy to handoff so you're never left with an incomplete product or an unexplained process.",items:l},cta:{title:"Ready to build a website that",accent:"actually works?",text:"Let's talk about your goals, your audience, and what a well-built site would do for your business."}},k=()=>t.jsx(i,{data:m});export{k as default};

@@ -40,6 +40,29 @@ export type ProjectEntry = {
 
 export const recentProjects: ProjectEntry[] = [
   {
+    slug: "tanzania-pulse",
+    name: "Tanzania Pulse",
+    domain: "tanzaniapulse.co.tz",
+    url: "https://tanzaniapulse.co.tz",
+    imageSrc: "/project-previews/tanzania-pulse.webp",
+    logoSrc: "/project-logos/tanzania-pulse.webp",
+    imageAlt: "Zebras grazing below Mount Kilimanjaro, from the Tanzania Pulse website hero",
+    imageFit: "cover",
+    imagePosition: "center 40%",
+    category: "Travel Directory",
+    headline: "A local travel directory that puts Arusha's hotels, transport and experiences one WhatsApp message away.",
+    summary: "A bilingual directory of verified hotels, apartments, transport, restaurants and experiences in Arusha, where visitors message owners directly on WhatsApp.",
+    short: "Verified Arusha hotels, transport and things to do, on WhatsApp.",
+    challenge: "Visitors to Arusha, including the crowds coming for AFCON 2027, struggle to find trustworthy local services, while small businesses get buried on big booking platforms that charge fees.",
+    solution: "We built a fast, bilingual directory with category search, verified listings, direct WhatsApp contact, a visitor essentials guide and simple sign-up for businesses and tour guides.",
+    audience: "A strong fit for directories, marketplaces and tourism platforms that connect visitors with local businesses.",
+    deliverables: ["Directory website and listings", "Category search", "Business and tour guide sign-up", "English and Kiswahili content"],
+    value: ["Trust through verified listings", "No booking fees for visitors", "Direct line to local owners"],
+    outcomes: ["Helps visitors find services fast", "Gives local businesses a direct channel", "Ready for AFCON 2027 visitor traffic"],
+    accent: "from-[#fde3c8] via-[#fff1e3] to-[#fffaf5]",
+    // TODO: add real results, beforeImage/afterImage and a client testimonial when available
+  },
+  {
     slug: "masatu-tours",
     name: "Masatu Tours",
     domain: "masatutours.com",

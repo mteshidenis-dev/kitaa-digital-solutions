@@ -44,11 +44,17 @@ export const siteContact = {
  * Social profiles. Only entries with a URL are shown on the site, so
  * nothing broken goes live. TODO: add the real profile URLs.
  */
-export const socialLinks: { name: "Instagram" | "Facebook" | "TikTok" | "LinkedIn" | "X"; url: string }[] = [
+export const socialLinks: {
+  name: "Instagram" | "Facebook" | "TikTok" | "LinkedIn" | "X";
+  url: string;
+  /** Accessible label; defaults to "Kitaa on <name>". */
+  label?: string;
+}[] = [
   { name: "Instagram", url: "" }, // TODO: e.g. https://www.instagram.com/<handle>
   { name: "Facebook", url: "" }, // TODO: e.g. https://www.facebook.com/<page>
-  { name: "TikTok", url: "" }, // TODO: e.g. https://www.tiktok.com/@<handle>
-  { name: "LinkedIn", url: "" }, // TODO: e.g. https://www.linkedin.com/company/<page>
+  { name: "TikTok", url: "https://www.tiktok.com/@kitaa.graphix" },
+  // Personal profile of co-founder Denis Mteshi. TODO: swap for a company page if one is created.
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/denis-mteshi-42b7ab365", label: "Denis Mteshi, co-founder, on LinkedIn" },
   { name: "X", url: "" }, // TODO: optional, e.g. https://x.com/<handle>
 ];
 

@@ -45,7 +45,10 @@ const businessJsonLd = () => ({
     { "@type": "Country", name: "Tanzania" },
     { "@type": "Place", name: "East Africa" },
   ],
-  ...(activeSocialLinks().length ? { sameAs: activeSocialLinks().map((s) => s.url) } : {}),
+  // Company profiles only (entries with a custom label are personal profiles).
+  ...(activeSocialLinks().some((s) => !s.label)
+    ? { sameAs: activeSocialLinks().filter((s) => !s.label).map((s) => s.url) }
+    : {}),
 });
 
 /**

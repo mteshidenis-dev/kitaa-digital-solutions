@@ -63,7 +63,7 @@ const team = [
     name: "Denis Mteshi",
     initials: "DM",
     photo: "", // TODO: optional square photo, e.g. "/team/denis.webp"
-    linkedin: "", // TODO: LinkedIn profile URL
+    linkedin: "https://www.linkedin.com/in/denis-mteshi-42b7ab365",
     role: "Co-Founder & Creative Director",
     bio: "Shapes every project's visual language so it feels credible, current, and conversion-ready.",
     focus: ["Brand", "UI design", "Creative direction"],

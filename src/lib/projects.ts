@@ -3,6 +3,11 @@ export type ProjectEntry = {
   name: string;
   domain: string;
   url: string;
+  /**
+   * The live site is down (expired domain, server error). Hides the "Visit live site"
+   * button and website link; delete this line when the site is back online.
+   */
+  offline?: boolean;
   imageSrc?: string;
   imageAlt: string;
   imageFit?: "cover" | "contain";
@@ -105,6 +110,7 @@ export const recentProjects: ProjectEntry[] = [
     name: "Tulia Essence Tours",
     domain: "tuliaessencetours.com",
     url: "https://tuliaessencetours.com",
+    offline: true, // TODO: server returns 403 and has no SSL (checked 20 Nov 2026)
     imageSrc: "/project-previews/tulia-essence-tours.webp",
     imageAlt: "Tulia Essence Tours website preview",
     imageFit: "cover",
@@ -148,6 +154,7 @@ export const recentProjects: ProjectEntry[] = [
     name: "Injili ya Sayansi",
     domain: "injiliyasayansi.com",
     url: "https://injiliyasayansi.com",
+    offline: true, // TODO: domain expired (checked 20 Nov 2026)
     imageSrc: "/project-previews/injili-ya-sayansi.webp",
     imageAlt: "Close-up of a laboratory microscope",
     imagePosition: "center",
@@ -214,6 +221,7 @@ export const recentProjects: ProjectEntry[] = [
     name: "Divine Wonders Adventures",
     domain: "divinewondersadventures.com",
     url: "https://divinewondersadventures.com",
+    offline: true, // TODO: domain does not exist; add the correct URL (checked 20 Nov 2026)
     imageSrc: "/project-previews/divine-wonders-adventures.webp",
     imageAlt: "Divine Wonders Adventures travel website preview",
     imageFit: "cover",

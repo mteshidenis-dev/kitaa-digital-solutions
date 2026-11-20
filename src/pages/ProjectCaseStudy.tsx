@@ -43,7 +43,7 @@ const ProjectCaseStudy = () => {
 
   const facts = [
     { icon: Sparkles, label: "Industry", value: project.category },
-    { icon: Globe2, label: "Website", value: project.domain, href: project.url },
+    ...(project.offline ? [] : [{ icon: Globe2, label: "Website", value: project.domain, href: project.url }]),
     { icon: Users, label: "Best for", value: project.audience },
   ];
 
@@ -84,14 +84,16 @@ const ProjectCaseStudy = () => {
               <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground md:text-lg">{project.headline}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-glow inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold"
-              >
-                Visit live site <ArrowUpRight className="h-4 w-4" />
-              </a>
+              {!project.offline && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-glow inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold"
+                >
+                  Visit live site <ArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
               <Link
                 to="/contact"
                 className="btn-glass inline-flex h-12 items-center justify-center rounded-full px-7 text-sm font-semibold"
@@ -105,7 +107,7 @@ const ProjectCaseStudy = () => {
 
       {/* ── Quick facts ── */}
       <section className="px-4 pt-4">
-        <div className="container mx-auto grid gap-4 md:grid-cols-3">
+        <div className={`container mx-auto grid gap-4 ${facts.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
           {facts.map((f, i) => (
             <Reveal key={f.label} delay={i * 0.08} y={20}>
               <div className="flex h-full gap-4 rounded-2xl border border-white/[0.07] bg-card p-5">

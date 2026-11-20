@@ -122,11 +122,11 @@ function smtp_send($cfg, $fromEmail, $fromName, $message) {
         }
         return [(int)substr($reply, 0, 3), trim($reply)];
     };
-    $cmd = function ($line, $expect) use ($fp, $read) {
+    $cmd = function ($line, $expect, $label = null) use ($fp, $read) {
         fwrite($fp, $line . "\r\n");
         list($code, $reply) = $read();
         if (!in_array($code, (array)$expect, true)) {
-            throw new Exception("'" . strtok($line, ' ') . "' got: $reply");
+            throw new Exception("'" . ($label ?? strtok($line, ' ')) . "' got: $reply");
         }
     };
     $crlf = function ($s) {
@@ -141,8 +141,8 @@ function smtp_send($cfg, $fromEmail, $fromName, $message) {
         }
         $cmd('EHLO kitaadigitalsolutions.tech', 250);
         $cmd('AUTH LOGIN', 334);
-        $cmd(base64_encode($cfg['user']), 334);
-        $cmd(base64_encode($cfg['pass']), 235);
+        $cmd(base64_encode($cfg['user']), 334, 'AUTH username');
+        $cmd(base64_encode($cfg['pass']), 235, 'AUTH password');
         $cmd("MAIL FROM:<$fromEmail>", 250);
         $cmd('RCPT TO:<' . $message['to'] . '>', [250, 251]);
         $cmd('DATA', 354);
@@ -196,16 +196,11 @@ $text .= "Message:\n$message\n\n";
 $text .= "------------------------------------------\n";
 $text .= "Sent: " . date('Y-m-d H:i') . " | IP: $ip\n";
 
-// TEMPORARY diagnostics (no secrets, no paths): remove once SMTP delivery is confirmed.
-$diag = ['checked' => count($CONFIG_CANDIDATES), 'found' => 0, 'readable' => 0, 'valid' => 0, 'open_basedir' => ini_get('open_basedir') ? 'set' : 'none'];
 $cfg = null;
 foreach ($CONFIG_CANDIDATES as $path) {
     if (@is_file($path)) {
-        $diag['found']++;
-        if (is_readable($path)) { $diag['readable']++; }
         $loaded = include $path;
         if (is_array($loaded) && !empty($loaded['user']) && !empty($loaded['pass'])) {
-            $diag['valid']++;
             $cfg = $loaded;
             break;
         }
@@ -224,8 +219,6 @@ if ($cfg) {
         $via = 'smtp';
     } else {
         error_log('Kitaa contact form SMTP error: ' . $result);
-        // Keep only the SMTP step and reply code, e.g. "'AUTH' got: 535 ..." (never the password).
-        $diag['smtp_error'] = mb_substr(preg_replace('#[A-Za-z0-9+/=]{20,}#', '[redacted]', (string)$result), 0, 160);
     }
 }
 if (!$sent) {
@@ -285,5 +278,5 @@ respond(
     $autoReplied
         ? "Message sent! We've emailed you a confirmation and will reply within 24 hours."
         : "Message sent! We'll get back to you within 24 hours.",
-    ['via' => $via, 'diag' => $diag]
+    ['via' => $via]
 );

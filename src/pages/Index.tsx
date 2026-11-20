@@ -21,9 +21,9 @@ const bySlug = (slug: string) => recentProjects.find((p) => p.slug === slug);
 const workGrid = [
   { slug: "masatu-tours", span: "lg:col-span-2 lg:row-span-2" },
   { slug: "elem-adventures", span: "" },
-  { slug: "tulia-essence-tours", span: "" },
+  { slug: "elbethel-stationery", span: "" },
   { slug: "bcb-safaris", span: "lg:col-span-2" },
-  { slug: "divine-wonders-adventures", span: "" },
+  { slug: "safari-snapshot", span: "" },
 ]
   .map((item) => ({ ...item, project: bySlug(item.slug) }))
   .filter((item): item is { slug: string; span: string; project: ProjectEntry } => Boolean(item.project));

@@ -225,7 +225,7 @@ if ($cfg) {
     } else {
         error_log('Kitaa contact form SMTP error: ' . $result);
         // Keep only the SMTP step and reply code, e.g. "'AUTH' got: 535 ..." (never the password).
-        $diag['smtp_error'] = mb_substr(preg_replace('/[A-Za-z0-9+/=]{20,}/', '[redacted]', $result), 0, 160);
+        $diag['smtp_error'] = mb_substr(preg_replace('#[A-Za-z0-9+/=]{20,}#', '[redacted]', (string)$result), 0, 160);
     }
 }
 if (!$sent) {

@@ -2,32 +2,45 @@
 /**
  * Contact form handler for Kitaa Digital Solutions.
  *
- * Sends through Hostinger's authenticated mail server (SMTP) so messages are
- * DKIM-signed and SPF-aligned and land in the inbox, not spam.
+ * 1. Emails the enquiry to info@ through Hostinger's authenticated mail server
+ *    (SMTP), so it is DKIM-signed and SPF-aligned and lands in the inbox.
+ * 2. Sends the visitor a short, branded "thanks for contacting us" auto-reply.
  *
  * The mailbox password is NOT stored here (this repository is public). It is read
- * from a private file one folder ABOVE the website root, e.g.
- *   /home/<user>/domains/kitaadigitalsolutions.tech/kitaa-mail-config.php
- * containing:
+ * from a private file kept OUTSIDE the website folder, next to public_html:
+ *   kitaa-mail-config.php
  *   <?php return ['host' => 'smtp.hostinger.com', 'port' => 465,
  *                 'user' => 'no-reply@kitaadigitalsolutions.tech', 'pass' => 'MAILBOX_PASSWORD'];
- * If that file is missing or SMTP fails, it falls back to PHP mail().
+ * If no config is found or SMTP fails, the enquiry falls back to PHP mail()
+ * (and no auto-reply is sent, to avoid spam-folder or relay problems).
  */
 
 // ---- Settings -------------------------------------------------------------
 $TO_EMAIL   = 'info@kitaadigitalsolutions.tech';
 $FROM_EMAIL = 'no-reply@kitaadigitalsolutions.tech';
-$FROM_NAME  = 'Kitaa Website';
+$FROM_NAME  = 'Kitaa Digital Solutions';
+$WHATSAPP   = '+255 763 346 078';
+$WHATSAPP_LINK = 'https://wa.me/255763346078';
+$SITE_URL   = 'https://kitaadigitalsolutions.tech';
 $MAX_PER_HOUR_PER_IP = 5;
-$CONFIG_FILE = dirname(__DIR__) . '/kitaa-mail-config.php';
+
+// Where the private config may live. Hostinger's Git deploy can place the site in
+// .builds/... behind a public_html link, so several locations are checked.
+$docRoot = rtrim((string)($_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
+$CONFIG_CANDIDATES = array_unique(array_filter([
+    $docRoot ? dirname($docRoot) . '/kitaa-mail-config.php' : null,
+    dirname(__DIR__) . '/kitaa-mail-config.php',
+    dirname(__DIR__, 2) . '/kitaa-mail-config.php',
+    dirname(__DIR__, 3) . '/kitaa-mail-config.php',
+]));
 // ---------------------------------------------------------------------------
 
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
-function respond($status, $ok, $message) {
+function respond($status, $ok, $message, $extra = []) {
     http_response_code($status);
-    echo json_encode(['ok' => $ok, 'message' => $message]);
+    echo json_encode(array_merge(['ok' => $ok, 'message' => $message], $extra));
     exit;
 }
 
@@ -67,7 +80,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(422, false, 'Please enter a valid email address.');
 }
 
-// Simple per-IP rate limit.
+// Simple per-IP rate limit (also limits how many auto-replies one visitor can trigger).
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $rateFile = sys_get_temp_dir() . '/kitaa_contact_' . md5($ip);
 $now = time();
@@ -84,22 +97,12 @@ if (count($hits) >= $MAX_PER_HOUR_PER_IP) {
 $hits[] = $now;
 @file_put_contents($rateFile, implode(',', $hits));
 
-$body  = "New message from the website contact form\n";
-$body .= "------------------------------------------\n\n";
-$body .= "Name:    $name\n";
-$body .= "Email:   $email\n";
-$body .= "Subject: $subject\n\n";
-$body .= "Message:\n$message\n\n";
-$body .= "------------------------------------------\n";
-$body .= "Sent: " . date('Y-m-d H:i') . " | IP: $ip\n";
-
-$fullSubject = 'Website enquiry: ' . $subject;
-
 /**
  * Minimal SMTP client (implicit TLS on port 465, AUTH LOGIN).
+ * $message = ['to', 'replyEmail', 'replyName', 'subject', 'text', 'html' (optional)].
  * Returns true on success, or an error string.
  */
-function smtp_send($cfg, $fromEmail, $fromName, $toEmail, $replyEmail, $replyName, $subject, $body) {
+function smtp_send($cfg, $fromEmail, $fromName, $message) {
     $host = $cfg['host'] ?? 'smtp.hostinger.com';
     $port = (int)($cfg['port'] ?? 465);
     $context = stream_context_create(['ssl' => ['verify_peer' => true, 'verify_peer_name' => true]]);
@@ -109,7 +112,6 @@ function smtp_send($cfg, $fromEmail, $fromName, $toEmail, $replyEmail, $replyNam
     }
     stream_set_timeout($fp, 15);
 
-    // Read a (possibly multi-line) reply and return its 3-digit code.
     $read = function () use ($fp) {
         $reply = '';
         while (($line = fgets($fp, 1024)) !== false) {
@@ -127,6 +129,10 @@ function smtp_send($cfg, $fromEmail, $fromName, $toEmail, $replyEmail, $replyNam
             throw new Exception("'" . strtok($line, ' ') . "' got: $reply");
         }
     };
+    $crlf = function ($s) {
+        $s = preg_replace("/\r\n|\r|\n/", "\r\n", $s);
+        return preg_replace('/^\./m', '..', $s); // dot-stuffing
+    };
 
     try {
         list($code, $reply) = $read();
@@ -138,24 +144,37 @@ function smtp_send($cfg, $fromEmail, $fromName, $toEmail, $replyEmail, $replyNam
         $cmd(base64_encode($cfg['user']), 334);
         $cmd(base64_encode($cfg['pass']), 235);
         $cmd("MAIL FROM:<$fromEmail>", 250);
-        $cmd("RCPT TO:<$toEmail>", [250, 251]);
+        $cmd('RCPT TO:<' . $message['to'] . '>', [250, 251]);
         $cmd('DATA', 354);
 
         $headers = [
             'Date: ' . date('r'),
             'From: ' . encode_header($fromName) . " <$fromEmail>",
-            "To: <$toEmail>",
-            'Reply-To: ' . encode_header($replyName) . " <$replyEmail>",
-            'Subject: ' . encode_header($subject),
+            'To: <' . $message['to'] . '>',
+            'Reply-To: ' . encode_header($message['replyName']) . ' <' . $message['replyEmail'] . '>',
+            'Subject: ' . encode_header($message['subject']),
             'Message-ID: <' . bin2hex(random_bytes(12)) . '@kitaadigitalsolutions.tech>',
             'MIME-Version: 1.0',
-            'Content-Type: text/plain; charset=UTF-8',
-            'Content-Transfer-Encoding: 8bit',
         ];
-        // Normalise line endings and dot-stuff lines that start with ".".
-        $text = preg_replace("/\r\n|\r|\n/", "\r\n", $body);
-        $text = preg_replace('/^\./m', '..', $text);
-        $cmd(implode("\r\n", $headers) . "\r\n\r\n" . $text . "\r\n.", 250);
+        if (!empty($message['autoReply'])) {
+            $headers[] = 'Auto-Submitted: auto-replied';
+        }
+
+        if (!empty($message['html'])) {
+            $boundary = 'kitaa' . bin2hex(random_bytes(8));
+            $headers[] = "Content-Type: multipart/alternative; boundary=\"$boundary\"";
+            $body = "--$boundary\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"
+                . $message['text'] . "\r\n"
+                . "--$boundary\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"
+                . $message['html'] . "\r\n"
+                . "--$boundary--";
+        } else {
+            $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+            $headers[] = 'Content-Transfer-Encoding: 8bit';
+            $body = $message['text'];
+        }
+
+        $cmd(implode("\r\n", $headers) . "\r\n\r\n" . $crlf($body) . "\r\n.", 250);
         fwrite($fp, "QUIT\r\n");
         fclose($fp);
         return true;
@@ -166,32 +185,98 @@ function smtp_send($cfg, $fromEmail, $fromName, $toEmail, $replyEmail, $replyNam
     }
 }
 
-$sent = false;
+// ---- 1) The enquiry to Kitaa ----------------------------------------------
+$fullSubject = 'Website enquiry: ' . $subject;
+$text  = "New message from the website contact form\n";
+$text .= "------------------------------------------\n\n";
+$text .= "Name:    $name\n";
+$text .= "Email:   $email\n";
+$text .= "Subject: $subject\n\n";
+$text .= "Message:\n$message\n\n";
+$text .= "------------------------------------------\n";
+$text .= "Sent: " . date('Y-m-d H:i') . " | IP: $ip\n";
 
-// 1) Preferred: authenticated SMTP (inbox-friendly).
-if (is_file($CONFIG_FILE)) {
-    $cfg = include $CONFIG_FILE;
-    if (is_array($cfg) && !empty($cfg['user']) && !empty($cfg['pass'])) {
-        $result = smtp_send($cfg, $FROM_EMAIL, $FROM_NAME, $TO_EMAIL, $email, $name, $fullSubject, $body);
-        if ($result === true) {
-            $sent = true;
-        } else {
-            error_log('Kitaa contact form SMTP error: ' . $result);
+$cfg = null;
+foreach ($CONFIG_CANDIDATES as $path) {
+    if (is_file($path)) {
+        $loaded = include $path;
+        if (is_array($loaded) && !empty($loaded['user']) && !empty($loaded['pass'])) {
+            $cfg = $loaded;
+            break;
         }
     }
 }
 
-// 2) Fallback: PHP mail(), so the form keeps working even without SMTP settings.
+$via = 'mail';
+$sent = false;
+if ($cfg) {
+    $result = smtp_send($cfg, $FROM_EMAIL, 'Kitaa Website', [
+        'to' => $TO_EMAIL, 'replyEmail' => $email, 'replyName' => $name,
+        'subject' => $fullSubject, 'text' => $text,
+    ]);
+    if ($result === true) {
+        $sent = true;
+        $via = 'smtp';
+    } else {
+        error_log('Kitaa contact form SMTP error: ' . $result);
+    }
+}
 if (!$sent) {
-    $headers  = 'From: ' . encode_header($FROM_NAME) . " <$FROM_EMAIL>\r\n";
+    $headers  = 'From: ' . encode_header('Kitaa Website') . " <$FROM_EMAIL>\r\n";
     $headers .= 'Reply-To: ' . encode_header($name) . " <$email>\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-    $sent = @mail($TO_EMAIL, encode_header($fullSubject), $body, $headers, '-f' . $FROM_EMAIL);
+    $sent = @mail($TO_EMAIL, encode_header($fullSubject), $text, $headers, '-f' . $FROM_EMAIL);
 }
-
 if (!$sent) {
     respond(500, false, 'Could not send your message. Please email or WhatsApp us directly.');
 }
 
-respond(200, true, "Message sent! We'll get back to you soon.");
+// ---- 2) Auto-reply to the visitor (only over authenticated SMTP) -----------
+// Deliberately does NOT echo the visitor's message, so the form can't be used to
+// send arbitrary content to other people.
+$autoReplied = false;
+if ($via === 'smtp') {
+    $firstName = mb_substr(preg_split('/\s+/', $name)[0], 0, 40);
+    $safeName = htmlspecialchars($firstName, ENT_QUOTES, 'UTF-8');
+
+    $replyText = "Hi $firstName,\n\n"
+        . "Thanks for contacting Kitaa Digital Solutions. We've received your message, and someone from our team will get back to you within 24 hours (usually much sooner).\n\n"
+        . "Need us sooner? Chat with us on WhatsApp: $WHATSAPP ($WHATSAPP_LINK)\n\n"
+        . "In the meantime, see some of our recent work: $SITE_URL/portfolio\n\n"
+        . "Talk soon,\nThe Kitaa Digital Solutions team\nArusha, Tanzania\n$SITE_URL\n\n"
+        . "You're receiving this because a message was sent from our website using this email address. If that wasn't you, you can ignore this email.";
+
+    $replyHtml = '<!doctype html><html><body style="margin:0;padding:0;background:#f4f4f5;">'
+        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:24px 12px;"><tr><td align="center">'
+        . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#111113;border-radius:16px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;">'
+        . '<tr><td style="padding:28px 32px 8px 32px;color:#f3f1ec;font-size:18px;font-weight:bold;">Kitaa Digital Solutions</td></tr>'
+        . '<tr><td style="padding:8px 32px 0 32px;color:#f3f1ec;font-size:26px;font-weight:bold;line-height:1.25;">Thanks for reaching out, ' . $safeName . '<span style="color:#2a7cf6;">.</span></td></tr>'
+        . '<tr><td style="padding:16px 32px 0 32px;color:#c9c7c2;font-size:15px;line-height:1.6;">We\'ve received your message, and someone from our team will get back to you <strong style="color:#f3f1ec;">within 24 hours</strong> (usually much sooner).</td></tr>'
+        . '<tr><td style="padding:24px 32px 0 32px;"><a href="' . $WHATSAPP_LINK . '" style="display:inline-block;background:#1f74f2;color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:12px 22px;border-radius:999px;">Chat with us on WhatsApp</a></td></tr>'
+        . '<tr><td style="padding:16px 32px 0 32px;color:#c9c7c2;font-size:14px;line-height:1.6;">Or call ' . $WHATSAPP . '. In the meantime, see <a href="' . $SITE_URL . '/portfolio" style="color:#5b9bff;">some of our recent work</a>.</td></tr>'
+        . '<tr><td style="padding:28px 32px 28px 32px;color:#8a8883;font-size:13px;line-height:1.6;border-top:1px solid #2a2a2e;margin-top:24px;">Talk soon,<br>The Kitaa Digital Solutions team &middot; Arusha, Tanzania<br><a href="' . $SITE_URL . '" style="color:#8a8883;">kitaadigitalsolutions.tech</a></td></tr>'
+        . '</table>'
+        . '<p style="max-width:560px;color:#9a9aa0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5;margin:16px auto 0;">You\'re receiving this because a message was sent from our website using this email address. If that wasn\'t you, you can ignore this email.</p>'
+        . '</td></tr></table></body></html>';
+
+    $result = smtp_send($cfg, $FROM_EMAIL, $FROM_NAME, [
+        'to' => $email, 'replyEmail' => $TO_EMAIL, 'replyName' => $FROM_NAME,
+        'subject' => 'Thanks for contacting Kitaa Digital Solutions',
+        'text' => $replyText, 'html' => $replyHtml, 'autoReply' => true,
+    ]);
+    if ($result === true) {
+        $autoReplied = true;
+    } else {
+        error_log('Kitaa contact form auto-reply error: ' . $result);
+    }
+}
+
+respond(
+    200,
+    true,
+    $autoReplied
+        ? "Message sent! We've emailed you a confirmation and will reply within 24 hours."
+        : "Message sent! We'll get back to you within 24 hours.",
+    ['via' => $via]
+);

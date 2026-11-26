@@ -1,6 +1,32 @@
+# No directory listings
+Options -Indexes
+
+# Never serve hidden files (.git, .env, .htaccess, ...)
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# Security headers, sent with every response (including errors)
+<IfModule mod_headers.c>
+  # Browsers must use HTTPS for a year after their first visit
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # Only this site may load scripts, styles and fonts it controls; only Google Maps may be framed;
+  # no other site may frame this one (clickjacking)
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always unset X-Powered-By
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # www.kitaadigitalsolutions.tech -> kitaadigitalsolutions.tech (one canonical address)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
 
   # Old case study address (slug typo) -> new address
   RewriteRule ^portfolio/elbethel-stationary/?$ /portfolio/elbethel-stationery [R=301,L]

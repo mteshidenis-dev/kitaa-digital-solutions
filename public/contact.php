@@ -23,6 +23,10 @@ $WHATSAPP   = '+255 763 346 078';
 $WHATSAPP_LINK = 'https://wa.me/255763346078';
 $SITE_URL   = 'https://kitaadigitalsolutions.tech';
 $MAX_PER_HOUR_PER_IP = 5;
+$MAX_AUTOREPLIES_PER_DAY_PER_EMAIL = 2; // stops the form being used to flood one inbox
+$MAX_AUTOREPLIES_PER_HOUR_TOTAL = 30;   // hard cap, even if many IPs are used
+// Only these sites may submit the form (blocks other websites posting to it).
+$ALLOWED_HOSTS = ['kitaadigitalsolutions.tech', 'www.kitaadigitalsolutions.tech'];
 
 // Where the private config may live. Hostinger's Git deploy can place the site in
 // .builds/... behind a public_html link, so several locations are checked.
@@ -37,6 +41,7 @@ $CONFIG_CANDIDATES = array_unique(array_filter([
 
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
+header('Cache-Control: no-store');
 
 function respond($status, $ok, $message, $extra = []) {
     http_response_code($status);
@@ -46,6 +51,45 @@ function respond($status, $ok, $message, $extra = []) {
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(405, false, 'Method not allowed.');
+}
+
+// Same-site check: browsers always send Origin (or at least Referer) with a form POST,
+// so a request from another website, or with neither header, is refused.
+$source = (string)($_SERVER['HTTP_ORIGIN'] ?? '');
+if ($source === '' || $source === 'null') {
+    $source = (string)($_SERVER['HTTP_REFERER'] ?? '');
+}
+$sourceHost = strtolower((string)parse_url($source, PHP_URL_HOST));
+if ($sourceHost === '' || !in_array($sourceHost, $ALLOWED_HOSTS, true)) {
+    respond(403, false, 'Please send your message from our website.');
+}
+
+/**
+ * Sliding-window counter stored in a temp file. Returns true if under $max within
+ * $window seconds (and records this hit), false if the limit is reached.
+ */
+function rate_ok($key, $max, $window) {
+    $file = sys_get_temp_dir() . '/kitaa_contact_' . md5($key);
+    $now = time();
+    $fp = @fopen($file, 'c+');
+    if (!$fp) {
+        return true; // fail open rather than lose real enquiries
+    }
+    flock($fp, LOCK_EX);
+    $hits = array_filter(
+        array_map('intval', explode(',', (string)stream_get_contents($fp))),
+        function ($t) use ($now, $window) { return $t > $now - $window; }
+    );
+    $ok = count($hits) < $max;
+    if ($ok) {
+        $hits[] = $now;
+        ftruncate($fp, 0);
+        rewind($fp);
+        fwrite($fp, implode(',', $hits));
+    }
+    flock($fp, LOCK_UN);
+    fclose($fp);
+    return $ok;
 }
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -82,20 +126,9 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 // Simple per-IP rate limit (also limits how many auto-replies one visitor can trigger).
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-$rateFile = sys_get_temp_dir() . '/kitaa_contact_' . md5($ip);
-$now = time();
-$hits = [];
-if (is_file($rateFile)) {
-    $hits = array_filter(
-        array_map('intval', explode(',', (string)file_get_contents($rateFile))),
-        function ($t) use ($now) { return $t > $now - 3600; }
-    );
-}
-if (count($hits) >= $MAX_PER_HOUR_PER_IP) {
+if (!rate_ok('ip:' . $ip, $MAX_PER_HOUR_PER_IP, 3600)) {
     respond(429, false, 'Too many messages. Please try again later or contact us on WhatsApp.');
 }
-$hits[] = $now;
-@file_put_contents($rateFile, implode(',', $hits));
 
 /**
  * Minimal SMTP client (implicit TLS on port 465, AUTH LOGIN).
@@ -236,7 +269,9 @@ if (!$sent) {
 // Deliberately does NOT echo the visitor's message, so the form can't be used to
 // send arbitrary content to other people.
 $autoReplied = false;
-if ($via === 'smtp') {
+if ($via === 'smtp'
+    && rate_ok('reply:' . strtolower($email), $MAX_AUTOREPLIES_PER_DAY_PER_EMAIL, 86400)
+    && rate_ok('reply:all', $MAX_AUTOREPLIES_PER_HOUR_TOTAL, 3600)) {
     $firstName = mb_substr(preg_split('/\s+/', $name)[0], 0, 40);
     $safeName = htmlspecialchars($firstName, ENT_QUOTES, 'UTF-8');
 

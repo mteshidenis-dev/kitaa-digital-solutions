@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // When the hosting server can't find a route (e.g. /contact), it serves this 404.html.
+      // We save the full URL to sessionStorage and redirect to / so the main app loads.
+      // The script in index.html then restores the correct path via history.replaceState.
+      sessionStorage.setItem('spa_redirect', window.location.href);
+      window.location.replace('/');
+    </script>
+  </head>
+  <body></body>
+</html>

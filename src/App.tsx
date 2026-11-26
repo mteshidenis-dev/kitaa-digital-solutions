@@ -1,9 +1,6 @@
 import { Suspense } from "react";
 import { lazyPage as lazy } from "./lib/lazyPage";
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -32,16 +29,12 @@ const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-const queryClient = new QueryClient();
-
 // While another page's code loads (usually a split second), keep a quiet blank
 // space instead of a spinner so the footer doesn't jump up.
 const RouteFallback = () => <div className="min-h-screen" aria-hidden="true" />;
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
+  <>
       <Sonner />
       <BrowserRouter>
         <ScrollManager />
@@ -78,8 +71,7 @@ const App = () => (
         <FloatingWhatsApp />
         <BackToTop />
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  </>
 );
 
 export default App;

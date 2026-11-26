@@ -25,3 +25,6 @@ dist-ssr
 
 # Hosting upload bundle
 kitaa-site-upload.zip
+
+# Launch-video renders (/brag)
+brag-output*/
